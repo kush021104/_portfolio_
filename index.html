@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kushagra Bhardwaj - Biotechnology & Bioinformatics Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- NEW ELEGANT & PROFESSIONAL THEME --- */
+
+        /* 1. Global Styles & Color Palette */
+        :root {
+            --primary-blue: #0A66C2;
+            --dark-text: #212529;
+            --body-text: #495057;
+            --light-gray: #F8F9FA;
+            --border-color: #DEE2E6;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            color: var(--body-text);
+            background-color: var(--white);
+        }
+
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        h1, h2, h3, h4 {
+            color: var(--dark-text);
+            font-weight: 600;
+        }
+
+        /* 2. Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--white);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: box-shadow 0.3s ease;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .navbar.scrolled {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--body-text);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        /* 3. Hero Section */
+        .hero {
+            padding: 160px 0 100px;
+            background-color: var(--light-gray);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-left h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: var(--primary-blue);
+        }
+
+        .hero-left .subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            color: var(--dark-text);
+            font-weight: 300;
+        }
+        
+        .hero-left .highlight-text {
+            font-weight: 500;
+            color: var(--dark-text);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--primary-blue);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            background: #0056a2;
+            box-shadow: 0 4px 15px rgba(10, 102, 194, 0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-blue);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .hero-right {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+        }
+
+        .hero-right h3 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            color: var(--dark-text);
+            text-align: center;
+        }
+
+        .hero-bio p {
+            font-size: 1rem;
+            color: var(--body-text);
+            margin-bottom: 1rem;
+        }
+        .hero-bio strong {
+            color: var(--dark-text);
+            font-weight: 600;
+        }
+
+        /* 4. General Section Styling */
+        .section {
+            padding: 100px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .section:last-of-type {
+            border-bottom: none;
+        }
+        
+        .section:nth-child(even) {
+            background-color: var(--light-gray);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 4rem;
+            color: var(--primary-blue);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--primary-blue);
+            border-radius: 2px;
+        }
+
+        /* 5. Card Styles */
+        .grid {
+            display: grid;
+            gap: 2rem;
+        }
+        .grid-2 { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+
+        .card, .project-card, .skill-category {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .card:hover, .project-card:hover, .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-blue);
+        }
+
+        /* 6. Project Cards */
+        .project-card h3 {
+            font-size: 1.2rem;
+            color: var(--primary-blue);
+        }
+        .project-status {
+            font-size: 0.85rem;
+            color: #6C757D;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+        .project-body strong {
+            color: var(--dark-text);
+            font-weight: 600;
+        }
+
+        /* 7. Skills Section */
+        .skill-category h4 {
+            color: var(--dark-text);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+        }
+
+        .skill-tag {
+            background: var(--light-gray);
+            color: var(--body-text);
+            padding: 0.4rem 0.9rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid var(--border-color);
+            transition: all 0.2s ease;
+        }
+        .skill-tag.interactive-skill {
+            cursor: pointer;
+        }
+        .skill-tag.interactive-skill:hover {
+            background: var(--primary-blue);
+            color: var(--white);
+            border-color: var(--primary-blue);
+        }
+        
+        /* 8. Timeline (Experience & Education) */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--border-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2.5rem;
+        }
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: var(--primary-blue);
+            border: 3px solid var(--white);
+            border-radius: 50%;
+            top: 5px;
+            left: -37px;
+            z-index: 1;
+        }
+
+        .timeline-date {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin-bottom: 0.25rem;
+        }
+        .timeline-content h3 {
+            color: var(--dark-text);
+            margin-bottom: 0.5rem;
+            font-size: 1.25rem;
+        }
+        .timeline-content p {
+            color: var(--body-text);
+            font-size: 1rem;
+        }
+
+        /* 9. Contact & Assistant Sections */
+        .centered-content {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        .contact-link {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 12px 25px;
+            border-radius: 8px;
+            border: 2px solid var(--primary-blue);
+            background: var(--white);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .contact-link svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+        .contact-link:hover {
+            background: var(--primary-blue);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        /* 10. Footer */
+        .footer {
+            background: var(--dark-text);
+            color: var(--light-gray);
+            text-align: center;
+            padding: 2rem 0;
+            font-size: 0.9rem;
+        }
+
+        /* 11. Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: var(--white);
+            margin: 10% auto;
+            padding: 2.5rem;
+            border: 1px solid var(--border-color);
+            width: 90%;
+            max-width: 600px;
+            border-radius: 12px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            animation: slideIn 0.4s ease;
+        }
+
+        @keyframes slideIn { from { transform: translateY(-30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        .close-btn {
+            color: #aaa;
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-btn:hover, .close-btn:focus { color: var(--primary-blue); }
+        .modal-content h3 { color: var(--primary-blue); font-size: 1.8rem; margin-bottom: 1rem; }
+        .modal-content p { color: var(--body-text); margin-bottom: 1.5rem; text-align: left; white-space: pre-wrap; }
+        
+        /* 12. Responsive Design */
+        @media (max-width: 992px) {
+            .hero-content { grid-template-columns: 1fr; text-align: center; }
+            .hero-left { text-align: center; }
+            .cta-buttons { justify-content: center; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero-left h1 { font-size: 2.8rem; }
+            .section-title { font-size: 2rem; }
+            .timeline { padding-left: 20px; }
+            .timeline-item::after { left: -28px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="nav-content">
+            <div class="logo">Kushagra Bhardwaj</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#bio-assistant">Assistant</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-left">
+                    <h1>Kushagra Bhardwaj</h1>
+                    <p class="subtitle">Biotechnology Student | <span class="highlight-text">Bioinformatics Enthusiast</span></p>
+                    <div class="cta-buttons">
+                        <a href="#projects" class="btn btn-primary">View Projects</a>
+                        <a href="#contact" class="btn btn-secondary">Contact Me</a>
+                    </div>
+                </div>
+                <div class="hero-right">
+                    <h3>About Me</h3>
+                    <div class="hero-bio">
+                        <p>
+                            I'm a 3rd-year Biotechnology undergraduate passionate about applying computational skills to solve complex biological problems. My focus is on <strong>bioinformatics</strong>, <strong>machine learning</strong>, and <strong>dry lab research</strong>.
+                        </p>
+                        <p>
+                            A detail-oriented and goal-driven learner, I combine my scientific foundation with growing skills in <strong>Python</strong> and <strong>computational biology</strong>. I'm actively building my expertise through certifications and hands-on projects to bridge the gap between life sciences and AI.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">Core Focus</h2>
+            <div class="grid grid-2">
+                <div class="card">
+                    <h3>Academic Foundation</h3>
+                    <p>B.Tech Biotechnology student with a solid background in structural biology and biochemistry. Preparing for GATE Biotechnology while maintaining excellence in coursework and lab experience.</p>
+                </div>
+                <div class="card">
+                    <h3>Career Aspirations</h3>
+                    <p>Aspiring to build a career in computational drug discovery and precision medicine. I am actively learning Data Analysis and AI through various platforms to advance therapeutic discovery.</p>
+                </div>
+                <div class="card">
+                    <h3>Learner Profile</h3>
+                    <p>A goal-driven and proactive learner who values independence and competence. Committed to continuous improvement and applying knowledge to real-world challenges.</p>
+                </div>
+                <div class="card">
+                    <h3>Research Interests</h3>
+                    <p>Passionate about drug repurposing, molecular docking, AI-driven drug discovery, and gaining data-driven insights from genomic and bioinformatic data.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="grid grid-2">
+                <div class="project-card">
+                    <h3>Structural & Phylogenetic Analysis</h3>
+                    <p class="project-status">Completed • Structural Biology</p>
+                    <p>Analyzed the MshA glycosyltransferase enzyme to understand its evolutionary relationships and structural features, providing insights into its functional mechanisms.</p>
+                    <p><strong>Technologies:</strong> Structural Biology Tools, Phylogenetic Software</p>
+                </div>
+                <div class="project-card">
+                    <h3>DNA Sequence Classifier</h3>
+                    <p class="project-status">Ongoing • Machine Learning</p>
+                    <p>Developing a machine learning model to distinguish between promoter and non-promoter DNA regions, with plans to expand to multi-class genomic sequence analysis.</p>
+                    <p><strong>Technologies:</strong> Python, scikit-learn, Biopython</p>
+                </div>
+                <div class="project-card">
+                    <h3>IBD Drug Discovery</h3>
+                    <p class="project-status">Ongoing • Drug Repurposing</p>
+                    <p>Identifying potential drug candidates for Inflammatory Bowel Disease (IBD) using drug repurposing strategies and molecular docking techniques.</p>
+                    <p><strong>Technologies:</strong> Molecular Docking Software, Drug Databases</p>
+                </div>
+                <div class="project-card">
+                    <h3>Bioinformatics Virtual Assistant</h3>
+                    <p class="project-status">Upcoming • AI Development</p>
+                    <p>Planning to build an intelligent virtual assistant to help researchers with bioinformatics workflows, protocol guidance, and computational tasks.</p>
+                    <p><strong>Technologies:</strong> Python, Natural Language Processing</p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <button id="generateProjectBtn" class="btn btn-secondary">✨ Get an AI-Powered Project Idea</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="section">
+        <div class="container">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="grid grid-3">
+                <div class="skill-category">
+                    <h4>Drug Discovery</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag interactive-skill" data-skill="Molecular Docking">Molecular Docking</span>
+                        <span class="skill-tag interactive-skill" data-skill="Structure-Based Drug Design">Structure-Based Design</span>
+                        <span class="skill-tag interactive-skill" data-skill="Drug Repurposing">Drug Repurposing</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h4>Bioinformatics</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag interactive-skill" data-skill="Sequence Alignment">Sequence Alignment</span>
+                        <span class="skill-tag interactive-skill" data-skill="Structural Analysis in Bioinformatics">Structural Analysis</span>
+                        <span class="skill-tag interactive-skill" data-skill="Phylogenetic Analysis">Phylogenetic Analysis</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h4>Computational Tools</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag interactive-skill" data-skill="Python for Bioinformatics">Python</span>
+                        <span class="skill-tag interactive-skill" data-skill="R for Bioinformatics">R</span>
+                        <span class="skill-tag interactive-skill" data-skill="Biopython">Biopython</span>
+                        <span class="skill-tag interactive-skill" data-skill="Google Colab">Google Colab</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="section">
+        <div class="container">
+            <h2 class="section-title">Experience & Education</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <p class="timeline-date">2024</p>
+                    <h3>Bioinformatics Intern</h3>
+                    <p><strong>Mapbiome Informatics</strong></p>
+                    <p>Gained hands-on experience in computational biology workflows, working with real-world datasets and industry-standard tools for genomic analysis.</p>
+                </div>
+                <div class="timeline-item">
+                    <p class="timeline-date">2023 - Present</p>
+                    <h3>B.Tech in Biotechnology</h3>
+                    <p>Focusing on bioprocessing, recombinant DNA technology, and bioinformatics applications.</p>
+                </div>
+                <div class="timeline-item">
+                    <p class="timeline-date">Ongoing</p>
+                    <h3>NPTEL & GATE Preparation</h3>
+                    <p>Completing advanced courses in NGS and preparing for GATE Biotechnology to strengthen core subject knowledge.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="bio-assistant" class="section">
+        <div class="container">
+            <h2 class="section-title">Bio-Query Assistant</h2>
+            <div class="centered-content">
+                <p>This tool uses Google's Gemini API to answer questions about bioinformatics and biotechnology. Ask it a question below to see a demonstration of my ability to integrate AI into functional applications.</p>
+                <textarea id="bioQueryInput" placeholder="e.g., Explain CRISPR-Cas9..." style="width: 100%; height: 100px; resize: vertical; border: 1px solid var(--border-color); background: var(--white); color: var(--dark-text); padding: 1rem; border-radius: 8px; font-size: 1rem; margin-top: 1.5rem;"></textarea>
+                <button id="askAssistantBtn" class="btn btn-primary" style="margin-top: 1rem;">Ask Gemini</button>
+                <div id="loadingIndicator" class="modal-loader" style="display: none; margin: 1rem auto;">
+                    <svg class="spinner" width="30" height="30" viewBox="0 0 50 50"><circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle></svg>
+                </div>
+                <div id="bioAssistantResponse" style="margin-top: 1.5rem; padding: 1.5rem; background: var(--light-gray); border-radius: 8px; border: 1px solid var(--border-color); color: var(--dark-text); text-align: left; white-space: pre-wrap; display: none;"></div>
+                <div id="bioAssistantError" style="margin-top: 1rem; color: #D9534F; text-align: center; display: none;"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <div class="container">
+            <div class="contact-content">
+                <h2 class="section-title">Let's Connect</h2>
+                <p>I'm always excited to discuss bioinformatics, collaborate on projects, or explore new opportunities. Feel free to reach out or suggest an idea!</p>
+                <div class="contact-links">
+                    <a href="#" id="email-btn" class="contact-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"></path></svg>
+                        <span>Email</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/kushagra-bhardwaj-021a66307/" target="_blank" rel="noopener noreferrer" class="contact-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="https://github.com/kush021104" target="_blank" rel="noopener noreferrer" class="contact-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.91 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path></svg>
+                        <span>GitHub</span>
+                    </a>
+                    <a href="#" id="suggest-idea-btn" class="contact-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2c-5.523 0-10 4.477-10 10s4.477 10 10 10 10-4.477 10-10-4.477-10-10-10zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8zm-1-5h2v2h-2v-2zm0-8h2v6h-2v-6z"></path></svg>
+                        <span>Suggest an Idea</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Kushagra Bhardwaj. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <!-- Modals -->
+    <div id="emailModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h3>My Email Address</h3>
+            <p style="text-align: center;">Feel free to reach out!</p>
+            <div class="email-display" style="display: flex; justify-content: space-between; align-items: center; background: var(--light-gray); padding: 1rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                <span id="emailText" style="font-size: 1.1rem; color: var(--dark-text); word-break: break-all;">kushagra021104@gmail.com</span>
+                <button id="copyEmailBtn" class="btn btn-primary" style="padding: 8px 15px; font-size: 0.9rem;">Copy</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="skillExplainerModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h3 id="skillModalTitle">Skill Explanation</h3>
+            <div id="skillModalLoader" class="modal-loader">
+                <svg class="spinner" width="40" height="40" viewBox="0 0 50 50"><circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle></svg>
+            </div>
+            <p id="skillModalContent"></p>
+        </div>
+    </div>
+
+    <div id="projectIdeaModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h3>✨ AI-Powered Project Idea</h3>
+            <div id="projectModalLoader" class="modal-loader">
+                <svg class="spinner" width="40" height="40" viewBox="0 0 50 50"><circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle></svg>
+            </div>
+            <p id="projectModalContent"></p>
+            <a id="emailProjectIdeaBtn" href="#" class="btn btn-secondary" style="display: none; margin-top: 1.5rem;">📧 Email This Idea to Me</a>
+        </div>
+    </div>
+    
+    <div id="visitorSuggestionModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h3>Suggest a Project Idea</h3>
+            <p style="text-align: center;">Have a project idea or a problem you think I could tackle? I'd love to hear it!</p>
+            <textarea id="visitorIdeaInput" placeholder="Describe your project idea here..." style="width: 100%; height: 150px; resize: vertical; border: 1px solid var(--border-color); background: var(--light-gray); color: var(--dark-text); padding: 1rem; border-radius: 8px; font-size: 1rem;"></textarea>
+            <a id="sendVisitorIdeaBtn" href="#" class="btn btn-primary" style="margin-top: 1.5rem;">Send Suggestion</a>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                navbar.classList.toggle('scrolled', window.scrollY > 50);
+            });
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    if (href.startsWith('#') && href.length > 1) {
+                        e.preventDefault();
+                        const target = document.querySelector(href);
+                        if (target) {
+                            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    }
+                });
+            });
+
+            const allModals = document.querySelectorAll('.modal');
+            const openModal = (modal) => modal.style.display = 'block';
+            const closeModal = (modal) => modal.style.display = 'none';
+            allModals.forEach(modal => {
+                const closeBtn = modal.querySelector('.close-btn');
+                if (closeBtn) closeBtn.onclick = () => closeModal(modal);
+            });
+            window.onclick = (event) => {
+                allModals.forEach(modal => {
+                    if (event.target == modal) closeModal(modal);
+                });
+            };
+            
+            const emailModal = document.getElementById('emailModal');
+            document.getElementById('email-btn').onclick = (e) => {
+                e.preventDefault();
+                openModal(emailModal);
+            };
+            document.getElementById('copyEmailBtn').onclick = () => {
+                const emailText = document.getElementById('emailText').textContent;
+                navigator.clipboard.writeText(emailText).then(() => {
+                    document.getElementById('copyEmailBtn').textContent = 'Copied!';
+                    setTimeout(() => { document.getElementById('copyEmailBtn').textContent = 'Copy'; }, 2000);
+                });
+            };
+
+            const callGemini = async (prompt) => {
+                const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
+                const apiKey = "";
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+                let retries = 3;
+                let delay = 1000;
+                while (retries > 0) {
+                    try {
+                        const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                        const result = await response.json();
+                        if (result.candidates?.[0]?.content?.parts?.[0]?.text) {
+                            return result.candidates[0].content.parts[0].text;
+                        } else { throw new Error("Unexpected API response structure."); }
+                    } catch (error) {
+                        retries--;
+                        if (retries === 0) throw error;
+                        await new Promise(res => setTimeout(res, delay));
+                        delay *= 2;
+                    }
+                }
+            };
+
+            const bioQueryInput = document.getElementById('bioQueryInput');
+            const askAssistantBtn = document.getElementById('askAssistantBtn');
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            const bioAssistantResponse = document.getElementById('bioAssistantResponse');
+            const bioAssistantError = document.getElementById('bioAssistantError');
+
+            askAssistantBtn.addEventListener('click', async () => {
+                const prompt = bioQueryInput.value.trim();
+                if (!prompt) {
+                    bioAssistantError.textContent = "Please enter a question to ask.";
+                    bioAssistantError.style.display = 'block';
+                    return;
+                }
+                bioAssistantResponse.style.display = 'none';
+                bioAssistantError.style.display = 'none';
+                loadingIndicator.style.display = 'block';
+                try {
+                    const responseText = await callGemini(prompt);
+                    bioAssistantResponse.textContent = responseText;
+                    bioAssistantResponse.style.display = 'block';
+                } catch (error) {
+                    bioAssistantError.textContent = "Sorry, I couldn't get a response. Please try again.";
+                    bioAssistantError.style.display = 'block';
+                } finally {
+                    loadingIndicator.style.display = 'none';
+                }
+            });
+
+            const skillExplainerModal = document.getElementById('skillExplainerModal');
+            document.querySelectorAll('.interactive-skill').forEach(skillTag => {
+                skillTag.addEventListener('click', async () => {
+                    const skillName = skillTag.dataset.skill;
+                    document.getElementById('skillModalTitle').textContent = skillName;
+                    document.getElementById('skillModalContent').textContent = '';
+                    document.getElementById('skillModalLoader').style.display = 'block';
+                    openModal(skillExplainerModal);
+                    const prompt = `In the context of bioinformatics, explain "${skillName}" in about 100 words for a hiring manager. Describe its primary use and importance.`;
+                    try {
+                        document.getElementById('skillModalContent').textContent = await callGemini(prompt);
+                    } catch (error) {
+                        document.getElementById('skillModalContent').textContent = "Could not fetch an explanation. Please try again later.";
+                    } finally {
+                        document.getElementById('skillModalLoader').style.display = 'none';
+                    }
+                });
+            });
+
+            const projectIdeaModal = document.getElementById('projectIdeaModal');
+            document.getElementById('generateProjectBtn').addEventListener('click', async () => {
+                document.getElementById('projectModalContent').textContent = '';
+                document.getElementById('emailProjectIdeaBtn').style.display = 'none';
+                document.getElementById('projectModalLoader').style.display = 'block';
+                openModal(projectIdeaModal);
+                let projectContext = "My current projects include: ";
+                document.querySelectorAll('.project-card').forEach(card => {
+                    const title = card.querySelector('h3')?.textContent || '';
+                    const description = card.querySelector('p:not(.project-status)')?.textContent || '';
+                    projectContext += `Title: ${title.trim()}. Description: ${description.trim()}. `;
+                });
+                projectContext += "My skills include drug discovery, molecular modeling, Python, R, and machine learning.";
+                const prompt = `Based on my portfolio (${projectContext}), suggest one novel bioinformatics project idea for an undergraduate. Provide a catchy title and a 1-2 paragraph description of the goal, methods, and learning outcomes. Format with "Title:" and "Description:".`;
+                try {
+                    const idea = await callGemini(prompt);
+                    document.getElementById('projectModalContent').textContent = idea;
+                    const subject = "AI-Generated Bioinformatics Project Idea";
+                    const body = encodeURIComponent(`Here's a new project idea from my portfolio site:\n\n${idea}`);
+                    document.getElementById('emailProjectIdeaBtn').href = `mailto:kushagra021104@gmail.com?subject=${subject}&body=${body}`;
+                    document.getElementById('emailProjectIdeaBtn').style.display = 'inline-flex';
+                } catch (error) {
+                    document.getElementById('projectModalContent').textContent = "Could not generate a project idea. Please try again later.";
+                } finally {
+                    document.getElementById('projectModalLoader').style.display = 'none';
+                }
+            });
+            
+            const visitorSuggestionModal = document.getElementById('visitorSuggestionModal');
+            document.getElementById('suggest-idea-btn').addEventListener('click', (e) => {
+                e.preventDefault();
+                openModal(visitorSuggestionModal);
+            });
+            document.getElementById('visitorIdeaInput').addEventListener('input', () => {
+                const subject = "Visitor Project Suggestion";
+                const body = encodeURIComponent(document.getElementById('visitorIdeaInput').value);
+                document.getElementById('sendVisitorIdeaBtn').href = `mailto:kushagra021104@gmail.com?subject=${subject}&body=${body}`;
+            });
+        });
+    </script>
+</body>
+</html>
