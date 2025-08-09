@@ -6,7 +6,7 @@
     <title>Kushagra Bhardwaj - Biotechnology & Bioinformatics Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* --- NEW ELEGANT & PROFESSIONAL THEME --- */
+        /* --- ELEGANT & PROFESSIONAL THEME --- */
 
         /* 1. Global Styles & Color Palette */
         :root {
@@ -694,10 +694,13 @@
         <div class="modal-content">
             <span class="close-btn">&times;</span>
             <h3 id="skillModalTitle">Skill Explanation</h3>
-            <div id="skillModalLoader" class="modal-loader">
+            <div id="skillModalLoader" class="modal-loader" style="display: none;">
                 <svg class="spinner" width="40" height="40" viewBox="0 0 50 50"><circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle></svg>
             </div>
-            <p id="skillModalContent"></p>
+            <div id="skillModalContent">
+                <p id="skillModalText"></p>
+                <button id="skillRetryBtn" class="btn btn-secondary" style="display: none; margin-top: 1rem;">Retry</button>
+            </div>
         </div>
     </div>
 
@@ -772,9 +775,10 @@
 
             const callGemini = async (prompt) => {
                 const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
-                const apiKey = "AIzaSyB_EtiVX0Zu87uyffbbiQqDFI-tyM9x7DQ";
+                const apiKey = "AIzaSyB_EtiVX0Zu87uyffbbiQqDFI-tyM9x7DQ"; // IMPORTANT: Replace with your actual API key
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
-                let retries = 3;
+                
+                let retries = 2; // Reduced retries to fail faster for the user
                 let delay = 1000;
                 while (retries > 0) {
                     try {
@@ -822,23 +826,38 @@
             });
 
             const skillExplainerModal = document.getElementById('skillExplainerModal');
+            const skillModalTitle = document.getElementById('skillModalTitle');
+            const skillModalText = document.getElementById('skillModalText');
+            const skillModalLoader = document.getElementById('skillModalLoader');
+            const skillRetryBtn = document.getElementById('skillRetryBtn');
+            let currentSkillName = '';
+
+            const fetchSkillExplanation = async () => {
+                skillModalText.textContent = '';
+                skillRetryBtn.style.display = 'none';
+                skillModalLoader.style.display = 'block';
+                
+                const prompt = `In the context of bioinformatics, explain "${currentSkillName}" in about 100 words for a hiring manager. Describe its primary use and importance.`;
+                try {
+                    const explanation = await callGemini(prompt);
+                    skillModalText.textContent = explanation;
+                } catch (error) {
+                    skillModalText.textContent = "Could not fetch an explanation. The API might be busy. Please try again.";
+                    skillRetryBtn.style.display = 'inline-flex';
+                } finally {
+                    skillModalLoader.style.display = 'none';
+                }
+            };
+
             document.querySelectorAll('.interactive-skill').forEach(skillTag => {
-                skillTag.addEventListener('click', async () => {
-                    const skillName = skillTag.dataset.skill;
-                    document.getElementById('skillModalTitle').textContent = skillName;
-                    document.getElementById('skillModalContent').textContent = '';
-                    document.getElementById('skillModalLoader').style.display = 'block';
+                skillTag.addEventListener('click', () => {
+                    currentSkillName = skillTag.dataset.skill;
+                    skillModalTitle.textContent = currentSkillName;
                     openModal(skillExplainerModal);
-                    const prompt = `In the context of bioinformatics, explain "${skillName}" in about 100 words for a hiring manager. Describe its primary use and importance.`;
-                    try {
-                        document.getElementById('skillModalContent').textContent = await callGemini(prompt);
-                    } catch (error) {
-                        document.getElementById('skillModalContent').textContent = "Could not fetch an explanation. Please try again later.";
-                    } finally {
-                        document.getElementById('skillModalLoader').style.display = 'none';
-                    }
+                    fetchSkillExplanation();
                 });
             });
+            skillRetryBtn.addEventListener('click', fetchSkillExplanation);
 
             const projectIdeaModal = document.getElementById('projectIdeaModal');
             document.getElementById('generateProjectBtn').addEventListener('click', async () => {
