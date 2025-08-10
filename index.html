@@ -230,7 +230,7 @@
             border-radius: 2px;
         }
 
-        /* 5. Card Styles */
+        /* 5. Card Styles & Grids */
         .grid {
             display: grid;
             gap: 2rem;
@@ -297,11 +297,9 @@
             font-weight: 500;
             border: 1px solid var(--border-color);
             transition: all 0.2s ease;
-        }
-        .skill-tag.interactive-skill {
             cursor: pointer;
         }
-        .skill-tag.interactive-skill:hover {
+        .skill-tag:hover {
             background: var(--primary-blue);
             color: var(--white);
             border-color: var(--primary-blue);
@@ -431,7 +429,7 @@
             width: 90%;
             max-width: 600px;
             border-radius: 12px;
-            text-align: center;
+            text-align: left;
             position: relative;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             animation: slideIn 0.4s ease;
@@ -452,7 +450,7 @@
 
         .close-btn:hover, .close-btn:focus { color: var(--primary-blue); }
         .modal-content h3 { color: var(--primary-blue); font-size: 1.8rem; margin-bottom: 1rem; }
-        .modal-content p { color: var(--body-text); margin-bottom: 1.5rem; text-align: left; white-space: pre-wrap; }
+        .modal-content p { color: var(--body-text); margin-bottom: 1rem; }
         
         /* 12. Responsive Design */
         @media (max-width: 992px) {
@@ -544,25 +542,21 @@
                     <h3>Structural & Phylogenetic Analysis</h3>
                     <p class="project-status">Completed • Structural Biology</p>
                     <p>Analyzed the MshA glycosyltransferase enzyme to understand its evolutionary relationships and structural features, providing insights into its functional mechanisms.</p>
-                    <p><strong>Technologies:</strong> Structural Biology Tools, Phylogenetic Software</p>
                 </div>
                 <div class="project-card">
                     <h3>DNA Sequence Classifier</h3>
                     <p class="project-status">Ongoing • Machine Learning</p>
                     <p>Developing a machine learning model to distinguish between promoter and non-promoter DNA regions, with plans to expand to multi-class genomic sequence analysis.</p>
-                    <p><strong>Technologies:</strong> Python, scikit-learn, Biopython</p>
                 </div>
                 <div class="project-card">
                     <h3>IBD Drug Discovery</h3>
                     <p class="project-status">Ongoing • Drug Repurposing</p>
                     <p>Identifying potential drug candidates for Inflammatory Bowel Disease (IBD) using drug repurposing strategies and molecular docking techniques.</p>
-                    <p><strong>Technologies:</strong> Molecular Docking Software, Drug Databases</p>
                 </div>
                 <div class="project-card">
                     <h3>Bioinformatics Virtual Assistant</h3>
                     <p class="project-status">Upcoming • AI Development</p>
                     <p>Planning to build an intelligent virtual assistant to help researchers with bioinformatics workflows, protocol guidance, and computational tasks.</p>
-                    <p><strong>Technologies:</strong> Python, Natural Language Processing</p>
                 </div>
             </div>
             <div style="text-align: center; margin-top: 3rem;">
@@ -578,26 +572,26 @@
                 <div class="skill-category">
                     <h4>Drug Discovery</h4>
                     <div class="skill-tags">
-                        <span class="skill-tag interactive-skill" data-skill="Molecular Docking">Molecular Docking</span>
-                        <span class="skill-tag interactive-skill" data-skill="Structure-Based Drug Design">Structure-Based Design</span>
-                        <span class="skill-tag interactive-skill" data-skill="Drug Repurposing">Drug Repurposing</span>
+                        <span class="skill-tag" data-skill="docking">Molecular Docking</span>
+                        <span class="skill-tag" data-skill="sbd">Structure-Based Design</span>
+                        <span class="skill-tag" data-skill="repurposing">Drug Repurposing</span>
                     </div>
                 </div>
                 <div class="skill-category">
                     <h4>Bioinformatics</h4>
                     <div class="skill-tags">
-                        <span class="skill-tag interactive-skill" data-skill="Sequence Alignment">Sequence Alignment</span>
-                        <span class="skill-tag interactive-skill" data-skill="Structural Analysis in Bioinformatics">Structural Analysis</span>
-                        <span class="skill-tag interactive-skill" data-skill="Phylogenetic Analysis">Phylogenetic Analysis</span>
+                        <span class="skill-tag" data-skill="alignment">Sequence Alignment</span>
+                        <span class="skill-tag" data-skill="analysis">Structural Analysis</span>
+                        <span class="skill-tag" data-skill="phylo">Phylogenetic Analysis</span>
                     </div>
                 </div>
                 <div class="skill-category">
                     <h4>Computational Tools</h4>
                     <div class="skill-tags">
-                        <span class="skill-tag interactive-skill" data-skill="Python for Bioinformatics">Python</span>
-                        <span class="skill-tag interactive-skill" data-skill="R for Bioinformatics">R</span>
-                        <span class="skill-tag interactive-skill" data-skill="Biopython">Biopython</span>
-                        <span class="skill-tag interactive-skill" data-skill="Google Colab">Google Colab</span>
+                        <span class="skill-tag" data-skill="python">Python</span>
+                        <span class="skill-tag" data-skill="r">R</span>
+                        <span class="skill-tag" data-skill="biopython">Biopython</span>
+                        <span class="skill-tag" data-skill="colab">Google Colab</span>
                     </div>
                 </div>
             </div>
@@ -690,17 +684,11 @@
         </div>
     </div>
     
-    <div id="skillExplainerModal" class="modal">
+    <div id="skillModal" class="modal">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
-            <h3 id="skillModalTitle">Skill Explanation</h3>
-            <div id="skillModalLoader" class="modal-loader" style="display: none;">
-                <svg class="spinner" width="40" height="40" viewBox="0 0 50 50"><circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle></svg>
-            </div>
-            <div id="skillModalContent">
-                <p id="skillModalText"></p>
-                <button id="skillRetryBtn" class="btn btn-secondary" style="display: none; margin-top: 1rem;">Retry</button>
-            </div>
+            <h3 id="skillModalTitle"></h3>
+            <p id="skillModalContent"></p>
         </div>
     </div>
 
@@ -729,6 +717,20 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // --- DATA STORE (NO API FOR SKILLS) ---
+            const skillDescriptions = {
+                docking: "Molecular docking is a computational technique that predicts the preferred orientation of one molecule to a second when bound to each other to form a stable complex. It's crucial in drug discovery for screening virtual libraries of small molecules to identify potential drug candidates that bind to a specific protein target.",
+                sbd: "Structure-Based Drug Design (SBDD) uses the 3D structural information of a biological target to design and optimize drug candidates. By understanding the target's binding site, we can design molecules with high affinity and selectivity, leading to more effective and safer drugs.",
+                repurposing: "Drug repurposing involves identifying new therapeutic uses for existing, approved drugs. This approach can significantly accelerate the drug development timeline and reduce costs, as the safety profiles of these drugs are already well-established.",
+                alignment: "Sequence alignment is a fundamental bioinformatics method for comparing DNA, RNA, or protein sequences to identify regions of similarity. This can reveal functional, structural, or evolutionary relationships between the sequences.",
+                analysis: "This involves the use of computational tools to analyze, predict, and visualize the 3D structures of biological macromolecules like proteins and nucleic acids. Understanding structure is key to understanding function, and it is foundational for drug design and molecular biology research.",
+                phylo: "Phylogenetic analysis is the study of evolutionary relationships among biological entities. By comparing sequence data, we can construct phylogenetic trees that illustrate how different species or genes have diverged over time.",
+                python: "Python is a versatile, high-level programming language widely used in bioinformatics for its extensive libraries like Biopython, Pandas, and Scikit-learn. It's essential for data analysis, scripting, machine learning, and automating complex biological workflows.",
+                r: "R is a programming language and environment specialized for statistical computing and graphics. In bioinformatics, it's heavily used for statistical analysis of genomic data, data visualization (e.g., with ggplot2), and running packages from the Bioconductor project.",
+                biopython: "Biopython is a collection of Python tools for computational biology and bioinformatics. It provides functionalities for reading and writing various sequence file formats, accessing online biological databases, and interfacing with other common bioinformatics tools.",
+                colab: "Google Colab is a cloud-based Jupyter notebook environment that provides free access to computing resources, including GPUs. It's an excellent platform for developing and running machine learning models, performing data analysis, and collaborating on computational projects without needing a powerful local machine."
+            };
+
             // --- API KEYS & IDs ---
             const geminiApiKey = "AIzaSyB_EtiVX0Zu87uyffbbiQqDFI-tyM9x7DQ";
 
@@ -828,40 +830,19 @@
                 }
             });
 
-            // --- Skill Explainer ---
-            const skillExplainerModal = document.getElementById('skillExplainerModal');
-            const skillModalTitle = document.getElementById('skillModalTitle');
-            const skillModalText = document.getElementById('skillModalText');
-            const skillModalLoader = document.getElementById('skillModalLoader');
-            const skillRetryBtn = document.getElementById('skillRetryBtn');
-            let currentSkillName = '';
-
-            const fetchSkillExplanation = async () => {
-                skillModalText.textContent = '';
-                skillRetryBtn.style.display = 'none';
-                skillModalLoader.style.display = 'block';
-                
-                const prompt = `In the context of bioinformatics, explain "${currentSkillName}" in about 100 words for a hiring manager. Describe its primary use and importance.`;
-                try {
-                    const explanation = await callGemini(prompt);
-                    skillModalText.textContent = explanation;
-                } catch (error) {
-                    skillModalText.textContent = "Could not fetch an explanation. The API might be busy. Please try again.";
-                    skillRetryBtn.style.display = 'inline-flex';
-                } finally {
-                    skillModalLoader.style.display = 'none';
-                }
-            };
-
-            document.querySelectorAll('.interactive-skill').forEach(skillTag => {
+            // --- Skill Explainer (Pre-defined) ---
+            const skillModal = document.getElementById('skillModal');
+            document.querySelectorAll('.skill-tag').forEach(skillTag => {
                 skillTag.addEventListener('click', () => {
-                    currentSkillName = skillTag.dataset.skill;
-                    skillModalTitle.textContent = currentSkillName;
-                    openModal(skillExplainerModal);
-                    fetchSkillExplanation();
+                    const skillKey = skillTag.dataset.skill;
+                    const skillName = skillTag.textContent;
+                    const skillDesc = skillDescriptions[skillKey];
+                    
+                    document.getElementById('skillModalTitle').textContent = skillName;
+                    document.getElementById('skillModalContent').textContent = skillDesc;
+                    openModal(skillModal);
                 });
             });
-            skillRetryBtn.addEventListener('click', fetchSkillExplanation);
 
             // --- AI Project Idea Generator ---
             const projectIdeaModal = document.getElementById('projectIdeaModal');
