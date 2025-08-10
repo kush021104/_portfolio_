@@ -729,6 +729,10 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // --- API KEYS & IDs ---
+            const geminiApiKey = "AIzaSyB_EtiVX0Zu87uyffbbiQqDFI-tyM9x7DQ";
+
+            // --- General Setup ---
             const navbar = document.getElementById('navbar');
             window.addEventListener('scroll', () => {
                 navbar.classList.toggle('scrolled', window.scrollY > 50);
@@ -775,10 +779,8 @@
 
             const callGemini = async (prompt) => {
                 const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
-                const apiKey = "AIzaSyB_EtiVX0Zu87uyffbbiQqDFI-tyM9x7DQ"; // IMPORTANT: Replace with your actual API key
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
-                
-                let retries = 2; // Reduced retries to fail faster for the user
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${geminiApiKey}`;
+                let retries = 2;
                 let delay = 1000;
                 while (retries > 0) {
                     try {
@@ -797,6 +799,7 @@
                 }
             };
 
+            // --- Bio-Query Assistant ---
             const bioQueryInput = document.getElementById('bioQueryInput');
             const askAssistantBtn = document.getElementById('askAssistantBtn');
             const loadingIndicator = document.getElementById('loadingIndicator');
@@ -825,6 +828,7 @@
                 }
             });
 
+            // --- Skill Explainer ---
             const skillExplainerModal = document.getElementById('skillExplainerModal');
             const skillModalTitle = document.getElementById('skillModalTitle');
             const skillModalText = document.getElementById('skillModalText');
@@ -859,6 +863,7 @@
             });
             skillRetryBtn.addEventListener('click', fetchSkillExplanation);
 
+            // --- AI Project Idea Generator ---
             const projectIdeaModal = document.getElementById('projectIdeaModal');
             document.getElementById('generateProjectBtn').addEventListener('click', async () => {
                 document.getElementById('projectModalContent').textContent = '';
@@ -887,6 +892,7 @@
                 }
             });
             
+            // --- Visitor Suggestion Box ---
             const visitorSuggestionModal = document.getElementById('visitorSuggestionModal');
             document.getElementById('suggest-idea-btn').addEventListener('click', (e) => {
                 e.preventDefault();
