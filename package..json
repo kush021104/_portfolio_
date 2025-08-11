@@ -1,0 +1,8 @@
+{
+  "name": "portfolio-functions",
+  "version": "1.0.0",
+  "description": "Dependencies for Netlify Functions",
+  "dependencies": {
+    "@google/generative-ai": "^0.14.1"
+  }
+}
