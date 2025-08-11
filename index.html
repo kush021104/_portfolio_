@@ -236,6 +236,9 @@
             gap: 2rem;
         }
         .grid-2 { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+        
+        /* --- FIX: ADDED MISSING grid-3 RULE --- */
+        .grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
 
         .card, .project-card, .skill-category {
             background: var(--white);
@@ -361,7 +364,7 @@
         }
 
         /* 9. Contact & Assistant Sections */
-        .centered-content {
+        .centered-content, .contact-content {
             max-width: 700px;
             margin: 0 auto;
             text-align: center;
@@ -459,8 +462,13 @@
             .cta-buttons { justify-content: center; }
         }
 
+        /* --- FIX: MOBILE MENU --- */
         @media (max-width: 768px) {
-            .nav-links { display: none; }
+            .nav-content {
+                flex-direction: column; /* Stacks logo and links vertically */
+                align-items: flex-start;
+                gap: 1rem;
+            }
             .hero-left h1 { font-size: 2.8rem; }
             .section-title { font-size: 2rem; }
             .timeline { padding-left: 20px; }
@@ -560,7 +568,7 @@
                 </div>
             </div>
             <div style="text-align: center; margin-top: 3rem;">
-                <button id="generateProjectBtn" class="btn btn-secondary">✨ Get an AI-Powered Project Idea</button>
+                <button id="generateProjectBtn" class="btn btn-secondary" disabled>✨ Get an AI-Powered Project Idea (Coming Soon)</button>
             </div>
         </div>
     </section>
@@ -671,7 +679,6 @@
         </div>
     </footer>
     
-    <!-- Modals -->
     <div id="emailModal" class="modal">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
@@ -731,8 +738,7 @@
                 colab: "Google Colab is a cloud-based Jupyter notebook environment that provides free access to computing resources, including GPUs. It's an excellent platform for developing and running machine learning models, performing data analysis, and collaborating on computational projects without needing a powerful local machine."
             };
 
-            // --- API KEYS & IDs ---
-            const geminiApiKey = "   ";
+            // --- FIX: API KEY REMOVED FROM CLIENT-SIDE CODE ---
 
             // --- General Setup ---
             const navbar = document.getElementById('navbar');
@@ -744,9 +750,9 @@
                 anchor.addEventListener('click', function (e) {
                     const href = this.getAttribute('href');
                     if (href.startsWith('#') && href.length > 1) {
-                        e.preventDefault();
                         const target = document.querySelector(href);
                         if (target) {
+                            e.preventDefault();
                             target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                         }
                     }
@@ -779,29 +785,7 @@
                 });
             };
 
-            const callGemini = async (prompt) => {
-                const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${geminiApiKey}`;
-                let retries = 2;
-                let delay = 1000;
-                while (retries > 0) {
-                    try {
-                        const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-                        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-                        const result = await response.json();
-                        if (result.candidates?.[0]?.content?.parts?.[0]?.text) {
-                            return result.candidates[0].content.parts[0].text;
-                        } else { throw new Error("Unexpected API response structure."); }
-                    } catch (error) {
-                        retries--;
-                        if (retries === 0) throw error;
-                        await new Promise(res => setTimeout(res, delay));
-                        delay *= 2;
-                    }
-                }
-            };
-
-            // --- Bio-Query Assistant ---
+            // --- Bio-Query Assistant (Updated to call the secure serverless function) ---
             const bioQueryInput = document.getElementById('bioQueryInput');
             const askAssistantBtn = document.getElementById('askAssistantBtn');
             const loadingIndicator = document.getElementById('loadingIndicator');
@@ -818,11 +802,27 @@
                 bioAssistantResponse.style.display = 'none';
                 bioAssistantError.style.display = 'none';
                 loadingIndicator.style.display = 'block';
+                
                 try {
-                    const responseText = await callGemini(prompt);
-                    bioAssistantResponse.textContent = responseText;
+                    // This is the new URL for your secure "middleman" function on Netlify
+                    const response = await fetch('/.netlify/functions/ask-gemini', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ prompt: prompt }),
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`Server error: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    bioAssistantResponse.textContent = data.reply;
                     bioAssistantResponse.style.display = 'block';
+
                 } catch (error) {
+                    console.error('Error fetching AI response:', error);
                     bioAssistantError.textContent = "Sorry, I couldn't get a response. Please try again.";
                     bioAssistantError.style.display = 'block';
                 } finally {
@@ -844,34 +844,13 @@
                 });
             });
 
-            // --- AI Project Idea Generator ---
-            const projectIdeaModal = document.getElementById('projectIdeaModal');
-            document.getElementById('generateProjectBtn').addEventListener('click', async () => {
-                document.getElementById('projectModalContent').textContent = '';
-                document.getElementById('emailProjectIdeaBtn').style.display = 'none';
-                document.getElementById('projectModalLoader').style.display = 'block';
-                openModal(projectIdeaModal);
-                let projectContext = "My current projects include: ";
-                document.querySelectorAll('.project-card').forEach(card => {
-                    const title = card.querySelector('h3')?.textContent || '';
-                    const description = card.querySelector('p:not(.project-status)')?.textContent || '';
-                    projectContext += `Title: ${title.trim()}. Description: ${description.trim()}. `;
+            // --- NOTE: AI Project Idea Generator is disabled until it is also moved to a serverless function ---
+            const generateProjectBtn = document.getElementById('generateProjectBtn');
+            if(generateProjectBtn) {
+                generateProjectBtn.addEventListener('click', () => {
+                    alert("This feature is being upgraded for security and will be back soon!");
                 });
-                projectContext += "My skills include drug discovery, molecular modeling, Python, R, and machine learning.";
-                const prompt = `Based on my portfolio (${projectContext}), suggest one novel bioinformatics project idea for an undergraduate. Provide a catchy title and a 1-2 paragraph description of the goal, methods, and learning outcomes. Format with "Title:" and "Description:".`;
-                try {
-                    const idea = await callGemini(prompt);
-                    document.getElementById('projectModalContent').textContent = idea;
-                    const subject = "AI-Generated Bioinformatics Project Idea";
-                    const body = encodeURIComponent(`Here's a new project idea from my portfolio site:\n\n${idea}`);
-                    document.getElementById('emailProjectIdeaBtn').href = `mailto:kushagra021104@gmail.com?subject=${subject}&body=${body}`;
-                    document.getElementById('emailProjectIdeaBtn').style.display = 'inline-flex';
-                } catch (error) {
-                    document.getElementById('projectModalContent').textContent = "Could not generate a project idea. Please try again later.";
-                } finally {
-                    document.getElementById('projectModalLoader').style.display = 'none';
-                }
-            });
+            }
             
             // --- Visitor Suggestion Box ---
             const visitorSuggestionModal = document.getElementById('visitorSuggestionModal');
