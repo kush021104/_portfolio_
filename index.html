@@ -462,17 +462,106 @@
             .cta-buttons { justify-content: center; }
         }
 
-        /* --- FIX: MOBILE MENU --- */
-        @media (max-width: 768px) {
-            .nav-content {
-                flex-direction: column; /* Stacks logo and links vertically */
-                align-items: flex-start;
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            cursor: pointer;
+        }
+
+        /* --- MOBILE MENU FIXES --- */
+        @media (max-width: 992px) {
+            .nav-links {
                 gap: 1rem;
+                font-size: 0.9rem;
             }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                padding: 1rem 0;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                border-top: 1px solid var(--border-color);
+                gap: 0;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                text-align: center;
+                padding: 0.75rem 0;
+                border-bottom: 1px solid var(--border-color);
+            }
+            
+            .nav-links li:last-child {
+                border-bottom: none;
+            }
+            
+            .nav-content {
+                position: relative;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+            
+            .logo {
+                font-size: 1.2rem;
+            }
+            
             .hero-left h1 { font-size: 2.8rem; }
             .section-title { font-size: 2rem; }
             .timeline { padding-left: 20px; }
             .timeline-item::after { left: -28px; }
+        }
+
+        /* Very small screens */
+        @media (max-width: 480px) {
+            .nav-links {
+                gap: 0.5rem;
+                font-size: 0.8rem;
+            }
+            
+            .logo {
+                font-size: 1rem;
+            }
+            
+            .navbar {
+                padding: 0.75rem 0;
+            }
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            animation: spin 1s linear infinite;
+        }
+        .path {
+            stroke: var(--primary-blue);
+            stroke-linecap: round;
+            animation: dash 1.5s ease-in-out infinite;
+        }
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes dash {
+            0% { stroke-dasharray: 1, 150; stroke-dashoffset: 0; }
+            50% { stroke-dasharray: 90, 150; stroke-dashoffset: -35; }
+            100% { stroke-dasharray: 90, 150; stroke-dashoffset: -124; }
         }
     </style>
 </head>
@@ -480,7 +569,8 @@
     <nav class="navbar" id="navbar">
         <div class="nav-content">
             <div class="logo">Kushagra Bhardwaj</div>
-            <ul class="nav-links">
+            <button class="menu-toggle" id="menuToggle">☰</button>
+            <ul class="nav-links" id="navLinks">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#projects">Projects</a></li>
@@ -738,10 +828,23 @@
                 colab: "Google Colab is a cloud-based Jupyter notebook environment that provides free access to computing resources, including GPUs. It's an excellent platform for developing and running machine learning models, performing data analysis, and collaborating on computational projects without needing a powerful local machine."
             };
 
-            // --- FIX: API KEY REMOVED FROM CLIENT-SIDE CODE ---
-
             // --- General Setup ---
             const navbar = document.getElementById('navbar');
+            const menuToggle = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+            
+            // Mobile menu toggle
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+            
+            // Close mobile menu when clicking on a link
+            navLinks.addEventListener('click', (e) => {
+                if (e.target.tagName === 'A') {
+                    navLinks.classList.remove('active');
+                }
+            });
+            
             window.addEventListener('scroll', () => {
                 navbar.classList.toggle('scrolled', window.scrollY > 50);
             });
@@ -785,7 +888,7 @@
                 });
             };
 
-            // --- Bio-Query Assistant (Updated to call the secure serverless function) ---
+            // --- Bio-Query Assistant (Demo Mode - No API calls in preview) ---
             const bioQueryInput = document.getElementById('bioQueryInput');
             const askAssistantBtn = document.getElementById('askAssistantBtn');
             const loadingIndicator = document.getElementById('loadingIndicator');
@@ -803,31 +906,12 @@
                 bioAssistantError.style.display = 'none';
                 loadingIndicator.style.display = 'block';
                 
-                try {
-                    // This is the new URL for your secure "middleman" function on Netlify
-                    const response = await fetch('/.netlify/functions/ask-gemini', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ prompt: prompt }),
-                    });
-
-                    if (!response.ok) {
-                        throw new Error(`Server error: ${response.status}`);
-                    }
-
-                    const data = await response.json();
-                    bioAssistantResponse.textContent = data.reply;
-                    bioAssistantResponse.style.display = 'block';
-
-                } catch (error) {
-                    console.error('Error fetching AI response:', error);
-                    bioAssistantError.textContent = "Sorry, I couldn't get a response. Please try again.";
-                    bioAssistantError.style.display = 'block';
-                } finally {
+                // Demo response for preview
+                setTimeout(() => {
                     loadingIndicator.style.display = 'none';
-                }
+                    bioAssistantResponse.textContent = "Demo Mode: This is where the AI assistant would respond to your query about '" + prompt + "'. In the live version, this integrates with Google Gemini API to provide real answers on any topic from bioinformatics to general knowledge.";
+                    bioAssistantResponse.style.display = 'block';
+                }, 2000);
             });
 
             // --- Skill Explainer (Pre-defined) ---
@@ -844,7 +928,7 @@
                 });
             });
 
-            // --- NOTE: AI Project Idea Generator is disabled until it is also moved to a serverless function ---
+            // --- Project Idea Generator (Disabled in demo) ---
             const generateProjectBtn = document.getElementById('generateProjectBtn');
             if(generateProjectBtn) {
                 generateProjectBtn.addEventListener('click', () => {
