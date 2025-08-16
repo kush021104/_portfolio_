@@ -10,12 +10,12 @@
 
         /* 1. Global Styles & Color Palette */
         :root {
-            --jet-black: #0B0C10;
-            --ivory-white: #F8F8F8;
-            --royal-gold: #D4AF37;
-            --emerald-green: #006D5B; /* This will be replaced */
-            --dark-card: #1A1B1F; /* A slightly lighter black for cards */
-            --border-color: #333;
+            --primary-blue: #0A66C2;
+            --dark-text: #212529;
+            --body-text: #495057;
+            --light-gray: #F8F9FA;
+            --border-color: #DEE2E6;
+            --white: #FFFFFF;
         }
 
         * {
@@ -31,8 +31,8 @@
         body {
             font-family: 'Inter', sans-serif;
             line-height: 1.7;
-            color: var(--ivory-white);
-            background-color: var(--jet-black);
+            color: var(--body-text);
+            background-color: var(--white);
         }
 
         .container {
@@ -42,7 +42,7 @@
         }
         
         h1, h2, h3, h4 {
-            color: var(--royal-gold);
+            color: var(--dark-text);
             font-weight: 600;
         }
 
@@ -51,7 +51,7 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: var(--jet-black);
+            background: var(--white);
             z-index: 1000;
             padding: 1rem 0;
             transition: box-shadow 0.3s ease;
@@ -59,7 +59,7 @@
         }
 
         .navbar.scrolled {
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
 
         .nav-content {
@@ -74,7 +74,7 @@
         .logo {
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--royal-gold);
+            color: var(--primary-blue);
             text-transform: uppercase;
             letter-spacing: 1px;
         }
@@ -87,21 +87,19 @@
 
         .nav-links a {
             text-decoration: none;
-            color: var(--ivory-white);
+            color: var(--body-text);
             font-weight: 500;
             transition: color 0.3s ease;
-            opacity: 0.8;
         }
 
         .nav-links a:hover {
-            color: var(--royal-gold);
-            opacity: 1;
+            color: var(--primary-blue);
         }
 
         /* 3. Hero Section */
         .hero {
             padding: 160px 0 100px;
-            background-color: var(--jet-black);
+            background-color: var(--light-gray);
             border-bottom: 1px solid var(--border-color);
         }
 
@@ -116,19 +114,19 @@
             font-size: 3.5rem;
             line-height: 1.2;
             margin-bottom: 1rem;
-            color: var(--royal-gold);
+            color: var(--primary-blue);
         }
 
         .hero-left .subtitle {
             font-size: 1.25rem;
             margin-bottom: 2rem;
-            color: var(--ivory-white);
+            color: var(--dark-text);
             font-weight: 300;
         }
         
         .hero-left .highlight-text {
             font-weight: 500;
-            color: var(--ivory-white);
+            color: var(--dark-text);
         }
 
         .cta-buttons {
@@ -152,51 +150,50 @@
         }
 
         .btn-primary {
-            background: var(--royal-gold);
-            color: var(--jet-black);
+            background: var(--primary-blue);
+            color: var(--white);
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            background: #e6c35c;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+            background: #0056a2;
+            box-shadow: 0 4px 15px rgba(10, 102, 194, 0.2);
         }
 
         .btn-secondary {
             background: transparent;
-            color: var(--royal-gold);
-            border: 2px solid var(--royal-gold);
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
         }
 
         .btn-secondary:hover {
-            background: var(--royal-gold);
-            color: var(--jet-black);
+            background: var(--primary-blue);
+            color: var(--white);
             transform: translateY(-2px);
         }
 
         .hero-right {
-            background: var(--dark-card);
+            background: var(--white);
             padding: 2.5rem;
             border-radius: 12px;
             border: 1px solid var(--border-color);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
         }
 
         .hero-right h3 {
             font-size: 1.75rem;
             margin-bottom: 1rem;
-            color: var(--royal-gold);
+            color: var(--dark-text);
             text-align: center;
         }
 
         .hero-bio p {
             font-size: 1rem;
-            color: var(--ivory-white);
+            color: var(--body-text);
             margin-bottom: 1rem;
-            opacity: 0.9;
         }
         .hero-bio strong {
-            color: var(--ivory-white);
+            color: var(--dark-text);
             font-weight: 600;
         }
 
@@ -208,12 +205,16 @@
         .section:last-of-type {
             border-bottom: none;
         }
+        
+        .section:nth-child(even) {
+            background-color: var(--light-gray);
+        }
 
         .section-title {
             text-align: center;
             font-size: 2.5rem;
             margin-bottom: 4rem;
-            color: var(--royal-gold);
+            color: var(--primary-blue);
             position: relative;
         }
 
@@ -225,7 +226,7 @@
             transform: translateX(-50%);
             width: 60px;
             height: 3px;
-            background: var(--royal-gold);
+            background: var(--primary-blue);
             border-radius: 2px;
         }
 
@@ -235,51 +236,49 @@
             gap: 2rem;
         }
         .grid-2 { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+        
+        /* --- FIX: ADDED MISSING grid-3 RULE --- */
         .grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
 
-        .card, .project-card, .skill-category, .achievement-card {
-            background: var(--dark-card);
+        .card, .project-card, .skill-category {
+            background: var(--white);
             padding: 2rem;
             border-radius: 12px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease;
             border: 1px solid var(--border-color);
         }
 
-        .card:hover, .project-card:hover, .skill-category:hover, .achievement-card:hover {
+        .card:hover, .project-card:hover, .skill-category:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            border-color: var(--royal-gold);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
         }
 
         .card h3 {
             font-size: 1.25rem;
             margin-bottom: 0.5rem;
-            color: var(--royal-gold);
+            color: var(--primary-blue);
         }
 
         /* 6. Project Cards */
-        .project-card {
-            cursor: pointer;
-        }
         .project-card h3 {
             font-size: 1.2rem;
-            color: var(--royal-gold);
+            color: var(--primary-blue);
         }
         .project-status {
             font-size: 0.85rem;
-            color: #aaa;
+            color: #6C757D;
             margin-bottom: 1rem;
             font-style: italic;
         }
         .project-body strong {
-            color: var(--ivory-white);
+            color: var(--dark-text);
             font-weight: 600;
         }
 
         /* 7. Skills Section */
         .skill-category h4 {
-            color: var(--ivory-white);
+            color: var(--dark-text);
             margin-bottom: 1rem;
             font-size: 1.1rem;
             border-bottom: 2px solid var(--border-color);
@@ -293,8 +292,8 @@
         }
 
         .skill-tag {
-            background: var(--jet-black);
-            color: var(--ivory-white);
+            background: var(--light-gray);
+            color: var(--body-text);
             padding: 0.4rem 0.9rem;
             border-radius: 25px;
             font-size: 0.9rem;
@@ -304,22 +303,12 @@
             cursor: pointer;
         }
         .skill-tag:hover {
-            background: var(--emerald-green);
-            color: var(--ivory-white);
-            border-color: var(--emerald-green);
+            background: var(--primary-blue);
+            color: var(--white);
+            border-color: var(--primary-blue);
         }
         
-        /* 8. NEW: Achievements Section */
-        .achievement-card h3 {
-            font-size: 1.1rem;
-            color: var(--royal-gold);
-        }
-        .achievement-card p {
-            font-size: 0.95rem;
-            opacity: 0.9;
-        }
-
-        /* 9. Timeline (Experience & Education) */
+        /* 8. Timeline (Experience & Education) */
         .timeline {
             position: relative;
             max-width: 800px;
@@ -350,8 +339,8 @@
             position: absolute;
             width: 15px;
             height: 15px;
-            background: var(--royal-gold);
-            border: 3px solid var(--jet-black);
+            background: var(--primary-blue);
+            border: 3px solid var(--white);
             border-radius: 50%;
             top: 5px;
             left: -37px;
@@ -361,21 +350,20 @@
         .timeline-date {
             font-size: 0.9rem;
             font-weight: 600;
-            color: var(--royal-gold);
+            color: var(--primary-blue);
             margin-bottom: 0.25rem;
         }
         .timeline-content h3 {
-            color: var(--ivory-white);
+            color: var(--dark-text);
             margin-bottom: 0.5rem;
             font-size: 1.25rem;
         }
         .timeline-content p {
-            color: var(--ivory-white);
+            color: var(--body-text);
             font-size: 1rem;
-            opacity: 0.9;
         }
 
-        /* 10. Contact Section */
+        /* 9. Contact & Assistant Sections */
         .centered-content, .contact-content {
             max-width: 700px;
             margin: 0 auto;
@@ -389,15 +377,15 @@
             flex-wrap: wrap;
         }
         .contact-link {
-            color: var(--royal-gold);
+            color: var(--primary-blue);
             text-decoration: none;
             font-size: 1rem;
             font-weight: 600;
             transition: all 0.3s ease;
             padding: 12px 25px;
             border-radius: 8px;
-            border: 2px solid var(--royal-gold);
-            background: transparent;
+            border: 2px solid var(--primary-blue);
+            background: var(--white);
             display: inline-flex;
             align-items: center;
             gap: 0.75rem;
@@ -408,22 +396,21 @@
             fill: currentColor;
         }
         .contact-link:hover {
-            background: var(--royal-gold);
-            color: var(--jet-black);
+            background: var(--primary-blue);
+            color: var(--white);
             transform: translateY(-2px);
         }
 
-        /* 11. Footer */
+        /* 10. Footer */
         .footer {
-            background: var(--dark-card);
-            color: var(--ivory-white);
+            background: var(--dark-text);
+            color: var(--light-gray);
             text-align: center;
             padding: 2rem 0;
             font-size: 0.9rem;
-            border-top: 1px solid var(--border-color);
         }
 
-        /* 12. Modal Styles */
+        /* 11. Modal Styles */
         .modal {
             display: none;
             position: fixed;
@@ -433,12 +420,12 @@
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgba(0,0,0,0.7);
+            background-color: rgba(0,0,0,0.5);
             backdrop-filter: blur(5px);
         }
 
         .modal-content {
-            background: var(--dark-card);
+            background: var(--white);
             margin: 10% auto;
             padding: 2.5rem;
             border: 1px solid var(--border-color);
@@ -447,7 +434,7 @@
             border-radius: 12px;
             text-align: left;
             position: relative;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             animation: slideIn 0.4s ease;
         }
 
@@ -464,25 +451,117 @@
             transition: color 0.3s ease;
         }
 
-        .close-btn:hover, .close-btn:focus { color: var(--royal-gold); }
-        .modal-content h3 { color: var(--royal-gold); font-size: 1.8rem; margin-bottom: 1rem; }
-        .modal-content h4 { color: var(--ivory-white); font-size: 1.1rem; margin-top: 1.5rem; margin-bottom: 0.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; }
-        .modal-content p, .modal-content ul { color: var(--ivory-white); margin-bottom: 1rem; opacity: 0.9;}
-        .modal-content ul { list-style-position: inside; padding-left: 1rem; }
+        .close-btn:hover, .close-btn:focus { color: var(--primary-blue); }
+        .modal-content h3 { color: var(--primary-blue); font-size: 1.8rem; margin-bottom: 1rem; }
+        .modal-content p { color: var(--body-text); margin-bottom: 1rem; }
         
-        /* 13. Responsive Design */
+        /* 12. Responsive Design */
         @media (max-width: 992px) {
             .hero-content { grid-template-columns: 1fr; text-align: center; }
             .hero-left { text-align: center; }
             .cta-buttons { justify-content: center; }
         }
 
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            cursor: pointer;
+        }
+
+        /* --- MOBILE MENU FIXES --- */
+        @media (max-width: 992px) {
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+        }
+
         @media (max-width: 768px) {
-            .nav-links { display: none; }
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                padding: 1rem 0;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                border-top: 1px solid var(--border-color);
+                gap: 0;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                text-align: center;
+                padding: 0.75rem 0;
+                border-bottom: 1px solid var(--border-color);
+            }
+            
+            .nav-links li:last-child {
+                border-bottom: none;
+            }
+            
+            .nav-content {
+                position: relative;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+            
+            .logo {
+                font-size: 1.2rem;
+            }
+            
             .hero-left h1 { font-size: 2.8rem; }
             .section-title { font-size: 2rem; }
             .timeline { padding-left: 20px; }
             .timeline-item::after { left: -28px; }
+        }
+
+        /* Very small screens */
+        @media (max-width: 480px) {
+            .nav-links {
+                gap: 0.5rem;
+                font-size: 0.8rem;
+            }
+            
+            .logo {
+                font-size: 1rem;
+            }
+            
+            .navbar {
+                padding: 0.75rem 0;
+            }
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            animation: spin 1s linear infinite;
+        }
+        .path {
+            stroke: var(--primary-blue);
+            stroke-linecap: round;
+            animation: dash 1.5s ease-in-out infinite;
+        }
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes dash {
+            0% { stroke-dasharray: 1, 150; stroke-dashoffset: 0; }
+            50% { stroke-dasharray: 90, 150; stroke-dashoffset: -35; }
+            100% { stroke-dasharray: 90, 150; stroke-dashoffset: -124; }
         }
     </style>
 </head>
@@ -490,9 +569,9 @@
     <nav class="navbar" id="navbar">
         <div class="nav-content">
             <div class="logo">Kushagra Bhardwaj</div>
-            <ul class="nav-links">
+            <button class="menu-toggle" id="menuToggle">☰</button>
+            <ul class="nav-links" id="navLinks">
                 <li><a href="#home">Home</a></li>
-                <li><a href="#approach">Approach</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#skills">Skills</a></li>
@@ -529,15 +608,6 @@
         </div>
     </header>
 
-    <section id="approach" class="section">
-        <div class="container">
-            <h2 class="section-title">My Approach</h2>
-            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
-                <p style="font-size: 1.1rem;">I believe the future of medicine lies in our ability to translate vast biological data into actionable insights. My approach is to combine a strong biological foundation with clean, efficient code to build tools that are not only powerful but also practical for researchers. I am driven by a process of continuous learning, rigorous analysis, and a commitment to creating reproducible and impactful results.</p>
-            </div>
-        </div>
-    </section>
-
     <section id="about" class="section">
         <div class="container">
             <h2 class="section-title">Core Focus</h2>
@@ -564,35 +634,31 @@
 
     <section id="projects" class="section">
         <div class="container">
-            <h2 class="section-title">Project Case Studies</h2>
+            <h2 class="section-title">Featured Projects</h2>
             <div class="grid grid-2">
-                <!-- Project 1 -->
-                <div class="project-card" data-project-id="proj1">
+                <div class="project-card">
                     <h3>Structural & Phylogenetic Analysis</h3>
                     <p class="project-status">Completed • Structural Biology</p>
                     <p>Analyzed the MshA glycosyltransferase enzyme to understand its evolutionary relationships and structural features, providing insights into its functional mechanisms.</p>
                 </div>
-                <!-- Project 2 -->
-                <div class="project-card" data-project-id="proj2">
+                <div class="project-card">
                     <h3>DNA Sequence Classifier</h3>
                     <p class="project-status">Ongoing • Machine Learning</p>
                     <p>Developing a machine learning model to distinguish between promoter and non-promoter DNA regions, with plans to expand to multi-class genomic sequence analysis.</p>
                 </div>
-                <!-- Project 3 -->
-                <div class="project-card" data-project-id="proj3">
+                <div class="project-card">
                     <h3>IBD Drug Discovery</h3>
                     <p class="project-status">Ongoing • Drug Repurposing</p>
                     <p>Identifying potential drug candidates for Inflammatory Bowel Disease (IBD) using drug repurposing strategies and molecular docking techniques.</p>
                 </div>
-                <!-- Project 4 -->
-                <div class="project-card" data-project-id="proj4">
+                <div class="project-card">
                     <h3>Bioinformatics Virtual Assistant</h3>
                     <p class="project-status">Upcoming • AI Development</p>
                     <p>Planning to build an intelligent virtual assistant to help researchers with bioinformatics workflows, protocol guidance, and computational tasks.</p>
                 </div>
             </div>
-             <div style="text-align: center; margin-top: 3rem;">
-                <button id="generateProjectBtn" class="btn btn-secondary">✨ Get an AI-Powered Project Idea</button>
+            <div style="text-align: center; margin-top: 3rem;">
+                <button id="generateProjectBtn" class="btn btn-secondary" disabled>✨ Get an AI-Powered Project Idea (Coming Soon)</button>
             </div>
         </div>
     </section>
@@ -647,8 +713,8 @@
                 </div>
                 <div class="timeline-item">
                     <p class="timeline-date">Ongoing</p>
-                    <h3>GATE Preparation</h3>
-                    <p>Engaged in rigorous and ongoing preparation for the GATE examination, strengthening core knowledge across all areas of biotechnology.</p>
+                    <h3>NPTEL & GATE Preparation</h3>
+                    <p>Completing advanced courses in NGS and preparing for GATE Biotechnology to strengthen core subject knowledge.</p>
                 </div>
             </div>
         </div>
@@ -658,13 +724,13 @@
         <div class="container">
             <h2 class="section-title">Bio-Query Assistant</h2>
             <div class="centered-content">
-                <p>This tool uses Google's Gemini API to answer questions about bioinformatics and biotechnology. Ask it a question below to see a demonstration of my ability to integrate AI into functional applications.</p>
-                <textarea id="bioQueryInput" placeholder="e.g., Explain CRISPR-Cas9..." style="width: 100%; height: 100px; resize: vertical; border: 1px solid var(--border-color); background: var(--dark-card); color: var(--ivory-white); padding: 1rem; border-radius: 8px; font-size: 1rem; margin-top: 1.5rem;"></textarea>
+                <p>Test a live integration of the Google Gemini API. This assistant, which I built and deployed, can answer questions on any topic—from bioinformatics to world history. What would you like to know?</p>
+                <textarea id="bioQueryInput" placeholder="e.g., Explain CRISPR-Cas9..." style="width: 100%; height: 100px; resize: vertical; border: 1px solid var(--border-color); background: var(--white); color: var(--dark-text); padding: 1rem; border-radius: 8px; font-size: 1rem; margin-top: 1.5rem;"></textarea>
                 <button id="askAssistantBtn" class="btn btn-primary" style="margin-top: 1rem;">Ask Gemini</button>
                 <div id="loadingIndicator" class="modal-loader" style="display: none; margin: 1rem auto;">
                     <svg class="spinner" width="30" height="30" viewBox="0 0 50 50"><circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle></svg>
                 </div>
-                <div id="bioAssistantResponse" style="margin-top: 1.5rem; padding: 1.5rem; background: var(--dark-card); border-radius: 8px; border: 1px solid var(--border-color); color: var(--ivory-white); text-align: left; white-space: pre-wrap; display: none;"></div>
+                <div id="bioAssistantResponse" style="margin-top: 1.5rem; padding: 1.5rem; background: var(--light-gray); border-radius: 8px; border: 1px solid var(--border-color); color: var(--dark-text); text-align: left; white-space: pre-wrap; display: none;"></div>
                 <div id="bioAssistantError" style="margin-top: 1rem; color: #D9534F; text-align: center; display: none;"></div>
             </div>
         </div>
@@ -703,7 +769,6 @@
         </div>
     </footer>
     
-    <!-- Modals -->
     <div id="emailModal" class="modal">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
@@ -724,14 +789,6 @@
         </div>
     </div>
 
-    <div id="projectModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn">&times;</span>
-            <h3 id="projectModalTitle"></h3>
-            <div id="projectModalContent"></div>
-        </div>
-    </div>
-    
     <div id="projectIdeaModal" class="modal">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
@@ -757,7 +814,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            
             // --- DATA STORE (NO API FOR SKILLS) ---
             const skillDescriptions = {
                 docking: "Molecular docking is a computational technique that predicts the preferred orientation of one molecule to a second when bound to each other to form a stable complex. It's crucial in drug discovery for screening virtual libraries of small molecules to identify potential drug candidates that bind to a specific protein target.",
@@ -772,78 +828,23 @@
                 colab: "Google Colab is a cloud-based Jupyter notebook environment that provides free access to computing resources, including GPUs. It's an excellent platform for developing and running machine learning models, performing data analysis, and collaborating on computational projects without needing a powerful local machine."
             };
 
-            const projectCaseStudies = {
-                proj1: {
-                    title: "Structural & Phylogenetic Analysis",
-                    content: `
-                        <h4>The Problem</h4>
-                        <p>The MshA glycosyltransferase enzyme plays a role in glycosylation, but its precise structural features and evolutionary history were not fully characterized. The goal was to build a comprehensive model to better understand its function.</p>
-                        <h4>My Approach</h4>
-                        <ul>
-                            <li>Collected MshA sequences from various organisms from the NCBI database.</li>
-                            <li>Utilized tools like MUSCLE for multiple sequence alignment to identify conserved regions.</li>
-                            <li>Constructed a phylogenetic tree using MEGA to visualize evolutionary relationships.</li>
-                            <li>Performed homology modeling to predict the 3D structure of the protein.</li>
-                        </ul>
-                        <h4>What I Learned</h4>
-                        <p>This project solidified my skills in using core bioinformatics software and interpreting complex biological data. I learned how to integrate sequence, structural, and evolutionary information to form a cohesive understanding of a protein's function.</p>
-                    `
-                },
-                proj2: {
-                    title: "DNA Sequence Classifier",
-                    content: `
-                        <h4>The Problem</h4>
-                        <p>Distinguishing between promoter and non-promoter regions in a DNA sequence is a critical first step in understanding gene regulation. The challenge is to build an automated model that can perform this classification accurately.</p>
-                        <h4>My Approach</h4>
-                        <ul>
-                            <li>Sourced datasets of known promoter and non-promoter sequences.</li>
-                            <li>Engineered features from the DNA sequences, such as k-mer frequencies.</li>
-                            <li>Trained several machine learning models (e.g., Logistic Regression, Support Vector Machines) using Scikit-learn.</li>
-                            <li>Evaluated model performance using metrics like accuracy and F1-score.</li>
-                        </ul>
-                        <h4>What I Learned</h4>
-                        <p>This project was my introduction to applying machine learning in a genomic context. I gained practical experience in feature engineering, model training, and the importance of cross-validation for building a robust classifier.</p>
-                    `
-                },
-                proj3: {
-                    title: "IBD Drug Discovery",
-                    content: `
-                        <h4>The Problem</h4>
-                        <p>Inflammatory Bowel Disease (IBD) is a chronic condition with limited treatment options. The goal of this project is to use computational methods to identify existing drugs that could be repurposed to treat IBD.</p>
-                        <h4>My Approach</h4>
-                        <ul>
-                            <li>Identified key protein targets associated with IBD from literature and databases.</li>
-                            <li>Screened libraries of approved drugs against these targets using molecular docking software.</li>
-                            <li>Analyzed the binding affinities and interaction patterns of the top-scoring compounds.</li>
-                            <li>Investigating the mechanisms of action for the most promising candidates.</li>
-                        </ul>
-                        <h4>What I Learned</h4>
-                        <p>This ongoing project is deepening my understanding of structure-based drug design. It's teaching me how to navigate large chemical and biological databases and apply computational chemistry principles to a real-world therapeutic problem.</p>
-                    `
-                },
-                proj4: {
-                    title: "Bioinformatics Virtual Assistant",
-                    content: `
-                        <h4>The Problem</h4>
-                        <p>Bioinformatics involves many complex tools and workflows. A junior researcher or student often needs quick guidance on protocols or tool usage. This upcoming project aims to build an AI assistant to provide that support.</p>
-                        <h4>My Approach (Planned)</h4>
-                        <ul>
-                            <li>Fine-tune a large language model on a curated dataset of bioinformatics protocols and manuals.</li>
-                            <li>Develop a simple user interface where users can ask questions in natural language.</li>
-                            <li>Implement logic to parse user queries and provide concise, accurate answers.</li>
-                            <li>Integrate the assistant with common bioinformatics APIs to perform simple tasks directly.</li>
-                        </ul>
-                        <h4>What I Hope to Learn</h4>
-                        <p>Through this project, I aim to gain significant experience in natural language processing (NLP) and applied AI. It will be a practical exercise in building a tool that is not only technically sound but also genuinely useful to the scientific community.</p>
-                    `
-                }
-            };
-
-            // --- API KEYS ---
-            const geminiApiKey = "YOUR_GEMINI_API_KEY_HERE";
-
             // --- General Setup ---
             const navbar = document.getElementById('navbar');
+            const menuToggle = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+            
+            // Mobile menu toggle
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+            
+            // Close mobile menu when clicking on a link
+            navLinks.addEventListener('click', (e) => {
+                if (e.target.tagName === 'A') {
+                    navLinks.classList.remove('active');
+                }
+            });
+            
             window.addEventListener('scroll', () => {
                 navbar.classList.toggle('scrolled', window.scrollY > 50);
             });
@@ -852,9 +853,9 @@
                 anchor.addEventListener('click', function (e) {
                     const href = this.getAttribute('href');
                     if (href.startsWith('#') && href.length > 1) {
-                        e.preventDefault();
                         const target = document.querySelector(href);
                         if (target) {
+                            e.preventDefault();
                             target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                         }
                     }
@@ -887,29 +888,7 @@
                 });
             };
 
-            const callGemini = async (prompt) => {
-                const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${geminiApiKey}`;
-                let retries = 2;
-                let delay = 1000;
-                while (retries > 0) {
-                    try {
-                        const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-                        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-                        const result = await response.json();
-                        if (result.candidates?.[0]?.content?.parts?.[0]?.text) {
-                            return result.candidates[0].content.parts[0].text;
-                        } else { throw new Error("Unexpected API response structure."); }
-                    } catch (error) {
-                        retries--;
-                        if (retries === 0) throw error;
-                        await new Promise(res => setTimeout(res, delay));
-                        delay *= 2;
-                    }
-                }
-            };
-
-            // --- Bio-Query Assistant ---
+            // --- Bio-Query Assistant (Demo Mode - No API calls in preview) ---
             const bioQueryInput = document.getElementById('bioQueryInput');
             const askAssistantBtn = document.getElementById('askAssistantBtn');
             const loadingIndicator = document.getElementById('loadingIndicator');
@@ -926,16 +905,13 @@
                 bioAssistantResponse.style.display = 'none';
                 bioAssistantError.style.display = 'none';
                 loadingIndicator.style.display = 'block';
-                try {
-                    const responseText = await callGemini(prompt);
-                    bioAssistantResponse.textContent = responseText;
-                    bioAssistantResponse.style.display = 'block';
-                } catch (error) {
-                    bioAssistantError.textContent = "Sorry, I couldn't get a response. Please try again.";
-                    bioAssistantError.style.display = 'block';
-                } finally {
+                
+                // Demo response for preview
+                setTimeout(() => {
                     loadingIndicator.style.display = 'none';
-                }
+                    bioAssistantResponse.textContent = "Demo Mode: This is where the AI assistant would respond to your query about '" + prompt + "'. In the live version, this integrates with Google Gemini API to provide real answers on any topic from bioinformatics to general knowledge.";
+                    bioAssistantResponse.style.display = 'block';
+                }, 2000);
             });
 
             // --- Skill Explainer (Pre-defined) ---
@@ -952,65 +928,25 @@
                 });
             });
 
-            // --- Project Case Studies ---
-            const projectModal = document.getElementById('projectModal');
-            document.querySelectorAll('.project-card').forEach(card => {
-                card.addEventListener('click', () => {
-                    const projectId = card.dataset.projectId;
-                    const projectData = projectCaseStudies[projectId];
-
-                    document.getElementById('projectModalTitle').textContent = projectData.title;
-                    document.getElementById('projectModalContent').innerHTML = projectData.content;
-                    openModal(projectModal);
-                });
-            });
-            
-            // --- AI Project Idea Generator ---
-            const projectIdeaModal = document.getElementById('projectIdeaModal');
+            // --- Project Idea Generator (Disabled in demo) ---
             const generateProjectBtn = document.getElementById('generateProjectBtn');
-            if (generateProjectBtn) {
-                generateProjectBtn.addEventListener('click', async () => {
-                    document.getElementById('projectModalContent').textContent = '';
-                    document.getElementById('emailProjectIdeaBtn').style.display = 'none';
-                    document.getElementById('projectModalLoader').style.display = 'block';
-                    openModal(projectIdeaModal);
-                    let projectContext = "My current projects include: ";
-                    document.querySelectorAll('.project-card').forEach(card => {
-                        const title = card.querySelector('h3')?.textContent || '';
-                        const description = card.querySelector('p:not(.project-status)')?.textContent || '';
-                        projectContext += `Title: ${title.trim()}. Description: ${description.trim()}. `;
-                    });
-                    projectContext += "My skills include drug discovery, molecular modeling, Python, R, and machine learning.";
-                    const prompt = `Based on my portfolio (${projectContext}), suggest one novel bioinformatics project idea for an undergraduate. Provide a catchy title and a 1-2 paragraph description of the goal, methods, and learning outcomes. Format with "Title:" and "Description:".`;
-                    try {
-                        const idea = await callGemini(prompt);
-                        document.getElementById('projectModalContent').textContent = idea;
-                        const subject = "AI-Generated Bioinformatics Project Idea";
-                        const body = encodeURIComponent(`Here's a new project idea from my portfolio site:\n\n${idea}`);
-                        document.getElementById('emailProjectIdeaBtn').href = `mailto:kushagra021104@gmail.com?subject=${subject}&body=${body}`;
-                        document.getElementById('emailProjectIdeaBtn').style.display = 'inline-flex';
-                    } catch (error) {
-                        document.getElementById('projectModalContent').textContent = "Could not generate a project idea. Please try again later.";
-                    } finally {
-                        document.getElementById('projectModalLoader').style.display = 'none';
-                    }
+            if(generateProjectBtn) {
+                generateProjectBtn.addEventListener('click', () => {
+                    alert("This feature is being upgraded for security and will be back soon!");
                 });
             }
             
             // --- Visitor Suggestion Box ---
             const visitorSuggestionModal = document.getElementById('visitorSuggestionModal');
-            const suggestIdeaBtn = document.getElementById('suggest-idea-btn');
-            if (suggestIdeaBtn) {
-                suggestIdeaBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    openModal(visitorSuggestionModal);
-                });
-                document.getElementById('visitorIdeaInput').addEventListener('input', () => {
-                    const subject = "Visitor Project Suggestion";
-                    const body = encodeURIComponent(document.getElementById('visitorIdeaInput').value);
-                    document.getElementById('sendVisitorIdeaBtn').href = `mailto:kushagra021104@gmail.com?subject=${subject}&body=${body}`;
-                });
-            }
+            document.getElementById('suggest-idea-btn').addEventListener('click', (e) => {
+                e.preventDefault();
+                openModal(visitorSuggestionModal);
+            });
+            document.getElementById('visitorIdeaInput').addEventListener('input', () => {
+                const subject = "Visitor Project Suggestion";
+                const body = encodeURIComponent(document.getElementById('visitorIdeaInput').value);
+                document.getElementById('sendVisitorIdeaBtn').href = `mailto:kushagra021104@gmail.com?subject=${subject}&body=${body}`;
+            });
         });
     </script>
 </body>
