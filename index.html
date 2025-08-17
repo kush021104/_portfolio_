@@ -279,6 +279,9 @@
         }
 
         /* 6. Project Cards */
+        .project-card {
+            cursor: pointer; /* MODIFICATION: Add pointer cursor */
+        }
         .project-card h3 {
             font-size: 1.2rem;
             color: var(--primary-blue);
@@ -670,22 +673,23 @@
         <div class="container">
             <h2 class="section-title">Featured Projects</h2>
             <div class="grid grid-2">
-                <div class="project-card">
+                <!-- MODIFICATION: Added data-project attributes -->
+                <div class="project-card" data-project="analysis">
                     <h3>Structural & Phylogenetic Analysis</h3>
                     <p class="project-status">Completed • Structural Biology</p>
                     <p>Analyzed the MshA glycosyltransferase enzyme to understand its evolutionary relationships and structural features, providing insights into its functional mechanisms.</p>
                 </div>
-                <div class="project-card">
+                <div class="project-card" data-project="classifier">
                     <h3>DNA Sequence Classifier</h3>
                     <p class="project-status">Ongoing • Machine Learning</p>
                     <p>Developing a machine learning model to distinguish between promoter and non-promoter DNA regions, with plans to expand to multi-class genomic sequence analysis.</p>
                 </div>
-                <div class="project-card">
+                <div class="project-card" data-project="drug-discovery">
                     <h3>IBD Drug Discovery</h3>
                     <p class="project-status">Ongoing • Drug Repurposing</p>
                     <p>Identifying potential drug candidates for Inflammatory Bowel Disease (IBD) using drug repurposing strategies and molecular docking techniques.</p>
                 </div>
-                <div class="project-card">
+                <div class="project-card" data-project="assistant">
                     <h3>Bioinformatics Virtual Assistant</h3>
                     <p class="project-status">Upcoming • AI Development</p>
                     <p>Planning to build an intelligent virtual assistant to help researchers with bioinformatics workflows, protocol guidance, and computational tasks.</p>
@@ -816,11 +820,12 @@
         </div>
     </div>
     
-    <div id="skillModal" class="modal">
+    <!-- MODIFICATION: Renamed skillModal to detailModal for general use -->
+    <div id="detailModal" class="modal">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
-            <h3 id="skillModalTitle"></h3>
-            <p id="skillModalContent"></p>
+            <h3 id="detailModalTitle"></h3>
+            <p id="detailModalContent"></p>
         </div>
     </div>
 
@@ -842,13 +847,11 @@
             <h3>Suggest a Project Idea</h3>
             <p style="text-align: center;">Have a project idea or a problem you think I could tackle? I'd love to hear it!</p>
             
-            <!-- Success Message (Initially Hidden) -->
             <div id="suggestionSuccessMessage" style="display: none; text-align: center; margin-top: 1.5rem; padding: 1.5rem; background-color: var(--light-gray); border-radius: 8px;">
                 <h4 style="color: var(--success-green); margin-bottom: 0.5rem;">Thank you!</h4>
                 <p>Your response has been submitted.</p>
             </div>
 
-            <!-- Form Wrapper -->
             <div id="suggestionFormWrapper">
                 <textarea id="visitorIdeaInput" placeholder="Describe your project idea here..." style="width: 100%; height: 150px; resize: vertical; border: 1px solid var(--border-color); background: var(--white); color: var(--dark-text); padding: 1rem; border-radius: 8px; font-size: 1rem; margin-top: 1rem;"></textarea>
                 <a id="sendVisitorIdeaBtn" href="#" class="btn btn-primary" style="margin-top: 1.5rem; text-align: center; display: block;">Send Suggestion</a>
@@ -859,7 +862,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // --- DATA STORE (NO API FOR SKILLS) ---
+            // --- DATA STORE ---
             const skillDescriptions = {
                 docking: "Molecular docking is a computational technique that predicts the preferred orientation of one molecule to a second when bound to each other to form a stable complex. It's crucial in drug discovery for screening virtual libraries of small molecules to identify potential drug candidates that bind to a specific protein target.",
                 sbd: "Structure-Based Drug Design (SBDD) uses the 3D structural information of a biological target to design and optimize drug candidates. By understanding the target's binding site, we can design molecules with high affinity and selectivity, leading to more effective and safer drugs.",
@@ -871,6 +874,26 @@
                 r: "R is a programming language and environment specialized for statistical computing and graphics. In bioinformatics, it's heavily used for statistical analysis of genomic data, data visualization (e.g., with ggplot2), and running packages from the Bioconductor project.",
                 biopython: "Biopython is a collection of Python tools for computational biology and bioinformatics. It provides functionalities for reading and writing various sequence file formats, accessing online biological databases, and interfacing with other common bioinformatics tools.",
                 colab: "Google Colab is a cloud-based Jupyter notebook environment that provides free access to computing resources, including GPUs. It's an excellent platform for developing and running machine learning models, performing data analysis, and collaborating on computational projects without needing a powerful local machine."
+            };
+
+            // --- MODIFICATION: Added project descriptions ---
+            const projectDescriptions = {
+                analysis: {
+                    title: "Structural & Phylogenetic Analysis",
+                    description: "This project involved using bioinformatics tools like BLAST and ClustalW for sequence alignment and MEGA for constructing phylogenetic trees. The 3D structure of the MshA glycosyltransferase enzyme was visualized and analyzed using PyMOL to identify key functional domains and residues, providing insights into its role in biofilm formation."
+                },
+                classifier: {
+                    title: "DNA Sequence Classifier",
+                    description: "Currently, I am developing a machine learning model using Python with libraries such as Scikit-learn and Pandas. The model is being trained on a dataset of known promoter and non-promoter sequences from E. coli. The goal is to achieve high accuracy in classification, which is a crucial first step in gene prediction and annotation."
+                },
+                'drug-discovery': {
+                    title: "IBD Drug Discovery",
+                    description: "This ongoing research project utilizes a computational drug repurposing approach. I am using databases like DrugBank to identify existing drugs that could potentially target proteins involved in Inflammatory Bowel Disease (IBD). Molecular docking simulations are then performed using AutoDock Vina to predict the binding affinity and interaction between the drug candidates and their protein targets."
+                },
+                assistant: {
+                    title: "Bioinformatics Virtual Assistant",
+                    description: "This is a conceptual project I am planning, which will leverage a Large Language Model (LLM) API. The goal is to create a web-based tool where researchers can input natural language queries for common bioinformatics tasks (e.g., 'Find the FASTA sequence for human insulin'). The assistant would then process the request, interact with relevant databases (like NCBI), and return the required information or code snippet."
+                }
             };
 
             // --- General Setup ---
@@ -896,7 +919,6 @@
             const openModal = (modal) => modal.style.display = 'block';
             const closeModal = (modal) => {
                 modal.style.display = 'none';
-                // --- MODIFICATION: Reset suggestion modal on close ---
                 if (modal.id === 'visitorSuggestionModal') {
                     document.getElementById('suggestionFormWrapper').style.display = 'block';
                     document.getElementById('suggestionSuccessMessage').style.display = 'none';
@@ -936,28 +958,12 @@
                 navMenu.classList.toggle('active');
             });
 
-            // Close menu when a link is clicked
             navLinks.forEach(link => {
                 link.addEventListener('click', () => {
                     hamburger.classList.remove('active');
                     navMenu.classList.remove('active');
                 });
             });
-
-            // --- MAIN CONTACT FORM LOGIC ---
-            const contactForm = document.getElementById('contactForm');
-            const successMessage = document.getElementById('successMessage');
-            if (contactForm) {
-                contactForm.addEventListener('submit', function(event) {
-                    event.preventDefault();
-                    console.log('Main contact form submitted. Simulating...');
-                    setTimeout(() => {
-                        contactForm.style.display = 'none';
-                        successMessage.style.display = 'block';
-                    }, 1000);
-                });
-            }
-
 
             // --- Bio-Query Assistant ---
             const bioQueryInput = document.getElementById('bioQueryInput');
@@ -998,19 +1004,38 @@
                 });
             }
 
+            // --- Detail Modal Logic (for Skills and Projects) ---
+            const detailModal = document.getElementById('detailModal');
+            const detailModalTitle = document.getElementById('detailModalTitle');
+            const detailModalContent = document.getElementById('detailModalContent');
+
             // --- Skill Explainer ---
-            const skillModal = document.getElementById('skillModal');
             document.querySelectorAll('.skill-tag').forEach(skillTag => {
                 skillTag.addEventListener('click', () => {
                     const skillKey = skillTag.dataset.skill;
                     const skillName = skillTag.textContent;
                     const skillDesc = skillDescriptions[skillKey];
                     
-                    document.getElementById('skillModalTitle').textContent = skillName;
-                    document.getElementById('skillModalContent').textContent = skillDesc;
-                    openModal(skillModal);
+                    detailModalTitle.textContent = skillName;
+                    detailModalContent.textContent = skillDesc;
+                    openModal(detailModal);
                 });
             });
+
+            // --- MODIFICATION: Project Explainer ---
+            document.querySelectorAll('.project-card').forEach(projectCard => {
+                projectCard.addEventListener('click', () => {
+                    const projectKey = projectCard.dataset.project;
+                    const projectData = projectDescriptions[projectKey];
+
+                    if (projectData) {
+                        detailModalTitle.textContent = projectData.title;
+                        detailModalContent.textContent = projectData.description;
+                        openModal(detailModal);
+                    }
+                });
+            });
+
 
             // --- AI Project Idea Generator (Disabled) ---
             const generateProjectBtn = document.getElementById('generateProjectBtn');
@@ -1020,7 +1045,7 @@
                 });
             }
             
-            // --- MODIFIED: Visitor Suggestion Box ---
+            // --- Visitor Suggestion Box ---
             const visitorSuggestionModal = document.getElementById('visitorSuggestionModal');
             const visitorIdeaInput = document.getElementById('visitorIdeaInput');
             const sendVisitorIdeaBtn = document.getElementById('sendVisitorIdeaBtn');
@@ -1033,27 +1058,23 @@
             });
 
             if (visitorIdeaInput && sendVisitorIdeaBtn) {
-                // Update mailto link as user types
                 visitorIdeaInput.addEventListener('input', () => {
                     const subject = "Visitor Project Suggestion";
                     const body = encodeURIComponent(visitorIdeaInput.value);
                     sendVisitorIdeaBtn.href = `mailto:kushagra021104@gmail.com?subject=${subject}&body=${body}`;
                 });
 
-                // Handle the click event to show success message
                 sendVisitorIdeaBtn.addEventListener('click', (e) => {
                     if (visitorIdeaInput.value.trim() === '') {
-                        e.preventDefault(); // Prevent empty submission
-                        visitorIdeaInput.style.borderColor = 'red'; // Simple validation feedback
+                        e.preventDefault(); 
+                        visitorIdeaInput.style.borderColor = 'red'; 
                         setTimeout(() => { visitorIdeaInput.style.borderColor = 'var(--border-color)'; }, 2000);
                         return;
                     }
                     
-                    // Show success message and hide form
                     suggestionFormWrapper.style.display = 'none';
                     suggestionSuccessMessage.style.display = 'block';
 
-                    // Automatically close the modal after a few seconds
                     setTimeout(() => {
                         closeModal(visitorSuggestionModal);
                     }, 3000);
