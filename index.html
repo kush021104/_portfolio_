@@ -762,7 +762,7 @@
         <div class="container">
             <h2 class="section-title">Bio-Query Assistant</h2>
             <div class="centered-content">
-                <p>This tool uses Google's Gemini API to answer questions about bioinformatics and biotechnology. Ask it a question below to see a demonstration of my ability to integrate AI into functional applications.</p>
+                <p>This program uses Google's Gemini API to offer bioinformatics and biotechnology solutions. To see how I use AI in useful, practical applications, try asking a question below.</p>
                 <textarea id="bioQueryInput" placeholder="e.g., Explain CRISPR-Cas9..." style="width: 100%; height: 100px; resize: vertical; border: 1px solid var(--border-color); background: var(--white); color: var(--dark-text); padding: 1rem; border-radius: 8px; font-size: 1rem; margin-top: 1.5rem;"></textarea>
                 <button id="askAssistantBtn" class="btn btn-primary" style="margin-top: 1rem;">Ask Gemini</button>
                 <div id="loadingIndicator" class="modal-loader" style="display: none; margin: 1rem auto;">
@@ -879,16 +879,16 @@
             // --- MODIFICATION: Added project descriptions ---
             const projectDescriptions = {
                 analysis: {
-                    title: "Structural & Phylogenetic Analysis",
-                    description: "This project involved using bioinformatics tools like BLAST and ClustalW for sequence alignment and MEGA for constructing phylogenetic trees. The 3D structure of the MshA glycosyltransferase enzyme was visualized and analyzed using PyMOL to identify key functional domains and residues, providing insights into its role in biofilm formation."
+                    title: "Structural & Phylogenetic Analysis of ",
+                    description: "This project involved using various bioinformatics tools like BLAST, MEME SUITE and ClustalW for sequence alignment and MEGA for constructing phylogenetic trees. The 3D structure of the MshA glycosyltransferase enzyme was visualized and analyzed using SAVES6.1 and Molprobity, involving ramamcahnadran plot to identify key functional domains and residues."
                 },
                 classifier: {
                     title: "DNA Sequence Classifier",
-                    description: "Currently, I am developing a machine learning model using Python with libraries such as Scikit-learn and Pandas. The model is being trained on a dataset of known promoter and non-promoter sequences from E. coli. The goal is to achieve high accuracy in classification, which is a crucial first step in gene prediction and annotation."
+                    description: "Currently, I am developing a machine learning model using Python with libraries such as Scikit-learn and Pandas. The model will ask for a nucleotide sequence and for a promoter sequence, which we need to find in the nucleotide sequence, and the output section will show the whole sequence with the highlighted promoter region representing promoter region."
                 },
                 'drug-discovery': {
                     title: "IBD Drug Discovery",
-                    description: "This ongoing research project utilizes a computational drug repurposing approach. I am using databases like DrugBank to identify existing drugs that could potentially target proteins involved in Inflammatory Bowel Disease (IBD). Molecular docking simulations are then performed using AutoDock Vina to predict the binding affinity and interaction between the drug candidates and their protein targets."
+                    description: "This ongoing research project utilizes a computational drug repurposing approach. I am using databases like DrugBank and PubChem to identify existing drugs that could potentially target proteins involved in Inflammatory Bowel Disease (IBD). Molecular docking simulations are then performed using AutoDock 4 to predict the binding affinity and interaction between the drug candidates and their protein targets. Also, their protein-ligand interactions are thoroughly reviewed by BIOVIA DISCOVERY STUDIOS."
                 },
                 assistant: {
                     title: "Bioinformatics Virtual Assistant",
