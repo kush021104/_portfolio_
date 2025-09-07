@@ -104,7 +104,7 @@
             background: transparent;
             border: none;
             padding: 0.5rem;
-            z-index: 10;
+            z-index: 1001; /* Ensure hamburger is above nav links on mobile */
         }
         .hamburger .bar {
             display: block;
@@ -180,6 +180,13 @@
             background: #0056a2;
             box-shadow: 0 4px 15px rgba(10, 102, 194, 0.2);
         }
+        
+        .btn-primary:disabled {
+            background-color: #a0c3e2;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
 
         .btn-secondary {
             background: transparent;
@@ -228,7 +235,7 @@
             border-bottom: none;
         }
         
-        .section:nth-child(even) {
+        section:nth-child(even) {
             background-color: var(--light-gray);
         }
 
@@ -642,7 +649,7 @@
                 </div>
                 <div class="card fade-in">
                     <h3>
-                        <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M14.25 6.087c0-.665-.535-1.2-1.2-1.2h-1.5c-.665 0-1.2.535-1.2 1.2v1.5c0 .665.535 1.2 1.2 1.2h1.5c.665 0 1.2-.535 1.2-1.2v-1.5Zm0 6c0-.665-.535-1.2-1.2-1.2h-1.5c-.665 0-1.2.535-1.2 1.2v1.5c0 .665.535 1.2 1.2 1.2h1.5c.665 0 1.2-.535 1.2-1.2v-1.5Zm0 6c0-.665-.535-1.2-1.2-1.2h-1.5c-.665 0-1.2.535-1.2 1.2v1.5c0 .665.535 1.2 1.2 1.2h1.5c.665 0 1.2-.535 1.2-1.2v-1.5Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M4.875 6.087c0-.665.535-1.2 1.2-1.2h1.5c.665 0 1.2.535 1.2 1.2v1.5c0 .665-.535 1.2-1.2 1.2h-1.5c-.665 0-1.2-.535-1.2-1.2v-1.5Zm0 6c0-.665.535-1.2 1.2-1.2h1.5c.665 0 1.2.535 1.2 1.2v1.5c0 .665-.535 1.2-1.2 1.2h-1.5c-.665 0-1.2-.535-1.2-1.2v-1.5Zm0 6c0-.665.535-1.2 1.2-1.2h1.5c.665 0 1.2.535 1.2 1.2v1.5c0 .665.535 1.2-1.2 1.2h-1.5c-.665 0-1.2-.535-1.2-1.2v-1.5Z" /></svg>
+                        <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M14.25 6.087c0-.665-.535-1.2-1.2-1.2h-1.5c-.665 0-1.2.535-1.2 1.2v1.5c0 .665.535 1.2 1.2 1.2h1.5c.665 0 1.2-.535 1.2-1.2v-1.5Zm0 6c0-.665-.535-1.2-1.2-1.2h-1.5c-.665 0-1.2.535-1.2 1.2v1.5c0 .665.535 1.2 1.2 1.2h1.5c.665 0 1.2-.535 1.2-1.2v-1.5Zm0 6c0-.665-.535-1.2-1.2-1.2h-1.5c-.665 0-1.2.535-1.2 1.2v1.5c0 .665.535 1.2-1.2 1.2h-1.5c-.665 0-1.2-.535-1.2-1.2v-1.5Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M4.875 6.087c0-.665.535-1.2 1.2-1.2h1.5c.665 0 1.2.535 1.2 1.2v1.5c0 .665-.535 1.2-1.2 1.2h-1.5c-.665 0-1.2-.535-1.2-1.2v-1.5Zm0 6c0-.665.535-1.2 1.2-1.2h1.5c.665 0 1.2.535 1.2 1.2v1.5c0 .665-.535 1.2-1.2 1.2h-1.5c-.665 0-1.2-.535-1.2-1.2v-1.5Zm0 6c0-.665.535-1.2 1.2-1.2h1.5c.665 0 1.2.535 1.2 1.2v1.5c0 .665.535 1.2-1.2 1.2h-1.5c-.665 0-1.2-.535-1.2-1.2v-1.5Z" /></svg>
                         <span>🔬 Research Interests</span>
                     </h3>
                     <p>Passionate about drug repurposing, molecular docking, AI-driven drug discovery, and gaining data-driven insights from genomic and bioinformatic data.</p>
@@ -724,14 +731,14 @@
                     </div>
                 </div>
                 <div class="skill-category fade-in">
-                    <h4>Instruments handeled</h4>
+                    <h4>Instruments Handled</h4>
                     <div class="skill-tags">
-                        <span class="skill-tag" data-skill="laminar">Laminar air flow</span>
-                        <span class="skill-tag" data-skill="ph">ph meter</span>
+                        <span class="skill-tag" data-skill="laminar">Laminar Air Flow</span>
+                        <span class="skill-tag" data-skill="ph">pH Meter</span>
                         <span class="skill-tag" data-skill="microscope">Microscope</span>
-                        <span class="skill-tag" data-skill="hplc">HPLC</span>
+                        <span class="skill-tag" data-skill="hplc-instrument">HPLC</span>
                         <span class="skill-tag" data-skill="autoclave">Autoclave</span>
-                  </div>
+                </div>
             </div>
         </div>
     </section>
@@ -742,19 +749,25 @@
             <div class="timeline">
                 <div class="timeline-item fade-in">
                     <p class="timeline-date">2024</p>
-                    <h3>Bioinformatics Intern</h3>
-                    <p><strong>Mapbiome Informatics</strong></p>
-                    <p>Gained hands-on experience in computational biology workflows. Developed and automated a data analysis pipeline which reduced data processing time by an estimated 40%.</p>
+                    <div class="timeline-content">
+                        <h3>Bioinformatics Intern</h3>
+                        <p><strong>Mapbiome Informatics</strong></p>
+                        <p>Gained hands-on experience in computational biology workflows. Developed and automated a data analysis pipeline which reduced data processing time by an estimated 40%.</p>
+                    </div>
                 </div>
                 <div class="timeline-item fade-in">
                     <p class="timeline-date">2023 - Present</p>
-                    <h3>B.Tech in Biotechnology</h3>
-                    <p>Focusing on bioprocessing, recombinant DNA technology, and bioinformatics applications.</p>
+                     <div class="timeline-content">
+                        <h3>B.Tech in Biotechnology</h3>
+                        <p>Focusing on bioprocessing, recombinant DNA technology, and bioinformatics applications.</p>
+                    </div>
                 </div>
                 <div class="timeline-item fade-in">
                     <p class="timeline-date">Ongoing</p>
-                    <h3>NPTEL & GATE Preparation</h3>
-                    <p>Currently completing 20 weeks of advanced NPTEL courses in NGS and Metals in Biology to strengthen core subject knowledge for the GATE exam.</p>
+                    <div class="timeline-content">
+                        <h3>NPTEL & GATE Preparation</h3>
+                        <p>Currently completing 20 weeks of advanced NPTEL courses in NGS and Metals in Biology to strengthen core subject knowledge for the GATE exam.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -765,7 +778,7 @@
             <h2 class="section-title fade-in">Bio-Query Assistant</h2>
             <div class="centered-content fade-in">
                 <p>This tool uses Google's Gemini API to answer questions about bioinformatics and biotechnology. Ask it a question below to see a demonstration of my ability to integrate AI into functional applications.</p>
-                <textarea id="Bio-Query Assistant" placeholder="e.g., Explain CRISPR-Cas9..." style="width: 100%; height: 100px; resize: vertical; border: 1px solid var(--border-color); background: var(--white); color: var(--dark-text); padding: 1rem; border-radius: 8px; font-size: 1rem; margin-top: 1.5rem;"></textarea>
+                <textarea id="bioQueryInput" placeholder="e.g., Explain CRISPR-Cas9..." style="width: 100%; height: 100px; resize: vertical; border: 1px solid var(--border-color); background: var(--white); color: var(--dark-text); padding: 1rem; border-radius: 8px; font-size: 1rem; margin-top: 1.5rem;"></textarea>
                 <p class="assistant-example">Try asking: "How do I perform multiple sequence alignment in Python?"</p>
                 <button id="askAssistantBtn" class="btn btn-primary" style="margin-top: 1rem;">Ask AI</button>
             </div>
@@ -802,7 +815,7 @@
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Kushagra Bhardwaj. All rights reserved.</p>
+            <p>&copy; <span id="copyright-year"></span> Kushagra Bhardwaj. All rights reserved.</p>
         </div>
     </footer>
     
@@ -822,7 +835,7 @@
         <div class="modal-content">
             <span class="close-btn">&times;</span>
             <h3 id="detailModalTitle"></h3>
-            <div id="detailModalContent"></div>
+            <div id="detailModalContent" style="max-height: 400px; overflow-y: auto;"></div>
             <div id="detailModalLinkContainer"></div>
         </div>
     </div>
@@ -845,34 +858,35 @@
     </div>
 
 
-    <script defer>
+    <script>
         document.addEventListener('DOMContentLoaded', () => {
             // --- DATA STORE ---
             const skillDescriptions = {
-                docking: "MOLECULAR DOCKING:- this technique is used on ligands selected after performing virtual screening of protein-ligand complex. This selected ligand shows high specificity towards protein receptors. molecular docking study all the types of interaction possible between protein and ligand such as hydrogen bond, van der waals interaction , hydrophobic interactions, halogen interactions etc. there are various types of molecular docking:-1.flexible and rigid docking:-rigid docking(based on lock and key model), semiflexible docking (flexible ligand and rigid receptor) flexible docking (both ligand and receptor are flexible) 3.blind docking and local docking :-BLIND DOCKING :- we use blind docking , when we dont know about protein binding sites , considering whole protein as a binding siteLOCAL DOCKING:- when protein receptor(binding site) and residue at binding site is known , then we perform local docking. in this we ligand is bind to it’s receptor situated at a specific part of protein",
-                sbdd: "1. Structure-Based Drug Design (SBDD): -SBDD is employed when the 3D structure of the target protein is accessible. Having the structure of the target protein offers a significant benefit in the direct optimization process from hit to lead. In cases where an experimental structure is unavailable, computational techniques such as homology modelling and other protein predicting techniques can be utilized to construct the protein structure.",
-                repurposing: "Drug repurposing (also called drug repositioning or drug reprofiling) is the strategy of finding new therapeuticuses for existing drugs that are already approved, under development, or even shelved. Instead of starting drug discovery from scratch, researchers test whether a known drug (with established safety, pharmacokinetics, and manufacturing data) can be effective against a different disease",
-                alignment: "Sequence alignment is a fundamental bioinformatics method for comparing DNA, RNA, or protein sequences...",
-                analysis: "This involves the use of computational tools to analyze, predict, and visualize the 3D structures of biological macromolecules...",
-                phylo: "Phylogenetic analysis is the study of evolutionary relationships among biological entities...",
-                python: "Python is a versatile, high-level programming language widely used in bioinformatics...",
-                r: "R is a programming language and environment specialized for statistical computing and graphics...",
-                biopython: "Biopython is a collection of Python tools for computational biology and bioinformatics...",
-                colab: "Google Colab is a cloud-based Jupyter notebook environment that provides free access to computing resources...",
-                culture: "Bacterial culture is the process of growing bacteria in a controlled laboratory environment on a growth medium.",
-                streaking: "Streaking is a technique used to isolate a pure strain from a single species of microorganism, often from a mixed population.",
-                spreading: "Spreading is a technique to evenly distribute a liquid culture of bacteria on a solid medium plate for growth.",
-                hplc: "High-Performance Liquid Chromatography (HPLC) is a powerful analytical chemistry technique used to separate, identify, and quantify components in a mixture.",
-                biomolecule: "Quantitative and qualitative analysis of biomolecules, involving techniques to identify, separate, and quantify components like proteins and carbohydrates.",
-                laminar: "A Laminar Air Flow cabinet is a carefully enclosed workstation that provides a continuous flow of HEPA-filtered air in a single direction (horizontal or vertical).Purpose: Maintains a sterile and particle-free environment for sensitive microbiological and cell culture work. Applications: Media preparation, inoculation, aseptic transfers.",
-                ph: "A pH meter is an analytical instrument used to measure the hydrogen ion concentration (pH) of a solution. Works by: Using a glass electrode and a reference electrode to detect voltage differences. Applications: Biochemical assays, fermentation monitoring, media preparation.",
-                microscope: "A microscope is an optical instrument used to magnify and visualize objects or specimens too small for the naked eye. Types: Light microscope, phase-contrast microscope, electron microscope. Applications: Observation of cells, tissues, microorganisms, and structural details.",
-                autoclave: " A microscope is an optical instrument used to magnify and visualize objects or specimens too small for the naked eye. Types: Light microscope, phase-contrast microscope, electron microscope. Applications: Observation of cells, tissues, microorganisms, and structural details.",
+                docking: "Molecular docking predicts the preferred orientation of one molecule to a second when bound to each other to form a stable complex. It's crucial in drug design for studying protein-ligand interactions and for virtual screening of compound libraries to find potential drug candidates.",
+                sbdd: "Structure-Based Drug Design (SBDD) uses the known 3D structure of a biological target (like a protein or enzyme) to guide the design of new drugs. This rational approach allows for the creation of more potent and selective inhibitors, reducing development time and cost.",
+                repurposing: "Drug repurposing (or repositioning) is a strategy for identifying new uses for approved or investigational drugs that are outside the scope of the original medical indication. This approach offers a faster route to market compared to traditional drug discovery.",
+                alignment: "Sequence alignment is a fundamental bioinformatics method for comparing DNA, RNA, or protein sequences to identify regions of similarity that may be a consequence of functional, structural, or evolutionary relationships between the sequences.",
+                analysis: "This involves the use of computational tools to analyze, predict, and visualize the 3D structures of biological macromolecules like proteins and nucleic acids. Understanding structure is key to understanding function.",
+                phylo: "Phylogenetic analysis is the study of evolutionary relationships among biological entities (e.g., genes, species). It involves creating phylogenetic trees to visualize these relationships and understand evolutionary history.",
+                python: "Python is a versatile, high-level programming language widely used in bioinformatics for its extensive libraries (like Biopython, Pandas, NumPy) that simplify tasks like sequence analysis, data manipulation, and machine learning.",
+                r: "R is a programming language and environment specialized for statistical computing and graphics. In bioinformatics, it's heavily used for statistical analysis of large datasets, such as those from genomics and proteomics experiments.",
+                biopython: "Biopython is a collection of non-commercial Python tools for computational biology and bioinformatics. It contains classes to represent biological sequences and sequence annotations, and it’s able to read and write to a variety of file formats.",
+                colab: "Google Colab is a cloud-based Jupyter notebook environment that provides free access to computing resources, including GPUs. It's ideal for running bioinformatics analyses and machine learning models without requiring local setup.",
+                culture: "Bacterial culture is the process of growing bacteria in a controlled laboratory environment on a growth medium. This is a fundamental technique for studying microorganisms.",
+                streaking: "Streaking is a technique used to isolate a pure strain from a single species of microorganism, often from a mixed population, by creating isolated colonies on an agar plate.",
+                spreading: "Spreading is a technique to evenly distribute a liquid culture of bacteria on a solid medium plate for growth, often used for quantitative analysis (colony counting).",
+                hplc: "High-Performance Liquid Chromatography (HPLC) is a powerful analytical chemistry technique used to separate, identify, and quantify components in a mixture. It's widely used in drug purity analysis.",
+                biomolecule: "Quantitative and qualitative analysis of biomolecules, involving techniques to identify, separate, and quantify components like proteins, DNA, and carbohydrates using methods like electrophoresis and spectrophotometry.",
+                laminar: "A Laminar Air Flow cabinet is a carefully enclosed workstation that provides a continuous flow of HEPA-filtered air to maintain a sterile, particle-free environment for sensitive microbiological and cell culture work.",
+                ph: "A pH meter is an analytical instrument used to measure the hydrogen ion concentration (pH) of a solution. It's essential for preparing buffers, media, and monitoring biochemical reactions that are pH-sensitive.",
+                microscope: "A microscope is an optical instrument used to magnify and visualize objects or specimens too small for the naked eye. It's fundamental for observing cells, tissues, and microorganisms.",
+                'hplc-instrument': "Handling an HPLC instrument involves preparing mobile phases, priming the pump, injecting samples, setting up run parameters (flow rate, gradient), and interpreting chromatograms for component analysis.",
+                autoclave: "An autoclave is a pressure chamber used for sterilization. It uses high-pressure saturated steam at 121°C (250°F) to kill bacteria, viruses, fungi, and spores on equipment, media, and other laboratory supplies."
             };
 
             const projectDescriptions = {
                 salmonellosis: {
-                    title: "Molecular Docking and drug repurposing approach towards salmonellosis caused by salmonella typhimurium",
+                    title: "Molecular Docking and Drug Repurposing for Salmonellosis",
                     description: `
                         <p><strong>Objective:</strong> To investigate the binding capability of a potential drug candidate (Rotigaptide) against the Salmonella typhimurium enzyme MurA using computational methods, with the goal of identifying a new antibacterial agent.</p>
                         <p><strong>Methodology:</strong></p>
@@ -886,13 +900,13 @@
                          <p><strong>Key Results:</strong></p>
                         <ul>
                             <li>Achieved a strong binding energy of <strong>-11.12 kcal/mol</strong>, indicating high affinity.</li>
-                            <li>Identified significant hydrogen bonds (with ASN 23A, ARG 91A, etc.) and hydrophobic interactions, confirming a stable complex.</li>
+                            <li>Identified significant hydrogen bonds and hydrophobic interactions, confirming a stable complex.</li>
                         </ul>
                         <p><strong>Conclusion:</strong> This in silico study successfully demonstrated a rational drug development strategy, highlighting Rotigaptide as a promising inhibitor for the MurA enzyme in Salmonella typhimurium.</p>
                     `,
                 },
                 analysis: {
-                    title: "Structural & Phylogenetic Analysis of MshA glycosyltransferase",
+                    title: "Structural & Phylogenetic Analysis of MshA Glycosyltransferase",
                     description: `
                         <p><strong>Problem:</strong> To determine the evolutionary relationships and key structural features of the MshA glycosyltransferase enzyme, which is critical for biofilm formation in many bacteria.</p>
                         <p><strong>My Contribution:</strong></p>
@@ -905,7 +919,7 @@
                     `,
                 },
                 classifier: {
-                    title: "DNA Sequence Classifier",
+                    title: "DNA Sequence Classifier for Promoter Regions",
                     description: `
                         <p><strong>Problem:</strong> Accurately identifying promoter regions in a DNA sequence is a fundamental challenge in computational gene prediction.</p>
                         <p><strong>My Contribution:</strong></p>
@@ -918,13 +932,13 @@
                     `,
                 },
                 'drug-discovery': {
-                    title: "InflamDock: Molecular Docking-Based Drug Discovery Against TNF-α in IBD",
+                    title: "InflamDock: Drug Discovery for IBD via Molecular Docking",
                     description: `
                         <p><strong>Problem:</strong> To identify novel therapeutic candidates for Inflammatory Bowel Disease (IBD) by computationally screening existing drugs for new purposes.</p>
                         <p><strong>My Contribution:</strong></p>
                         <ul>
                             <li>Used databases like DrugBank to create a library of FDA-approved drugs.</li>
-                            <li>Performed molecular docking simulations using AutoDock Vina to predict the binding affinity of these drugs against key IBD protein targets.</li>
+                            <li>Performed molecular docking simulations using AutoDock Vina to predict the binding affinity of these drugs against key IBD protein targets like TNF-α.</li>
                             <li>Analyzed the top candidates to assess their potential as repurposed drugs for IBD.</li>
                         </ul>
                         <p><strong>Outcome:</strong> Successfully identified several promising drug candidates with strong predicted binding energies, warranting further investigation.</p>
@@ -945,12 +959,18 @@
                 }
             };
 
-            // --- General Setup ---
+            // --- General UI Setup & Event Listeners ---
+            
+            // Dynamic Copyright Year
+            document.getElementById('copyright-year').textContent = new Date().getFullYear();
+
+            // Navbar scroll effect
             const navbar = document.getElementById('navbar');
             window.addEventListener('scroll', () => {
                 navbar.classList.toggle('scrolled', window.scrollY > 50);
             });
 
+            // Smooth scrolling for anchor links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     const href = this.getAttribute('href');
@@ -958,16 +978,44 @@
                         const targetElement = document.querySelector(href);
                         if (targetElement) {
                             e.preventDefault();
-                            targetElement.scrollIntoView({
-                                behavior: 'smooth'
-                            });
+                            targetElement.scrollIntoView({ behavior: 'smooth' });
+                            // Close mobile menu on link click
+                            if (navMenu.classList.contains('active')) {
+                                hamburger.classList.remove('active');
+                                navMenu.classList.remove('active');
+                            }
                         }
                     }
                 });
             });
 
+            // Mobile hamburger menu logic
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('nav-menu');
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
 
+            // Fade-in animations on scroll
+            const fadeInElements = document.querySelectorAll('.fade-in');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            fadeInElements.forEach(el => observer.observe(el));
+
+
+            // --- Modal Management ---
             const allModals = document.querySelectorAll('.modal');
+            const detailModal = document.getElementById('detailModal');
+            const detailModalTitle = document.getElementById('detailModalTitle');
+            const detailModalContent = document.getElementById('detailModalContent');
+
             const openModal = (modal) => modal.style.display = 'block';
             const closeModal = (modal) => {
                 modal.style.display = 'none';
@@ -988,40 +1036,17 @@
                 });
             };
             
-            const fadeInElements = document.querySelectorAll('.fade-in');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            fadeInElements.forEach(el => observer.observe(el));
-
-            const hamburger = document.getElementById('hamburger');
-            const navMenu = document.getElementById('nav-menu');
-            hamburger.addEventListener('click', () => {
-                hamburger.classList.toggle('active');
-                navMenu.classList.toggle('active');
-            });
-
-            const detailModal = document.getElementById('detailModal');
-            const detailModalTitle = document.getElementById('detailModalTitle');
-            const detailModalContent = document.getElementById('detailModalContent');
-            const detailModalLinkContainer = document.getElementById('detailModalLinkContainer');
-
+            // Populate and open detail modal for skills
             document.querySelectorAll('.skill-tag').forEach(skillTag => {
                 skillTag.addEventListener('click', () => {
                     const skillKey = skillTag.dataset.skill;
                     detailModalTitle.textContent = skillTag.textContent;
-                    detailModalContent.innerHTML = `<p>${skillDescriptions[skillKey]}</p>`;
-                    detailModalLinkContainer.innerHTML = ''; // Clear link container for skills
+                    detailModalContent.innerHTML = `<p>${skillDescriptions[skillKey] || "Description not available."}</p>`;
                     openModal(detailModal);
                 });
             });
 
+            // Populate and open detail modal for projects
             document.querySelectorAll('.project-card').forEach(projectCard => {
                 projectCard.addEventListener('click', () => {
                     const projectKey = projectCard.dataset.project;
@@ -1029,13 +1054,43 @@
                     if (projectData) {
                         detailModalTitle.textContent = projectData.title;
                         detailModalContent.innerHTML = projectData.description;
-                        detailModalLinkContainer.innerHTML = '';
                         openModal(detailModal);
                     }
                 });
             });
+
+            // --- Contact & Suggestion Logic ---
             
-            // --- UPDATED Suggestion Modal Logic ---
+            // Email Modal & Copy Button
+            const emailModal = document.getElementById('emailModal');
+            document.getElementById('email-btn').addEventListener('click', (e) => {
+                e.preventDefault();
+                openModal(emailModal);
+            });
+            
+            document.getElementById('copyEmailBtn').addEventListener('click', function() {
+                const emailText = document.getElementById('emailText').textContent;
+                const copyBtn = this;
+                
+                // Fallback method using a temporary textarea
+                const textArea = document.createElement("textarea");
+                textArea.value = emailText;
+                textArea.style.position = "fixed"; // Avoid scrolling to bottom
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    copyBtn.textContent = 'Copied!';
+                    setTimeout(() => { copyBtn.textContent = 'Copy'; }, 2000);
+                } catch (err) {
+                    console.error('Fallback: Oops, unable to copy', err);
+                    copyBtn.textContent = 'Failed';
+                }
+                document.body.removeChild(textArea);
+            });
+
+            // Suggest an Idea Modal
             const visitorSuggestionModal = document.getElementById('visitorSuggestionModal');
             document.getElementById('suggest-idea-btn').addEventListener('click', (e) => {
                 e.preventDefault();
@@ -1052,23 +1107,87 @@
                 } else {
                     errorEl.style.display = 'none';
                     const subject = "Visitor Project Suggestion";
-                    const body = encodeURIComponent(ideaText);
+                    const body = encodeURIComponent(`A visitor suggested the following idea:\n\n"${ideaText}"`);
                     const mailtoLink = `mailto:kushagra021104@gmail.com?subject=${subject}&body=${body}`;
                     
                     document.getElementById('suggestionFormWrapper').style.display = 'none';
                     document.getElementById('suggestionSuccessMessage').style.display = 'block';
 
+                    // Open mail client
                     window.location.href = mailtoLink;
                 }
             });
+            
+            // --- Bio-Query Assistant (Gemini API) Logic ---
+            const askAssistantBtn = document.getElementById('askAssistantBtn');
+            const bioQueryInput = document.getElementById('bioQueryInput');
 
-            const emailModal = document.getElementById('emailModal');
-            document.getElementById('email-btn').addEventListener('click', (e) => {
-                e.preventDefault();
-                openModal(emailModal);
+            async function callGeminiAPI(query) {
+                const apiKey = ""; // The environment will provide the key
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+                
+                const systemPrompt = "You are an expert assistant specializing in biotechnology and bioinformatics. Answer the user's questions accurately and concisely. Format your response clearly, using paragraphs, lists, and bold text where appropriate for readability.";
+
+                const payload = {
+                    contents: [{ parts: [{ text: query }] }],
+                    systemInstruction: {
+                        parts: [{ text: systemPrompt }]
+                    },
+                };
+
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        console.error("API Error:", errorData);
+                        return `Error: ${errorData.error.message || 'Failed to get a response from the AI assistant.'}`;
+                    }
+
+                    const result = await response.json();
+                    return result.candidates?.[0]?.content?.parts?.[0]?.text || "Sorry, I couldn't generate a response.";
+                } catch (error) {
+                    console.error("Network or fetch error:", error);
+                    return "An error occurred while contacting the AI assistant. Please check your network connection.";
+                }
+            }
+
+            askAssistantBtn.addEventListener('click', async () => {
+                const query = bioQueryInput.value.trim();
+                if (!query) {
+                    detailModalTitle.textContent = "Input Required";
+                    detailModalContent.innerHTML = "<p>Please enter a question in the text box first.</p>";
+                    openModal(detailModal);
+                    return;
+                }
+
+                // Show loading state
+                askAssistantBtn.disabled = true;
+                askAssistantBtn.textContent = 'Thinking...';
+                detailModalTitle.textContent = "Bio-Query Assistant";
+                detailModalContent.innerHTML = "<p>Please wait, fetching an answer from the AI...</p>";
+                openModal(detailModal);
+
+                const responseText = await callGeminiAPI(query);
+                
+                // Gemini API returns markdown, so let's convert basic markdown to HTML
+                let formattedResponse = responseText
+                    .replace(/\n/g, '<br>') // New lines
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold
+                    .replace(/\*(.*?)\*/g, '<em>$1</em>'); // Italics
+
+                detailModalContent.innerHTML = `<p>${formattedResponse}</p>`;
+
+                // Reset button
+                askAssistantBtn.disabled = false;
+                askAssistantBtn.textContent = 'Ask AI';
             });
+
         });
     </script>
 </body>
 </html>
-
