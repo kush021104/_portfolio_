@@ -690,7 +690,7 @@
                     <h4>Drug Discovery</h4>
                     <div class="skill-tags">
                         <span class="skill-tag" data-skill="docking">Molecular Docking</span>
-                        <span class="skill-tag" data-skill="sbd">Structure-Based Design</span>
+                        <span class="skill-tag" data-skill="sbdd">Structure-Based Design</span>
                         <span class="skill-tag" data-skill="repurposing">Drug Repurposing</span>
                     </div>
                 </div>
@@ -721,6 +721,15 @@
                         <span class="skill-tag" data-skill="biomolecule">Biomolecule Analysis</span>
                     </div>
                 </div>
+                <div class="skill-category fade-in">
+                    <h4>Instruments handeled</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag" data-skill="culture">Laminar air flow</span>
+                        <span class="skill-tag" data-skill="streaking">ph meter</span>
+                        <span class="skill-tag" data-skill="spreading">Microscope</span>
+                        <span class="skill-tag" data-skill="hplc">HPLC</span>
+                        <span class="skill-tag" data-skill="biomolecule">Autoclave</span>
+                  </div>
             </div>
         </div>
     </section>
@@ -837,9 +846,9 @@
         document.addEventListener('DOMContentLoaded', () => {
             // --- DATA STORE ---
             const skillDescriptions = {
-                docking: "Molecular docking is a computational technique that predicts the preferred orientation of one molecule to a second when bound to each other to form a stable complex...",
-                sbd: "Structure-Based Drug Design (SBDD) uses the 3D structural information of a biological target to design and optimize drug candidates...",
-                repurposing: "Drug repurposing involves identifying new therapeutic uses for existing, approved drugs...",
+                docking: "MOLECULAR DOCKING:- this technique is used on ligands selected after performing virtual screening of protein-ligand complex. This selected ligand shows high specificity towards protein receptors. molecular docking study all the types of interaction possible between protein and ligand such as hydrogen bond, van der waals interaction , hydrophobic interactions, halogen interactions etc. there are various types of molecular docking:-1.flexible and rigid docking:-rigid docking(based on lock and key model), semiflexible docking (flexible ligand and rigid receptor) flexible docking (both ligand and receptor are flexible) 3.blind docking and local docking :-BLIND DOCKING :- we use blind docking , when we dont know about protein binding sites , considering whole protein as a binding siteLOCAL DOCKING:- when protein receptor(binding site) and residue at binding site is known , then we perform local docking. in this we ligand is bind to it’s receptor situated at a specific part of protein",
+                sbdd: "1. Structure-Based Drug Design (SBDD): -SBDD is employed when the 3D structure of the target protein is accessible. Having the structure of the target protein offers a significant benefit in the direct optimization process from hit to lead. In cases where an experimental structure is unavailable, computational techniques such as homology modelling and other protein predicting techniques can be utilized to construct the protein structure.",
+                repurposing: "Drug repurposing (also called drug repositioning or drug reprofiling) is the strategy of finding new therapeuticuses for existing drugs that are already approved, under development, or even shelved. Instead of starting drug discovery from scratch, researchers test whether a known drug (with established safety, pharmacokinetics, and manufacturing data) can be effective against a different disease",
                 alignment: "Sequence alignment is a fundamental bioinformatics method for comparing DNA, RNA, or protein sequences...",
                 analysis: "This involves the use of computational tools to analyze, predict, and visualize the 3D structures of biological macromolecules...",
                 phylo: "Phylogenetic analysis is the study of evolutionary relationships among biological entities...",
@@ -856,7 +865,7 @@
 
             const projectDescriptions = {
                 salmonellosis: {
-                    title: "Molecular Docking Towards Salmonellosis",
+                    title: "Molecular Docking and drug repurposing approach towards salmonellosis caused by salmonella typhimurium",
                     description: `
                         <p><strong>Objective:</strong> To investigate the binding capability of a potential drug candidate (Rotigaptide) against the Salmonella typhimurium enzyme MurA using computational methods, with the goal of identifying a new antibacterial agent.</p>
                         <p><strong>Methodology:</strong></p>
@@ -876,7 +885,7 @@
                     `,
                 },
                 analysis: {
-                    title: "Structural & Phylogenetic Analysis of MshA enzyme",
+                    title: "Structural & Phylogenetic Analysis of MshA glycosyltransferase",
                     description: `
                         <p><strong>Problem:</strong> To determine the evolutionary relationships and key structural features of the MshA glycosyltransferase enzyme, which is critical for biofilm formation in many bacteria.</p>
                         <p><strong>My Contribution:</strong></p>
@@ -902,7 +911,7 @@
                     `,
                 },
                 'drug-discovery': {
-                    title: "IBD Drug Discovery",
+                    title: "InflamDock: Molecular Docking-Based Drug Discovery Against TNF-α in IBD",
                     description: `
                         <p><strong>Problem:</strong> To identify novel therapeutic candidates for Inflammatory Bowel Disease (IBD) by computationally screening existing drugs for new purposes.</p>
                         <p><strong>My Contribution:</strong></p>
