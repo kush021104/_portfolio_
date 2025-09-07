@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kushagra Bhardwaj - Biotechnology & Bioinformatics Portfolio</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230A66C2'/%3E%3Ctext x='50' y='50' font-size='50' fill='white' text-anchor='middle' dy='.3em' font-family='Inter, sans-serif' font-weight='bold'%3EKB%3C/text%3E%3C/svg%3E">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         /* --- ELEGANT & PROFESSIONAL THEME --- */
@@ -16,6 +17,7 @@
             --light-gray: #F8F9FA;
             --border-color: #DEE2E6;
             --white: #FFFFFF;
+            --success-green: #28a745;
         }
 
         * {
@@ -72,11 +74,10 @@
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.75rem;
             font-weight: 700;
             color: var(--primary-blue);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            z-index: 10;
         }
 
         .nav-links {
@@ -96,6 +97,23 @@
             color: var(--primary-blue);
         }
 
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+            padding: 0.5rem;
+            z-index: 10;
+        }
+        .hamburger .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            background-color: var(--dark-text);
+            transition: all 0.3s ease-in-out;
+        }
+
         /* 3. Hero Section */
         .hero {
             padding: 160px 0 100px;
@@ -104,6 +122,8 @@
         }
 
         .hero-content {
+            position: relative;
+            z-index: 2;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
@@ -201,6 +221,7 @@
         .section {
             padding: 100px 0;
             border-bottom: 1px solid var(--border-color);
+            background-color: var(--white);
         }
         .section:last-of-type {
             border-bottom: none;
@@ -236,9 +257,8 @@
             gap: 2rem;
         }
         .grid-2 { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
-        
-        /* --- FIX: ADDED MISSING grid-3 RULE --- */
         .grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+        .grid-4 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
 
         .card, .project-card, .skill-category {
             background: var(--white);
@@ -247,6 +267,8 @@
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease;
             border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
         }
 
         .card:hover, .project-card:hover, .skill-category:hover {
@@ -258,12 +280,25 @@
             font-size: 1.25rem;
             margin-bottom: 0.5rem;
             color: var(--primary-blue);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .card-icon {
+            width: 28px;
+            height: 28px;
+            color: var(--primary-blue);
         }
 
         /* 6. Project Cards */
+        .project-card {
+            cursor: pointer;
+        }
         .project-card h3 {
             font-size: 1.2rem;
             color: var(--primary-blue);
+            flex-grow: 1; /* Allows title to take up space */
         }
         .project-status {
             font-size: 0.85rem;
@@ -401,6 +436,13 @@
             transform: translateY(-2px);
         }
 
+        .assistant-example {
+            font-size: 0.9rem;
+            color: var(--body-text);
+            margin-top: 0.5rem;
+            text-align: center;
+        }
+
         /* 10. Footer */
         .footer {
             background: var(--dark-text);
@@ -454,21 +496,69 @@
         .close-btn:hover, .close-btn:focus { color: var(--primary-blue); }
         .modal-content h3 { color: var(--primary-blue); font-size: 1.8rem; margin-bottom: 1rem; }
         .modal-content p { color: var(--body-text); margin-bottom: 1rem; }
+        #detailModalContent ul { padding-left: 20px; margin-top: -0.5rem; }
+        #detailModalLinkContainer { margin-top: 1.5rem; }
         
-        /* 12. Responsive Design */
+        /* 12. Animation Styles */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 13. Responsive Design */
         @media (max-width: 992px) {
             .hero-content { grid-template-columns: 1fr; text-align: center; }
             .hero-left { text-align: center; }
             .cta-buttons { justify-content: center; }
         }
 
-        /* --- FIX: MOBILE MENU --- */
         @media (max-width: 768px) {
-            .nav-content {
-                flex-direction: column; /* Stacks logo and links vertically */
-                align-items: flex-start;
-                gap: 1rem;
+            .hamburger {
+                display: block;
             }
+
+            .nav-links {
+                position: fixed;
+                left: -100%;
+                top: 0;
+                gap: 0;
+                flex-direction: column;
+                background-color: var(--white);
+                width: 100%;
+                height: 100vh;
+                text-align: center;
+                transition: left 0.3s ease;
+                padding-top: 5rem;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                padding: 1.5rem 0;
+            }
+
+            .nav-links a {
+                font-size: 1.2rem;
+            }
+
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            .hamburger.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
             .hero-left h1 { font-size: 2.8rem; }
             .section-title { font-size: 2rem; }
             .timeline { padding-left: 20px; }
@@ -479,8 +569,8 @@
 <body>
     <nav class="navbar" id="navbar">
         <div class="nav-content">
-            <div class="logo">Kushagra Bhardwaj</div>
-            <ul class="nav-links">
+            <div class="logo">KB</div>
+            <ul class="nav-links" id="nav-menu">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#projects">Projects</a></li>
@@ -489,6 +579,11 @@
                 <li><a href="#bio-assistant">Assistant</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
+            <button class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
         </div>
     </nav>
 
@@ -503,14 +598,14 @@
                         <a href="#contact" class="btn btn-secondary">Contact Me</a>
                     </div>
                 </div>
-                <div class="hero-right">
+                <div class="hero-right fade-in">
                     <h3>About Me</h3>
                     <div class="hero-bio">
                         <p>
                             I'm a 3rd-year Biotechnology undergraduate passionate about applying computational skills to solve complex biological problems. My focus is on <strong>bioinformatics</strong>, <strong>machine learning</strong>, and <strong>dry lab research</strong>.
                         </p>
                         <p>
-                            A detail-oriented and goal-driven learner, I combine my scientific foundation with growing skills in <strong>Python</strong> and <strong>computational biology</strong>. I'm actively building my expertise through certifications and hands-on projects to bridge the gap between life sciences and AI.
+                            A detail-oriented and goal-driven learner, I combine my scientific foundation with growing skills in <strong>Python</strong> and <strong>computational biology</strong>, backed by over 80+ hours of specialized coursework.
                         </p>
                     </div>
                 </div>
@@ -520,22 +615,34 @@
 
     <section id="about" class="section">
         <div class="container">
-            <h2 class="section-title">Core Focus</h2>
+            <h2 class="section-title fade-in">Core Focus</h2>
             <div class="grid grid-2">
-                <div class="card">
-                    <h3>Academic Foundation</h3>
+                <div class="card fade-in">
+                    <h3>
+                        <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" /></svg>
+                        <span>📖 Academic Foundation</span>
+                    </h3>
                     <p>B.Tech Biotechnology student with a solid background in structural biology and biochemistry. Preparing for GATE Biotechnology while maintaining excellence in coursework and lab experience.</p>
                 </div>
-                <div class="card">
-                    <h3>Career Aspirations</h3>
+                <div class="card fade-in">
+                    <h3>
+                        <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941" /></svg>
+                        <span>🚀 Career Aspirations</span>
+                    </h3>
                     <p>Aspiring to build a career in computational drug discovery and precision medicine. I am actively learning Data Analysis and AI through various platforms to advance therapeutic discovery.</p>
                 </div>
-                <div class="card">
-                    <h3>Learner Profile</h3>
+                <div class="card fade-in">
+                    <h3>
+                        <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.042 21.672L13.684 16.6m0 0-2.51 2.225.569-9.47 5.227 7.917-3.286-.672ZM12 2.25V4.5m5.834.166-1.591 1.591M21.75 12h-2.25m-1.666 5.834L16.5 16.5M4.5 12H2.25m1.666-5.834L5.5 7.5M12 21.75V19.5" /></svg>
+                        <span>💡 Learner Profile</span>
+                    </h3>
                     <p>A goal-driven and proactive learner who values independence and competence. Committed to continuous improvement and applying knowledge to real-world challenges.</p>
                 </div>
-                <div class="card">
-                    <h3>Research Interests</h3>
+                <div class="card fade-in">
+                    <h3>
+                        <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M14.25 6.087c0-.665-.535-1.2-1.2-1.2h-1.5c-.665 0-1.2.535-1.2 1.2v1.5c0 .665.535 1.2 1.2 1.2h1.5c.665 0 1.2-.535 1.2-1.2v-1.5Zm0 6c0-.665-.535-1.2-1.2-1.2h-1.5c-.665 0-1.2.535-1.2 1.2v1.5c0 .665.535 1.2 1.2 1.2h1.5c.665 0 1.2-.535 1.2-1.2v-1.5Zm0 6c0-.665-.535-1.2-1.2-1.2h-1.5c-.665 0-1.2.535-1.2 1.2v1.5c0 .665.535 1.2 1.2 1.2h1.5c.665 0 1.2-.535 1.2-1.2v-1.5Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M4.875 6.087c0-.665.535-1.2 1.2-1.2h1.5c.665 0 1.2.535 1.2 1.2v1.5c0 .665-.535 1.2-1.2 1.2h-1.5c-.665 0-1.2-.535-1.2-1.2v-1.5Zm0 6c0-.665.535-1.2 1.2-1.2h1.5c.665 0 1.2.535 1.2 1.2v1.5c0 .665-.535 1.2-1.2 1.2h-1.5c-.665 0-1.2-.535-1.2-1.2v-1.5Zm0 6c0-.665.535-1.2 1.2-1.2h1.5c.665 0 1.2.535 1.2 1.2v1.5c0 .665.535 1.2-1.2 1.2h-1.5c-.665 0-1.2-.535-1.2-1.2v-1.5Z" /></svg>
+                        <span>🔬 Research Interests</span>
+                    </h3>
                     <p>Passionate about drug repurposing, molecular docking, AI-driven drug discovery, and gaining data-driven insights from genomic and bioinformatic data.</p>
                 </div>
             </div>
@@ -544,40 +651,42 @@
 
     <section id="projects" class="section">
         <div class="container">
-            <h2 class="section-title">Featured Projects</h2>
-            <div class="grid grid-2">
-                <div class="project-card">
+            <h2 class="section-title fade-in">Featured Projects</h2>
+            <div class="grid grid-3">
+                <div class="project-card fade-in" data-project="salmonellosis">
+                    <h3>Molecular Docking for Salmonellosis</h3>
+                    <p class="project-status">Completed • Computational Biology</p>
+                    <p>Investigated Rotigaptide as a potential drug candidate against a key Salmonella typhimurium enzyme using molecular docking.</p>
+                </div>
+                <div class="project-card fade-in" data-project="analysis">
                     <h3>Structural & Phylogenetic Analysis</h3>
                     <p class="project-status">Completed • Structural Biology</p>
-                    <p>Analyzed the MshA glycosyltransferase enzyme to understand its evolutionary relationships and structural features, providing insights into its functional mechanisms.</p>
+                    <p>Analyzed the MshA glycosyltransferase enzyme to understand its evolutionary relationships and structural features.</p>
                 </div>
-                <div class="project-card">
+                <div class="project-card fade-in" data-project="classifier">
                     <h3>DNA Sequence Classifier</h3>
                     <p class="project-status">Ongoing • Machine Learning</p>
-                    <p>Developing a machine learning model to distinguish between promoter and non-promoter DNA regions, with plans to expand to multi-class genomic sequence analysis.</p>
+                    <p>Developing an ML model to distinguish between promoter and non-promoter DNA regions.</p>
                 </div>
-                <div class="project-card">
+                <div class="project-card fade-in" data-project="drug-discovery">
                     <h3>IBD Drug Discovery</h3>
                     <p class="project-status">Ongoing • Drug Repurposing</p>
-                    <p>Identifying potential drug candidates for Inflammatory Bowel Disease (IBD) using drug repurposing strategies and molecular docking techniques.</p>
+                    <p>Identifying potential drug candidates for Inflammatory Bowel Disease (IBD) via molecular docking.</p>
                 </div>
-                <div class="project-card">
+                <div class="project-card fade-in" data-project="assistant">
                     <h3>Bioinformatics Virtual Assistant</h3>
                     <p class="project-status">Upcoming • AI Development</p>
-                    <p>Planning to build an intelligent virtual assistant to help researchers with bioinformatics workflows, protocol guidance, and computational tasks.</p>
+                    <p>Planning to build an intelligent virtual assistant to help researchers with bioinformatics workflows.</p>
                 </div>
-            </div>
-            <div style="text-align: center; margin-top: 3rem;">
-                <button id="generateProjectBtn" class="btn btn-secondary" disabled>✨ Get an AI-Powered Project Idea (Coming Soon)</button>
             </div>
         </div>
     </section>
 
     <section id="skills" class="section">
         <div class="container">
-            <h2 class="section-title">Technical Skills</h2>
-            <div class="grid grid-3">
-                <div class="skill-category">
+            <h2 class="section-title fade-in">Technical Skills</h2>
+            <div class="grid grid-4">
+                <div class="skill-category fade-in">
                     <h4>Drug Discovery</h4>
                     <div class="skill-tags">
                         <span class="skill-tag" data-skill="docking">Molecular Docking</span>
@@ -585,7 +694,7 @@
                         <span class="skill-tag" data-skill="repurposing">Drug Repurposing</span>
                     </div>
                 </div>
-                <div class="skill-category">
+                <div class="skill-category fade-in">
                     <h4>Bioinformatics</h4>
                     <div class="skill-tags">
                         <span class="skill-tag" data-skill="alignment">Sequence Alignment</span>
@@ -593,7 +702,7 @@
                         <span class="skill-tag" data-skill="phylo">Phylogenetic Analysis</span>
                     </div>
                 </div>
-                <div class="skill-category">
+                <div class="skill-category fade-in">
                     <h4>Computational Tools</h4>
                     <div class="skill-tags">
                         <span class="skill-tag" data-skill="python">Python</span>
@@ -602,29 +711,39 @@
                         <span class="skill-tag" data-skill="colab">Google Colab</span>
                     </div>
                 </div>
+                <div class="skill-category fade-in">
+                    <h4>Wet Lab Skills</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag" data-skill="culture">Bacteria Culture</span>
+                        <span class="skill-tag" data-skill="streaking">Streaking</span>
+                        <span class="skill-tag" data-skill="spreading">Spreading</span>
+                        <span class="skill-tag" data-skill="hplc">HPLC</span>
+                        <span class="skill-tag" data-skill="biomolecule">Biomolecule Analysis</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <section id="experience" class="section">
         <div class="container">
-            <h2 class="section-title">Experience & Education</h2>
+            <h2 class="section-title fade-in">Experience & Education</h2>
             <div class="timeline">
-                <div class="timeline-item">
+                <div class="timeline-item fade-in">
                     <p class="timeline-date">2024</p>
                     <h3>Bioinformatics Intern</h3>
                     <p><strong>Mapbiome Informatics</strong></p>
-                    <p>Gained hands-on experience in computational biology workflows, working with real-world datasets and industry-standard tools for genomic analysis.</p>
+                    <p>Gained hands-on experience in computational biology workflows. Developed and automated a data analysis pipeline which reduced data processing time by an estimated 40%.</p>
                 </div>
-                <div class="timeline-item">
+                <div class="timeline-item fade-in">
                     <p class="timeline-date">2023 - Present</p>
                     <h3>B.Tech in Biotechnology</h3>
                     <p>Focusing on bioprocessing, recombinant DNA technology, and bioinformatics applications.</p>
                 </div>
-                <div class="timeline-item">
+                <div class="timeline-item fade-in">
                     <p class="timeline-date">Ongoing</p>
                     <h3>NPTEL & GATE Preparation</h3>
-                    <p>Completing advanced courses in NGS and preparing for GATE Biotechnology to strengthen core subject knowledge.</p>
+                    <p>Currently completing 20 weeks of advanced NPTEL courses in NGS and Metals in Biology to strengthen core subject knowledge for the GATE exam.</p>
                 </div>
             </div>
         </div>
@@ -632,25 +751,22 @@
     
     <section id="bio-assistant" class="section">
         <div class="container">
-            <h2 class="section-title">Bio-Query Assistant</h2>
-            <div class="centered-content">
+            <h2 class="section-title fade-in">Bio-Query Assistant</h2>
+            <div class="centered-content fade-in">
                 <p>This tool uses Google's Gemini API to answer questions about bioinformatics and biotechnology. Ask it a question below to see a demonstration of my ability to integrate AI into functional applications.</p>
                 <textarea id="bioQueryInput" placeholder="e.g., Explain CRISPR-Cas9..." style="width: 100%; height: 100px; resize: vertical; border: 1px solid var(--border-color); background: var(--white); color: var(--dark-text); padding: 1rem; border-radius: 8px; font-size: 1rem; margin-top: 1.5rem;"></textarea>
+                <p class="assistant-example">Try asking: "How do I perform multiple sequence alignment in Python?"</p>
                 <button id="askAssistantBtn" class="btn btn-primary" style="margin-top: 1rem;">Ask Gemini</button>
-                <div id="loadingIndicator" class="modal-loader" style="display: none; margin: 1rem auto;">
-                    <svg class="spinner" width="30" height="30" viewBox="0 0 50 50"><circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle></svg>
-                </div>
-                <div id="bioAssistantResponse" style="margin-top: 1.5rem; padding: 1.5rem; background: var(--light-gray); border-radius: 8px; border: 1px solid var(--border-color); color: var(--dark-text); text-align: left; white-space: pre-wrap; display: none;"></div>
-                <div id="bioAssistantError" style="margin-top: 1rem; color: #D9534F; text-align: center; display: none;"></div>
             </div>
         </div>
     </section>
 
     <section id="contact" class="section">
         <div class="container">
-            <div class="contact-content">
+            <div class="contact-content fade-in">
                 <h2 class="section-title">Let's Connect</h2>
                 <p>I'm always excited to discuss bioinformatics, collaborate on projects, or explore new opportunities. Feel free to reach out or suggest an idea!</p>
+                
                 <div class="contact-links">
                     <a href="#" id="email-btn" class="contact-link">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"></path></svg>
@@ -691,54 +807,127 @@
         </div>
     </div>
     
-    <div id="skillModal" class="modal">
+    <div id="detailModal" class="modal">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
-            <h3 id="skillModalTitle"></h3>
-            <p id="skillModalContent"></p>
+            <h3 id="detailModalTitle"></h3>
+            <div id="detailModalContent"></div>
+            <div id="detailModalLinkContainer"></div>
         </div>
     </div>
 
-    <div id="projectIdeaModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn">&times;</span>
-            <h3>✨ AI-Powered Project Idea</h3>
-            <div id="projectModalLoader" class="modal-loader">
-                <svg class="spinner" width="40" height="40" viewBox="0 0 50 50"><circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle></svg>
-            </div>
-            <p id="projectModalContent"></p>
-            <a id="emailProjectIdeaBtn" href="#" class="btn btn-secondary" style="display: none; margin-top: 1.5rem;">📧 Email This Idea to Me</a>
-        </div>
-    </div>
-    
     <div id="visitorSuggestionModal" class="modal">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
             <h3>Suggest a Project Idea</h3>
             <p style="text-align: center;">Have a project idea or a problem you think I could tackle? I'd love to hear it!</p>
-            <textarea id="visitorIdeaInput" placeholder="Describe your project idea here..." style="width: 100%; height: 150px; resize: vertical; border: 1px solid var(--border-color); background: var(--light-gray); color: var(--dark-text); padding: 1rem; border-radius: 8px; font-size: 1rem;"></textarea>
-            <a id="sendVisitorIdeaBtn" href="#" class="btn btn-primary" style="margin-top: 1.5rem;">Send Suggestion</a>
+            <div id="suggestionSuccessMessage" style="display: none; text-align: center; margin-top: 1.5rem; padding: 1.5rem; background-color: var(--light-gray); border-radius: 8px;">
+                <h4 style="color: var(--success-green); margin-bottom: 0.5rem;">Thank you!</h4>
+                <p>Your response has been submitted.</p>
+            </div>
+            <div id="suggestionFormWrapper">
+                <textarea id="visitorIdeaInput" placeholder="Describe your project idea here..." style="width: 100%; height: 150px; resize: vertical; border: 1px solid var(--border-color); background: var(--white); color: var(--dark-text); padding: 1rem; border-radius: 8px; font-size: 1rem; margin-top: 1rem;"></textarea>
+                <a id="sendVisitorIdeaBtn" href="#" class="btn btn-primary" style="margin-top: 1.5rem; text-align: center; display: block;">Send Suggestion</a>
+            </div>
         </div>
     </div>
 
 
-    <script>
+    <script defer>
         document.addEventListener('DOMContentLoaded', () => {
-            // --- DATA STORE (NO API FOR SKILLS) ---
+            // --- DATA STORE ---
             const skillDescriptions = {
-                docking: "Molecular docking is a computational technique that predicts the preferred orientation of one molecule to a second when bound to each other to form a stable complex. It's crucial in drug discovery for screening virtual libraries of small molecules to identify potential drug candidates that bind to a specific protein target.",
-                sbd: "Structure-Based Drug Design (SBDD) uses the 3D structural information of a biological target to design and optimize drug candidates. By understanding the target's binding site, we can design molecules with high affinity and selectivity, leading to more effective and safer drugs.",
-                repurposing: "Drug repurposing involves identifying new therapeutic uses for existing, approved drugs. This approach can significantly accelerate the drug development timeline and reduce costs, as the safety profiles of these drugs are already well-established.",
-                alignment: "Sequence alignment is a fundamental bioinformatics method for comparing DNA, RNA, or protein sequences to identify regions of similarity. This can reveal functional, structural, or evolutionary relationships between the sequences.",
-                analysis: "This involves the use of computational tools to analyze, predict, and visualize the 3D structures of biological macromolecules like proteins and nucleic acids. Understanding structure is key to understanding function, and it is foundational for drug design and molecular biology research.",
-                phylo: "Phylogenetic analysis is the study of evolutionary relationships among biological entities. By comparing sequence data, we can construct phylogenetic trees that illustrate how different species or genes have diverged over time.",
-                python: "Python is a versatile, high-level programming language widely used in bioinformatics for its extensive libraries like Biopython, Pandas, and Scikit-learn. It's essential for data analysis, scripting, machine learning, and automating complex biological workflows.",
-                r: "R is a programming language and environment specialized for statistical computing and graphics. In bioinformatics, it's heavily used for statistical analysis of genomic data, data visualization (e.g., with ggplot2), and running packages from the Bioconductor project.",
-                biopython: "Biopython is a collection of Python tools for computational biology and bioinformatics. It provides functionalities for reading and writing various sequence file formats, accessing online biological databases, and interfacing with other common bioinformatics tools.",
-                colab: "Google Colab is a cloud-based Jupyter notebook environment that provides free access to computing resources, including GPUs. It's an excellent platform for developing and running machine learning models, performing data analysis, and collaborating on computational projects without needing a powerful local machine."
+                docking: "Molecular docking is a computational technique that predicts the preferred orientation of one molecule to a second when bound to each other to form a stable complex...",
+                sbd: "Structure-Based Drug Design (SBDD) uses the 3D structural information of a biological target to design and optimize drug candidates...",
+                repurposing: "Drug repurposing involves identifying new therapeutic uses for existing, approved drugs...",
+                alignment: "Sequence alignment is a fundamental bioinformatics method for comparing DNA, RNA, or protein sequences...",
+                analysis: "This involves the use of computational tools to analyze, predict, and visualize the 3D structures of biological macromolecules...",
+                phylo: "Phylogenetic analysis is the study of evolutionary relationships among biological entities...",
+                python: "Python is a versatile, high-level programming language widely used in bioinformatics...",
+                r: "R is a programming language and environment specialized for statistical computing and graphics...",
+                biopython: "Biopython is a collection of Python tools for computational biology and bioinformatics...",
+                colab: "Google Colab is a cloud-based Jupyter notebook environment that provides free access to computing resources...",
+                culture: "Bacterial culture is the process of growing bacteria in a controlled laboratory environment on a growth medium.",
+                streaking: "Streaking is a technique used to isolate a pure strain from a single species of microorganism, often from a mixed population.",
+                spreading: "Spreading is a technique to evenly distribute a liquid culture of bacteria on a solid medium plate for growth.",
+                hplc: "High-Performance Liquid Chromatography (HPLC) is a powerful analytical chemistry technique used to separate, identify, and quantify components in a mixture.",
+                biomolecule: "Quantitative and qualitative analysis of biomolecules, involving techniques to identify, separate, and quantify components like proteins and carbohydrates."
             };
 
-            // --- FIX: API KEY REMOVED FROM CLIENT-SIDE CODE ---
+            const projectDescriptions = {
+                salmonellosis: {
+                    title: "Molecular Docking Towards Salmonellosis",
+                    description: `
+                        <p><strong>Objective:</strong> To investigate the binding capability of a potential drug candidate (Rotigaptide) against the Salmonella typhimurium enzyme MurA using computational methods, with the goal of identifying a new antibacterial agent.</p>
+                        <p><strong>Methodology:</strong></p>
+                        <ul>
+                            <li>Identified MurA as the target protein, crucial for bacterial cell wall synthesis.</li>
+                            <li>Prepared and validated the protein structure using PyMOL and MolProbity (achieved 98.7% favorable region).</li>
+                            <li>Used a drug repurposing approach (Swiss Similarity) to identify Rotigaptide as a potential ligand.</li>
+                            <li>Performed blind molecular docking using AutoDock 4.2 to predict binding affinity.</li>
+                            <li>Analyzed protein-ligand interactions with PLIP to identify key hydrogen and hydrophobic bonds.</li>
+                        </ul>
+                         <p><strong>Key Results:</strong></p>
+                        <ul>
+                            <li>Achieved a strong binding energy of <strong>-11.12 kcal/mol</strong>, indicating high affinity.</li>
+                            <li>Identified significant hydrogen bonds (with ASN 23A, ARG 91A, etc.) and hydrophobic interactions, confirming a stable complex.</li>
+                        </ul>
+                        <p><strong>Conclusion:</strong> This in silico study successfully demonstrated a rational drug development strategy, highlighting Rotigaptide as a promising inhibitor for the MurA enzyme in Salmonella typhimurium.</p>
+                    `,
+                },
+                analysis: {
+                    title: "Structural & Phylogenetic Analysis of MshA enzyme",
+                    description: `
+                        <p><strong>Problem:</strong> To determine the evolutionary relationships and key structural features of the MshA glycosyltransferase enzyme, which is critical for biofilm formation in many bacteria.</p>
+                        <p><strong>My Contribution:</strong></p>
+                        <ul>
+                            <li>Performed sequence alignments using BLAST and ClustalW to identify homologous proteins.</li>
+                            <li>Constructed phylogenetic trees using MEGA to visualize evolutionary divergence.</li>
+                            <li>Analyzed the 3D protein structure with PyMOL to identify key functional domains and active site residues.</li>
+                        </ul>
+                        <p><strong>Outcome:</strong> The analysis provided valuable insights into the enzyme's functional mechanisms, contributing to a deeper understanding of bacterial biofilm development.</p>
+                    `,
+                },
+                classifier: {
+                    title: "DNA Sequence Classifier",
+                    description: `
+                        <p><strong>Problem:</strong> Accurately identifying promoter regions in a DNA sequence is a fundamental challenge in computational gene prediction.</p>
+                        <p><strong>My Contribution:</strong></p>
+                        <ul>
+                            <li>Developed a data preprocessing pipeline to convert DNA sequences into numerical features (k-mer counting).</li>
+                            <li>Trained and evaluated several machine learning models (like SVM and Random Forest) using Scikit-learn to classify sequences.</li>
+                        </ul>
+                        <p><strong>Technologies Used:</strong> Python, Pandas, NumPy, Scikit-learn, Matplotlib.</p>
+                        <p><strong>Outcome:</strong> The model achieved a promising accuracy in distinguishing promoter from non-promoter sequences, forming a solid foundation for a more complex gene annotation tool.</p>
+                    `,
+                },
+                'drug-discovery': {
+                    title: "IBD Drug Discovery",
+                    description: `
+                        <p><strong>Problem:</strong> To identify novel therapeutic candidates for Inflammatory Bowel Disease (IBD) by computationally screening existing drugs for new purposes.</p>
+                        <p><strong>My Contribution:</strong></p>
+                        <ul>
+                            <li>Used databases like DrugBank to create a library of FDA-approved drugs.</li>
+                            <li>Performed molecular docking simulations using AutoDock Vina to predict the binding affinity of these drugs against key IBD protein targets.</li>
+                            <li>Analyzed the top candidates to assess their potential as repurposed drugs for IBD.</li>
+                        </ul>
+                        <p><strong>Outcome:</strong> Successfully identified several promising drug candidates with strong predicted binding energies, warranting further investigation.</p>
+                    `,
+                },
+                assistant: {
+                    title: "Bioinformatics Virtual Assistant",
+                    description: `
+                        <p><strong>Concept:</strong> To build an intelligent, web-based tool that assists researchers with common bioinformatics tasks and queries using natural language.</p>
+                        <p><strong>Proposed Features:</strong></p>
+                        <ul>
+                            <li>Integrate the Gemini API for advanced natural language understanding and generation.</li>
+                            <li>Develop functions to interact with public bioinformatics databases (e.g., NCBI, PDB) programmatically.</li>
+                            <li>Create a simple user interface for researchers to ask questions like "Fetch the protein sequence for P53" or "Convert this PDB file to FASTA format."</li>
+                        </ul>
+                        <p><strong>Goal:</strong> This project aims to showcase my ability to merge AI technology with practical bioinformatics applications to create useful tools for the scientific community.</p>
+                    `,
+                }
+            };
 
             // --- General Setup ---
             const navbar = document.getElementById('navbar');
@@ -749,19 +938,29 @@
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     const href = this.getAttribute('href');
-                    if (href.startsWith('#') && href.length > 1) {
-                        const target = document.querySelector(href);
-                        if (target) {
+                    if (href && href.length > 1) {
+                        const targetElement = document.querySelector(href);
+                        if (targetElement) {
                             e.preventDefault();
-                            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            targetElement.scrollIntoView({
+                                behavior: 'smooth'
+                            });
                         }
                     }
                 });
             });
 
+
             const allModals = document.querySelectorAll('.modal');
             const openModal = (modal) => modal.style.display = 'block';
-            const closeModal = (modal) => modal.style.display = 'none';
+            const closeModal = (modal) => {
+                modal.style.display = 'none';
+                if (modal.id === 'visitorSuggestionModal') {
+                    document.getElementById('suggestionFormWrapper').style.display = 'block';
+                    document.getElementById('suggestionSuccessMessage').style.display = 'none';
+                    document.getElementById('visitorIdeaInput').value = '';
+                }
+            };
             allModals.forEach(modal => {
                 const closeBtn = modal.querySelector('.close-btn');
                 if (closeBtn) closeBtn.onclick = () => closeModal(modal);
@@ -772,98 +971,66 @@
                 });
             };
             
-            const emailModal = document.getElementById('emailModal');
-            document.getElementById('email-btn').onclick = (e) => {
-                e.preventDefault();
-                openModal(emailModal);
-            };
-            document.getElementById('copyEmailBtn').onclick = () => {
-                const emailText = document.getElementById('emailText').textContent;
-                navigator.clipboard.writeText(emailText).then(() => {
-                    document.getElementById('copyEmailBtn').textContent = 'Copied!';
-                    setTimeout(() => { document.getElementById('copyEmailBtn').textContent = 'Copy'; }, 2000);
-                });
-            };
-
-            // --- Bio-Query Assistant (Updated to call the secure serverless function) ---
-            const bioQueryInput = document.getElementById('bioQueryInput');
-            const askAssistantBtn = document.getElementById('askAssistantBtn');
-            const loadingIndicator = document.getElementById('loadingIndicator');
-            const bioAssistantResponse = document.getElementById('bioAssistantResponse');
-            const bioAssistantError = document.getElementById('bioAssistantError');
-
-            askAssistantBtn.addEventListener('click', async () => {
-                const prompt = bioQueryInput.value.trim();
-                if (!prompt) {
-                    bioAssistantError.textContent = "Please enter a question to ask.";
-                    bioAssistantError.style.display = 'block';
-                    return;
-                }
-                bioAssistantResponse.style.display = 'none';
-                bioAssistantError.style.display = 'none';
-                loadingIndicator.style.display = 'block';
-                
-                try {
-                    // This is the new URL for your secure "middleman" function on Netlify
-                    const response = await fetch('/.netlify/functions/ask-gemini', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ prompt: prompt }),
-                    });
-
-                    if (!response.ok) {
-                        throw new Error(`Server error: ${response.status}`);
+            const fadeInElements = document.querySelectorAll('.fade-in');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
                     }
+                });
+            }, { threshold: 0.1 });
 
-                    const data = await response.json();
-                    bioAssistantResponse.textContent = data.reply;
-                    bioAssistantResponse.style.display = 'block';
+            fadeInElements.forEach(el => observer.observe(el));
 
-                } catch (error) {
-                    console.error('Error fetching AI response:', error);
-                    bioAssistantError.textContent = "Sorry, I couldn't get a response. Please try again.";
-                    bioAssistantError.style.display = 'block';
-                } finally {
-                    loadingIndicator.style.display = 'none';
-                }
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('nav-menu');
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
             });
 
-            // --- Skill Explainer (Pre-defined) ---
-            const skillModal = document.getElementById('skillModal');
+            const detailModal = document.getElementById('detailModal');
+            const detailModalTitle = document.getElementById('detailModalTitle');
+            const detailModalContent = document.getElementById('detailModalContent');
+            const detailModalLinkContainer = document.getElementById('detailModalLinkContainer');
+
             document.querySelectorAll('.skill-tag').forEach(skillTag => {
                 skillTag.addEventListener('click', () => {
                     const skillKey = skillTag.dataset.skill;
-                    const skillName = skillTag.textContent;
-                    const skillDesc = skillDescriptions[skillKey];
-                    
-                    document.getElementById('skillModalTitle').textContent = skillName;
-                    document.getElementById('skillModalContent').textContent = skillDesc;
-                    openModal(skillModal);
+                    detailModalTitle.textContent = skillTag.textContent;
+                    detailModalContent.innerHTML = `<p>${skillDescriptions[skillKey]}</p>`;
+                    detailModalLinkContainer.innerHTML = ''; // Clear link container for skills
+                    openModal(detailModal);
                 });
             });
 
-            // --- NOTE: AI Project Idea Generator is disabled until it is also moved to a serverless function ---
-            const generateProjectBtn = document.getElementById('generateProjectBtn');
-            if(generateProjectBtn) {
-                generateProjectBtn.addEventListener('click', () => {
-                    alert("This feature is being upgraded for security and will be back soon!");
+            document.querySelectorAll('.project-card').forEach(projectCard => {
+                projectCard.addEventListener('click', () => {
+                    const projectKey = projectCard.dataset.project;
+                    const projectData = projectDescriptions[projectKey];
+                    if (projectData) {
+                        detailModalTitle.textContent = projectData.title;
+                        detailModalContent.innerHTML = projectData.description;
+                        detailModalLinkContainer.innerHTML = '';
+                        openModal(detailModal);
+                    }
                 });
-            }
-            
-            // --- Visitor Suggestion Box ---
+            });
+
             const visitorSuggestionModal = document.getElementById('visitorSuggestionModal');
             document.getElementById('suggest-idea-btn').addEventListener('click', (e) => {
                 e.preventDefault();
                 openModal(visitorSuggestionModal);
             });
-            document.getElementById('visitorIdeaInput').addEventListener('input', () => {
-                const subject = "Visitor Project Suggestion";
-                const body = encodeURIComponent(document.getElementById('visitorIdeaInput').value);
-                document.getElementById('sendVisitorIdeaBtn').href = `mailto:kushagra021104@gmail.com?subject=${subject}&body=${body}`;
+
+            const emailModal = document.getElementById('emailModal');
+            document.getElementById('email-btn').addEventListener('click', (e) => {
+                e.preventDefault();
+                openModal(emailModal);
             });
         });
     </script>
 </body>
 </html>
+
