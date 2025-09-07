@@ -18,6 +18,7 @@
             --border-color: #DEE2E6;
             --white: #FFFFFF;
             --success-green: #28a745;
+            --error-red: #dc3545;
         }
 
         * {
@@ -535,6 +536,7 @@
                 text-align: center;
                 transition: left 0.3s ease;
                 padding-top: 5rem;
+                z-index: 1000;
             }
 
             .nav-links.active {
@@ -685,7 +687,7 @@
     <section id="skills" class="section">
         <div class="container">
             <h2 class="section-title fade-in">Technical Skills</h2>
-            <div class="grid grid-4">
+            <div class="grid grid-3">
                 <div class="skill-category fade-in">
                     <h4>Drug Discovery</h4>
                     <div class="skill-tags">
@@ -830,13 +832,14 @@
             <span class="close-btn">&times;</span>
             <h3>Suggest a Project Idea</h3>
             <p style="text-align: center;">Have a project idea or a problem you think I could tackle? I'd love to hear it!</p>
-            <div id="suggestionSuccessMessage" style="display: none; text-align: center; margin-top: 1.5rem; padding: 1.5rem; background-color: var(--light-gray); border-radius: 8px;">
-                <h4 style="color: var(--success-green); margin-bottom: 0.5rem;">Thank you!</h4>
-                <p>Your response has been submitted.</p>
-            </div>
             <div id="suggestionFormWrapper">
-                <textarea id="visitorIdeaInput" placeholder="Describe your project idea here..." style="width: 100%; height: 150px; resize: vertical; border: 1px solid var(--border-color); background: var(--white); color: var(--dark-text); padding: 1rem; border-radius: 8px; font-size: 1rem; margin-top: 1rem;"></textarea>
-                <a id="sendVisitorIdeaBtn" href="#" class="btn btn-primary" style="margin-top: 1.5rem; text-align: center; display: block;">Send Suggestion</a>
+                 <textarea id="visitorIdeaInput" placeholder="Describe your project idea here..." style="width: 100%; height: 150px; resize: vertical; border: 1px solid var(--border-color); background: var(--white); color: var(--dark-text); padding: 1rem; border-radius: 8px; font-size: 1rem; margin-top: 1rem;"></textarea>
+                 <p id="suggestionError" style="color: var(--error-red); text-align: center; display: none; margin-top: 0.5rem;">Please write an idea first.</p>
+                 <a id="sendVisitorIdeaBtn" href="#" class="btn btn-primary" style="margin-top: 1rem; text-align: center; display: block; width: 100%;">Send Suggestion</a>
+            </div>
+            <div id="suggestionSuccessMessage" style="display: none; text-align: center; margin-top: 1.5rem; padding: 1.5rem; background-color: var(--light-gray); border-radius: 8px;">
+                <h4 style="color: var(--success-green); margin-bottom: 0.5rem;">Thank you for your suggestion!</h4>
+                <p>Your mail app should now be open.</p>
             </div>
         </div>
     </div>
@@ -972,6 +975,7 @@
                     document.getElementById('suggestionFormWrapper').style.display = 'block';
                     document.getElementById('suggestionSuccessMessage').style.display = 'none';
                     document.getElementById('visitorIdeaInput').value = '';
+                    document.getElementById('suggestionError').style.display = 'none';
                 }
             };
             allModals.forEach(modal => {
@@ -1030,11 +1034,32 @@
                     }
                 });
             });
-
+            
+            // --- UPDATED Suggestion Modal Logic ---
             const visitorSuggestionModal = document.getElementById('visitorSuggestionModal');
             document.getElementById('suggest-idea-btn').addEventListener('click', (e) => {
                 e.preventDefault();
                 openModal(visitorSuggestionModal);
+            });
+
+            document.getElementById('sendVisitorIdeaBtn').addEventListener('click', function(e) {
+                 e.preventDefault();
+                const ideaText = document.getElementById('visitorIdeaInput').value.trim();
+                const errorEl = document.getElementById('suggestionError');
+                
+                if (!ideaText) {
+                    errorEl.style.display = 'block';
+                } else {
+                    errorEl.style.display = 'none';
+                    const subject = "Visitor Project Suggestion";
+                    const body = encodeURIComponent(ideaText);
+                    const mailtoLink = `mailto:kushagra021104@gmail.com?subject=${subject}&body=${body}`;
+                    
+                    document.getElementById('suggestionFormWrapper').style.display = 'none';
+                    document.getElementById('suggestionSuccessMessage').style.display = 'block';
+
+                    window.location.href = mailtoLink;
+                }
             });
 
             const emailModal = document.getElementById('emailModal');
