@@ -78,7 +78,7 @@
             font-size: 1.75rem;
             font-weight: 700;
             color: var(--primary-blue);
-            z-index: 10;
+            z-index: 1001; /* Ensure logo is above mobile menu background */
         }
 
         .nav-links {
@@ -104,7 +104,7 @@
             background: transparent;
             border: none;
             padding: 0.5rem;
-            z-index: 10;
+            z-index: 1001; /* Ensure hamburger is above mobile menu background */
         }
         .hamburger .bar {
             display: block;
@@ -731,7 +731,8 @@
                         <span class="skill-tag" data-skill="microscope">Microscope</span>
                         <span class="skill-tag" data-skill="hplc">HPLC</span>
                         <span class="skill-tag" data-skill="autoclave">Autoclave</span>
-                  </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -768,6 +769,7 @@
                 <textarea id="Bio-Query Assistant" placeholder="e.g., Explain CRISPR-Cas9..." style="width: 100%; height: 100px; resize: vertical; border: 1px solid var(--border-color); background: var(--white); color: var(--dark-text); padding: 1rem; border-radius: 8px; font-size: 1rem; margin-top: 1.5rem;"></textarea>
                 <p class="assistant-example">Try asking: "How do I perform multiple sequence alignment in Python?"</p>
                 <button id="askAssistantBtn" class="btn btn-primary" style="margin-top: 1rem;">Ask AI</button>
+                <div id="assistantResponse" style="text-align: left; margin-top: 2rem; background-color: var(--light-gray); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color); display: none; white-space: pre-wrap;"></div>
             </div>
         </div>
     </section>
@@ -947,14 +949,24 @@
 
             // --- General Setup ---
             const navbar = document.getElementById('navbar');
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('nav-menu');
+
             window.addEventListener('scroll', () => {
                 navbar.classList.toggle('scrolled', window.scrollY > 50);
             });
 
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            // === EDITED: Modified Nav Link Click Handler ===
+            document.querySelectorAll('.nav-links a').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
+                    // Close the mobile menu if it's open
+                    if (navMenu.classList.contains('active')) {
+                        hamburger.classList.remove('active');
+                        navMenu.classList.remove('active');
+                    }
+                    
                     const href = this.getAttribute('href');
-                    if (href && href.length > 1) {
+                    if (href && href.startsWith('#')) {
                         const targetElement = document.querySelector(href);
                         if (targetElement) {
                             e.preventDefault();
@@ -1000,8 +1012,6 @@
 
             fadeInElements.forEach(el => observer.observe(el));
 
-            const hamburger = document.getElementById('hamburger');
-            const navMenu = document.getElementById('nav-menu');
             hamburger.addEventListener('click', () => {
                 hamburger.classList.toggle('active');
                 navMenu.classList.toggle('active');
@@ -1067,6 +1077,59 @@
                 e.preventDefault();
                 openModal(emailModal);
             });
+
+            // === Bio-Query Assistant Logic ===
+            const askBtn = document.getElementById('askAssistantBtn');
+            const queryInput = document.getElementById('Bio-Query Assistant'); 
+            const responseContainer = document.getElementById('assistantResponse');
+
+            if (!askBtn || !queryInput || !responseContainer) {
+                console.error("An AI assistant element was not found! Check your HTML IDs.");
+            } else {
+                askBtn.addEventListener('click', async () => {
+                    const query = queryInput.value.trim();
+                    if (!query) {
+                        responseContainer.style.display = 'block';
+                        responseContainer.innerHTML = `<p style="color: var(--error-red);">Please enter a question first.</p>`;
+                        return;
+                    }
+
+                    askBtn.disabled = true;
+                    askBtn.textContent = 'Thinking...';
+                    responseContainer.style.display = 'block';
+                    responseContainer.innerHTML = '<p>Please wait while I process your request...</p>';
+
+                    try {
+                        const response = await fetch('/.netlify/functions/ask-gemini', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ query: query }),
+                        });
+
+                        if (!response.ok) {
+                            const errorData = await response.json().catch(() => ({ error: 'Server returned an invalid response.' }));
+                            throw new Error(errorData.error || `Server error: ${response.statusText}`);
+                        }
+
+                        const data = await response.json();
+                        
+                        let formattedResponse = data.response
+                            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') 
+                            .replace(/\*(.*?)\*/g, '<em>$1</em>')     
+                            .replace(/`([^`]+)`/g, '<code>$1</code>') 
+                            .replace(/\n/g, '<br>');
+
+                        responseContainer.innerHTML = formattedResponse;
+
+                    } catch (error) {
+                        console.error("Error fetching AI response:", error);
+                        responseContainer.innerHTML = `<p style="color: var(--error-red);">Sorry, an error occurred: ${error.message}</p>`;
+                    } finally {
+                        askBtn.disabled = false;
+                        askBtn.textContent = 'Ask AI';
+                    }
+                });
+            }
         });
     </script>
 </body>
