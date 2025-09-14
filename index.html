@@ -569,6 +569,7 @@
     </style>
 </head>
 <body>
+    <!-- Navigation Bar -->
     <nav class="navbar" id="navbar">
         <div class="nav-content">
             <div class="logo">KB</div>
@@ -581,7 +582,7 @@
                 <li><a href="#bio-assistant">Assistant</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <button class="hamburger" id="hamburger">
+            <button class="hamburger" id="hamburger" aria-label="Open menu">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -589,6 +590,7 @@
         </div>
     </nav>
 
+    <!-- Hero Section -->
     <header id="home" class="hero">
         <div class="container">
             <div class="hero-content">
@@ -615,6 +617,7 @@
         </div>
     </header>
 
+    <!-- About Section -->
     <section id="about" class="section">
         <div class="container">
             <h2 class="section-title fade-in">Core Focus</h2>
@@ -651,6 +654,7 @@
         </div>
     </section>
 
+    <!-- Projects Section -->
     <section id="projects" class="section">
         <div class="container">
             <h2 class="section-title fade-in">Featured Projects</h2>
@@ -684,6 +688,7 @@
         </div>
     </section>
 
+    <!-- Skills Section -->
     <section id="skills" class="section">
         <div class="container">
             <h2 class="section-title fade-in">Technical Skills</h2>
@@ -724,10 +729,10 @@
                     </div>
                 </div>
                 <div class="skill-category fade-in">
-                    <h4>Instruments handeled</h4>
+                    <h4>Instruments Handled</h4>
                     <div class="skill-tags">
-                        <span class="skill-tag" data-skill="laminar">Laminar air flow</span>
-                        <span class="skill-tag" data-skill="ph">ph meter</span>
+                        <span class="skill-tag" data-skill="laminar">Laminar Air Flow</span>
+                        <span class="skill-tag" data-skill="ph">pH Meter</span>
                         <span class="skill-tag" data-skill="microscope">Microscope</span>
                         <span class="skill-tag" data-skill="hplc">HPLC</span>
                         <span class="skill-tag" data-skill="autoclave">Autoclave</span>
@@ -737,6 +742,7 @@
         </div>
     </section>
 
+    <!-- Experience Section -->
     <section id="experience" class="section">
         <div class="container">
             <h2 class="section-title fade-in">Experience & Education</h2>
@@ -761,6 +767,7 @@
         </div>
     </section>
     
+    <!-- Bio-Query Assistant Section -->
     <section id="bio-assistant" class="section">
         <div class="container">
             <h2 class="section-title fade-in">Bio-Query Assistant</h2>
@@ -769,11 +776,12 @@
                 <textarea id="bioQueryInput" placeholder="e.g., Explain CRISPR-Cas9..." style="width: 100%; height: 100px; resize: vertical; border: 1px solid var(--border-color); background: var(--white); color: var(--dark-text); padding: 1rem; border-radius: 8px; font-size: 1rem; margin-top: 1.5rem;"></textarea>
                 <p class="assistant-example">Try asking: "How do I perform multiple sequence alignment in Python?"</p>
                 <button id="askAssistantBtn" class="btn btn-primary" style="margin-top: 1rem;">Ask AI</button>
-                <div id="assistantResponse" style="text-align: left; margin-top: 2rem; background-color: var(--light-gray); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color); display: none; white-space: pre-wrap;"></div>
+                <div id="assistantResponse" style="text-align: left; margin-top: 2rem; background-color: var(--light-gray); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color); display: none; white-space: pre-wrap; word-wrap: break-word;"></div>
             </div>
         </div>
     </section>
 
+    <!-- Contact Section -->
     <section id="contact" class="section">
         <div class="container">
             <div class="contact-content fade-in">
@@ -802,15 +810,17 @@
         </div>
     </section>
 
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Kushagra Bhardwaj. All rights reserved.</p>
+            <p>&copy; <span id="current-year"></span> Kushagra Bhardwaj. All rights reserved.</p>
         </div>
     </footer>
     
+    <!-- Email Modal -->
     <div id="emailModal" class="modal">
         <div class="modal-content">
-            <span class="close-btn">&times;</span>
+            <span class="close-btn" aria-label="Close modal">&times;</span>
             <h3>My Email Address</h3>
             <p style="text-align: center;">Feel free to reach out!</p>
             <div class="email-display" style="display: flex; justify-content: space-between; align-items: center; background: var(--light-gray); padding: 1rem; border-radius: 8px; border: 1px solid var(--border-color);">
@@ -820,18 +830,20 @@
         </div>
     </div>
     
+    <!-- Project/Skill Detail Modal -->
     <div id="detailModal" class="modal">
         <div class="modal-content">
-            <span class="close-btn">&times;</span>
+            <span class="close-btn" aria-label="Close modal">&times;</span>
             <h3 id="detailModalTitle"></h3>
             <div id="detailModalContent"></div>
             <div id="detailModalLinkContainer"></div>
         </div>
     </div>
 
+    <!-- Suggestion Modal -->
     <div id="visitorSuggestionModal" class="modal">
         <div class="modal-content">
-            <span class="close-btn">&times;</span>
+            <span class="close-btn" aria-label="Close modal">&times;</span>
             <h3>Suggest a Project Idea</h3>
             <p style="text-align: center;">Have a project idea or a problem you think I could tackle? I'd love to hear it!</p>
             <div id="suggestionFormWrapper">
@@ -846,34 +858,35 @@
         </div>
     </div>
 
-    <script defer>
+
+    <script>
         document.addEventListener('DOMContentLoaded', () => {
             // --- DATA STORE ---
             const skillDescriptions = {
-                docking: "MOLECULAR DOCKING:- this technique is used on ligands selected after performing virtual screening of protein-ligand complex. This selected ligand shows high specificity towards protein receptors. molecular docking study all the types of interaction possible between protein and ligand such as hydrogen bond, van der waals interaction , hydrophobic interactions, halogen interactions etc. there are various types of molecular docking:-1.flexible and rigid docking:-rigid docking(based on lock and key model), semiflexible docking (flexible ligand and rigid receptor) flexible docking (both ligand and receptor are flexible) 3.blind docking and local docking :-BLIND DOCKING :- we use blind docking , when we dont know about protein binding sites , considering whole protein as a binding siteLOCAL DOCKING:- when protein receptor(binding site) and residue at binding site is known , then we perform local docking. in this we ligand is bind to it's receptor situated at a specific part of protein",
-                sbdd: "1. Structure-Based Drug Design (SBDD): -SBDD is employed when the 3D structure of the target protein is accessible. Having the structure of the target protein offers a significant benefit in the direct optimization process from hit to lead. In cases where an experimental structure is unavailable, computational techniques such as homology modelling and other protein predicting techniques can be utilized to construct the protein structure.",
-                repurposing: "Drug repurposing (also called drug repositioning or drug reprofiling) is the strategy of finding new therapeuticuses for existing drugs that are already approved, under development, or even shelved. Instead of starting drug discovery from scratch, researchers test whether a known drug (with established safety, pharmacokinetics, and manufacturing data) can be effective against a different disease",
-                alignment: "Sequence alignment is a fundamental bioinformatics method for comparing DNA, RNA, or protein sequences...",
-                analysis: "This involves the use of computational tools to analyze, predict, and visualize the 3D structures of biological macromolecules...",
-                phylo: "Phylogenetic analysis is the study of evolutionary relationships among biological entities...",
-                python: "Python is a versatile, high-level programming language widely used in bioinformatics...",
-                r: "R is a programming language and environment specialized for statistical computing and graphics...",
-                biopython: "Biopython is a collection of Python tools for computational biology and bioinformatics...",
-                colab: "Google Colab is a cloud-based Jupyter notebook environment that provides free access to computing resources...",
-                culture: "Bacterial culture is the process of growing bacteria in a controlled laboratory environment on a growth medium.",
-                streaking: "Streaking is a technique used to isolate a pure strain from a single species of microorganism, often from a mixed population.",
-                spreading: "Spreading is a technique to evenly distribute a liquid culture of bacteria on a solid medium plate for growth.",
-                hplc: "High-Performance Liquid Chromatography (HPLC) is a powerful analytical chemistry technique used to separate, identify, and quantify components in a mixture.",
-                biomolecule: "Quantitative and qualitative analysis of biomolecules, involving techniques to identify, separate, and quantify components like proteins and carbohydrates.",
-                laminar: "A Laminar Air Flow cabinet is a carefully enclosed workstation that provides a continuous flow of HEPA-filtered air in a single direction (horizontal or vertical).Purpose: Maintains a sterile and particle-free environment for sensitive microbiological and cell culture work. Applications: Media preparation, inoculation, aseptic transfers.",
-                ph: "A pH meter is an analytical instrument used to measure the hydrogen ion concentration (pH) of a solution. Works by: Using a glass electrode and a reference electrode to detect voltage differences. Applications: Biochemical assays, fermentation monitoring, media preparation.",
-                microscope: "A microscope is an optical instrument used to magnify and visualize objects or specimens too small for the naked eye. Types: Light microscope, phase-contrast microscope, electron microscope. Applications: Observation of cells, tissues, microorganisms, and structural details.",
-                autoclave: " A microscope is an optical instrument used to magnify and visualize objects or specimens too small for the naked eye. Types: Light microscope, phase-contrast microscope, electron microscope. Applications: Observation of cells, tissues, microorganisms, and structural details.",
+                docking: "Molecular docking predicts the preferred orientation of one molecule to a second when bound to each other to form a stable complex. It's crucial for understanding drug-receptor interactions and in structure-based drug design. Techniques include rigid, semi-flexible, and flexible docking, as well as blind docking (when the binding site is unknown) and local docking (when the site is known).",
+                sbdd: "Structure-Based Drug Design (SBDD) utilizes the 3D structure of a biological target (like a protein) to design and optimize potential drug candidates. This rational approach significantly speeds up the hit-to-lead process. If an experimental structure isn't available, computational models can be generated using techniques like homology modeling.",
+                repurposing: "Drug repurposing (or repositioning) is a strategy for identifying new uses for approved or investigational drugs that are outside the scope of the original medical indication. This approach can significantly reduce the time and cost of drug development by leveraging existing safety and pharmacological data.",
+                alignment: "Sequence alignment is a fundamental bioinformatics method for comparing DNA, RNA, or protein sequences to identify regions of similarity that may be a consequence of functional, structural, or evolutionary relationships between the sequences.",
+                analysis: "This involves the use of computational tools to analyze, predict, and visualize the 3D structures of biological macromolecules like proteins and nucleic acids. Understanding structure is key to understanding function.",
+                phylo: "Phylogenetic analysis is the study of evolutionary relationships among biological entities. By comparing sequence data, we can construct phylogenetic trees that infer how different species or genes have evolved over time.",
+                python: "Python is a versatile, high-level programming language widely used in bioinformatics for its extensive libraries (like Biopython, Pandas, NumPy), readability, and power in data analysis, automation, and machine learning.",
+                r: "R is a programming language and environment specialized for statistical computing and graphics. It's heavily used in bioinformatics for statistical analysis of large datasets, data visualization (e.g., with ggplot2), and biostatistics (e.g., with Bioconductor).",
+                biopython: "Biopython is a collection of open-source Python tools for computational biology and bioinformatics. It provides modules for parsing biological data formats (like FASTA, PDB), accessing online databases, and interfacing with common bioinformatics programs.",
+                colab: "Google Colab is a cloud-based Jupyter notebook environment that provides free access to computing resources, including GPUs. It's an excellent platform for bioinformatics research, machine learning experiments, and collaborative coding without complex local setup.",
+                culture: "Bacterial culture is the process of growing bacteria in a controlled laboratory environment on a growth medium (liquid or solid) to study their properties, growth, and behavior.",
+                streaking: "Streaking is a microbiological technique used to isolate a pure strain from a single species of microorganism on a solid media plate, typically by creating areas of decreasing bacterial density.",
+                spreading: "Spreading is a technique to evenly distribute a liquid culture of bacteria on a solid medium plate for growth, often used for quantifying bacteria (colony counting).",
+                hplc: "High-Performance Liquid Chromatography (HPLC) is a powerful analytical chemistry technique used to separate, identify, and quantify components in a mixture. In biotech, it's used for protein purification, quality control, and analyzing small molecules.",
+                biomolecule: "Quantitative and qualitative analysis of biomolecules, involving techniques to identify, separate, and quantify components like proteins (e.g., SDS-PAGE), DNA (e.g., gel electrophoresis), and carbohydrates.",
+                laminar: "A Laminar Air Flow cabinet is a carefully enclosed workstation that provides a continuous flow of HEPA-filtered air to maintain a sterile, particle-free environment for sensitive microbiological and cell culture work.",
+                ph: "A pH meter is an analytical instrument used to measure the hydrogen ion concentration (pH) of a solution, which is critical for preparing buffers, media, and monitoring biochemical reactions.",
+                microscope: "A microscope is an optical instrument used to magnify and visualize objects or specimens too small for the naked eye, essential for observing cells, tissues, and microorganisms.",
+                autoclave: "An autoclave is a pressure chamber used to sterilize equipment, media, and lab supplies by subjecting them to high-pressure saturated steam at elevated temperatures (typically 121°C), effectively killing all microorganisms and spores."
             };
 
             const projectDescriptions = {
                 salmonellosis: {
-                    title: "Molecular Docking and drug repurposing approach towards salmonellosis caused by salmonella typhimurium",
+                    title: "Molecular Docking and Drug Repurposing for Salmonellosis",
                     description: `
                         <p><strong>Objective:</strong> To investigate the binding capability of a potential drug candidate (Rotigaptide) against the Salmonella typhimurium enzyme MurA using computational methods, with the goal of identifying a new antibacterial agent.</p>
                         <p><strong>Methodology:</strong></p>
@@ -919,7 +932,7 @@
                     `,
                 },
                 'drug-discovery': {
-                    title: "InflamDock: Molecular Docking-Based Drug Discovery Against TNF-α in IBD",
+                    title: "InflamDock: Drug Discovery Against TNF-α in IBD",
                     description: `
                         <p><strong>Problem:</strong> To identify novel therapeutic candidates for Inflammatory Bowel Disease (IBD) by computationally screening existing drugs for new purposes.</p>
                         <p><strong>My Contribution:</strong></p>
@@ -950,15 +963,17 @@
             const navbar = document.getElementById('navbar');
             const hamburger = document.getElementById('hamburger');
             const navMenu = document.getElementById('nav-menu');
+            
+            // Set dynamic year in footer
+            document.getElementById('current-year').textContent = new Date().getFullYear();
 
             window.addEventListener('scroll', () => {
                 navbar.classList.toggle('scrolled', window.scrollY > 50);
             });
 
-            // === EDITED: Modified Nav Link Click Handler ===
+            // Smooth scrolling for nav links and close mobile menu on click
             document.querySelectorAll('.nav-links a').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
-                    // Close the mobile menu if it's open
                     if (navMenu.classList.contains('active')) {
                         hamburger.classList.remove('active');
                         navMenu.classList.remove('active');
@@ -969,14 +984,13 @@
                         const targetElement = document.querySelector(href);
                         if (targetElement) {
                             e.preventDefault();
-                            targetElement.scrollIntoView({
-                                behavior: 'smooth'
-                            });
+                            targetElement.scrollIntoView({ behavior: 'smooth' });
                         }
                     }
                 });
             });
 
+            // --- Modal Logic ---
             const allModals = document.querySelectorAll('.modal');
             const openModal = (modal) => modal.style.display = 'block';
             const closeModal = (modal) => {
@@ -998,6 +1012,7 @@
                 });
             };
             
+            // --- Fade-in Animations on Scroll ---
             const fadeInElements = document.querySelectorAll('.fade-in');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -1007,25 +1022,24 @@
                     }
                 });
             }, { threshold: 0.1 });
-
             fadeInElements.forEach(el => observer.observe(el));
 
+            // --- Hamburger Menu ---
             hamburger.addEventListener('click', () => {
                 hamburger.classList.toggle('active');
                 navMenu.classList.toggle('active');
             });
 
+            // --- Detail Modal Population (for Skills & Projects) ---
             const detailModal = document.getElementById('detailModal');
             const detailModalTitle = document.getElementById('detailModalTitle');
             const detailModalContent = document.getElementById('detailModalContent');
-            const detailModalLinkContainer = document.getElementById('detailModalLinkContainer');
 
             document.querySelectorAll('.skill-tag').forEach(skillTag => {
                 skillTag.addEventListener('click', () => {
                     const skillKey = skillTag.dataset.skill;
                     detailModalTitle.textContent = skillTag.textContent;
                     detailModalContent.innerHTML = `<p>${skillDescriptions[skillKey]}</p>`;
-                    detailModalLinkContainer.innerHTML = ''; // Clear link container for skills
                     openModal(detailModal);
                 });
             });
@@ -1037,13 +1051,12 @@
                     if (projectData) {
                         detailModalTitle.textContent = projectData.title;
                         detailModalContent.innerHTML = projectData.description;
-                        detailModalLinkContainer.innerHTML = '';
                         openModal(detailModal);
                     }
                 });
             });
             
-            // --- UPDATED Suggestion Modal Logic ---
+            // --- Suggestion Modal Logic ---
             const visitorSuggestionModal = document.getElementById('visitorSuggestionModal');
             document.getElementById('suggest-idea-btn').addEventListener('click', (e) => {
                 e.preventDefault();
@@ -1070,124 +1083,110 @@
                 }
             });
 
+            // --- Email Modal & Copy Logic ---
             const emailModal = document.getElementById('emailModal');
+            const copyEmailBtn = document.getElementById('copyEmailBtn');
             document.getElementById('email-btn').addEventListener('click', (e) => {
                 e.preventDefault();
                 openModal(emailModal);
             });
+            copyEmailBtn.addEventListener('click', () => {
+                const emailText = document.getElementById('emailText').textContent;
+                const tempTextArea = document.createElement('textarea');
+                tempTextArea.value = emailText;
+                document.body.appendChild(tempTextArea);
+                tempTextArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(tempTextArea);
+                
+                copyEmailBtn.textContent = 'Copied!';
+                setTimeout(() => {
+                    copyEmailBtn.textContent = 'Copy';
+                }, 2000);
+            });
 
-            // === FIXED Bio-Query Assistant Logic ===
+            // --- Bio-Query Assistant Logic (FIXED) ---
             const askBtn = document.getElementById('askAssistantBtn');
-            const queryInput = document.getElementById('bioQueryInput'); // Fixed ID
+            const queryInput = document.getElementById('bioQueryInput'); 
             const responseContainer = document.getElementById('assistantResponse');
+            
+            async function callGeminiAPI(query, retries = 3, delay = 1000) {
+                 const apiKey = ""; // API key is handled by the execution environment.
+                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+                 const systemPrompt = "You are a helpful and knowledgeable assistant specializing in bioinformatics, biotechnology, and computational biology. Provide clear, concise, and accurate answers suitable for a university student or researcher in the field. Format your responses using markdown for clarity (e.g., use bolding for key terms, lists for steps).";
 
-            if (!askBtn || !queryInput || !responseContainer) {
-                console.error("An AI assistant element was not found! Check your HTML IDs.");
-            } else {
-                askBtn.addEventListener('click', async () => {
-                    const query = queryInput.value.trim();
-                    if (!query) {
-                        responseContainer.style.display = 'block';
-                        responseContainer.innerHTML = `<p style="color: var(--error-red);">Please enter a question first.</p>`;
-                        return;
-                    }
-
-                    askBtn.disabled = true;
-                    askBtn.textContent = 'Thinking...';
-                    responseContainer.style.display = 'block';
-                    responseContainer.innerHTML = '<p>Please wait while I process your request...</p>';
-
-                    try {
-                        // Updated to use correct endpoint path
-                        const response = await fetch('/api/ask-gemini', {
-                            method: 'POST',
-                            headers: { 
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({ query: query }),
+                 const payload = {
+                    contents: [{ parts: [{ text: query }] }],
+                    systemInstruction: {
+                        parts: [{ text: systemPrompt }]
+                    },
+                 };
+                 
+                 for (let i = 0; i < retries; i++) {
+                     try {
+                        const response = await fetch(apiUrl, {
+                             method: 'POST',
+                             headers: { 'Content-Type': 'application/json' },
+                             body: JSON.stringify(payload)
                         });
 
                         if (!response.ok) {
-                            throw new Error(`Request failed: ${response.status} ${response.statusText}`);
+                            const errorText = await response.text();
+                            throw new Error(`API Error: ${response.status} ${response.statusText} - ${errorText}`);
                         }
 
-                        const data = await response.json();
-                        
-                        if (data.error) {
-                            throw new Error(data.error);
-                        }
+                        const result = await response.json();
+                        const candidate = result.candidates?.[0];
 
-                        let formattedResponse = data.response
-                            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') 
-                            .replace(/\*(.*?)\*/g, '<em>$1</em>')     
-                            .replace(/`([^`]+)`/g, '<code>$1</code>') 
-                            .replace(/\n/g, '<br>');
-
-                        responseContainer.innerHTML = formattedResponse;
-
-                    } catch (error) {
-                        console.error("Error fetching AI response:", error);
-                        
-                        // More specific error handling for different scenarios
-                        let errorMessage = "Sorry, there was an issue connecting to the AI service. ";
-                        
-                        if (error.message.includes('404')) {
-                            errorMessage += "The API endpoint was not found. Please check your Netlify function deployment.";
-                        } else if (error.message.includes('500')) {
-                            errorMessage += "There's a server error. Please check your API key configuration.";
-                        } else if (error.message.includes('Failed to fetch')) {
-                            errorMessage += "Network connection failed. Please check your internet connection.";
+                        if (candidate && candidate.content?.parts?.[0]?.text) {
+                            return candidate.content.parts[0].text;
                         } else {
-                            errorMessage += error.message;
+                            throw new Error("Invalid response structure from API.");
                         }
-                        
-                        responseContainer.innerHTML = `<p style="color: var(--error-red);">${errorMessage}</p>`;
-                    } finally {
-                        askBtn.disabled = false;
-                        askBtn.textContent = 'Ask AI';
+                    } catch (error) {
+                        console.error(`Attempt ${i + 1} failed:`, error);
+                        if (i === retries - 1) throw error; // Rethrow last error
+                        await new Promise(res => setTimeout(res, delay));
+                        delay *= 2; // Exponential backoff
                     }
-                });
-
-                // Add Enter key support for textarea
-                queryInput.addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter' && !e.shiftKey) {
-                        e.preventDefault();
-                        askBtn.click();
-                    }
-                });
+                }
             }
 
-            // Email copy functionality
-            const copyEmailBtn = document.getElementById('copyEmailBtn');
-            if (copyEmailBtn) {
-                copyEmailBtn.addEventListener('click', async () => {
-                    const emailText = document.getElementById('emailText').textContent;
-                    try {
-                        await navigator.clipboard.writeText(emailText);
-                        copyEmailBtn.textContent = 'Copied!';
-                        copyEmailBtn.style.background = 'var(--success-green)';
-                        setTimeout(() => {
-                            copyEmailBtn.textContent = 'Copy';
-                            copyEmailBtn.style.background = 'var(--primary-blue)';
-                        }, 2000);
-                    } catch (err) {
-                        console.error('Failed to copy email: ', err);
-                        // Fallback for older browsers
-                        const textArea = document.createElement('textarea');
-                        textArea.value = emailText;
-                        document.body.appendChild(textArea);
-                        textArea.select();
-                        document.execCommand('copy');
-                        document.body.removeChild(textArea);
-                        copyEmailBtn.textContent = 'Copied!';
-                        copyEmailBtn.style.background = 'var(--success-green)';
-                        setTimeout(() => {
-                            copyEmailBtn.textContent = 'Copy';
-                            copyEmailBtn.style.background = 'var(--primary-blue)';
-                        }, 2000);
-                    }
-                });
-            }
+
+            askBtn.addEventListener('click', async () => {
+                const query = queryInput.value.trim();
+                if (!query) {
+                    responseContainer.style.display = 'block';
+                    responseContainer.innerHTML = `<p style="color: var(--error-red);">Please enter a question first.</p>`;
+                    return;
+                }
+
+                askBtn.disabled = true;
+                askBtn.textContent = 'Thinking...';
+                responseContainer.style.display = 'block';
+                responseContainer.innerHTML = '<p>Please wait while I process your request...</p>';
+
+                try {
+                    const resultText = await callGeminiAPI(query);
+                    
+                    // Basic markdown to HTML conversion
+                    let formattedResponse = resultText
+                        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                        .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                        .replace(/`([^`]+)`/g, '<code>$1</code>')
+                        .replace(/^\s*\n/gm, '<br>') // Handle newlines
+                        .replace(/(\r\n|\n|\r)/gm, "<br>");
+
+
+                    responseContainer.innerHTML = formattedResponse;
+                } catch (error) {
+                    console.error("Error fetching AI response:", error);
+                    responseContainer.innerHTML = `<p style="color: var(--error-red);">Sorry, an error occurred: ${error.message}</p>`;
+                } finally {
+                    askBtn.disabled = false;
+                    askBtn.textContent = 'Ask AI';
+                }
+            });
         });
     </script>
 </body>
