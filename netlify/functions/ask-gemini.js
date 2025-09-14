@@ -1,35 +1,67 @@
+// This function will run on Netlify's servers, not in the browser.
+// It acts as a secure proxy to the Google Gemini API.
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
-exports.handler = async function (event) {
-  // Only allow POST requests
-  if (event.httpMethod !== "POST") {
-    return { statusCode: 405, body: "Method Not Allowed" };
-  }
-
-  try {
-    // Get the user's question from the frontend
-    const { prompt } = JSON.parse(event.body);
-    if (!prompt) {
-      return { statusCode: 400, body: "Bad Request: No prompt provided." };
+exports.handler = async function (event, context) {
+    // Only allow POST requests
+    if (event.httpMethod !== 'POST') {
+        return {
+            statusCode: 405,
+            body: JSON.stringify({ error: 'Method Not Allowed' }),
+        };
     }
 
-    // Get the secret API key from Netlify's environment variables
-    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
+    // Get the API key from environment variables.
+    const apiKey = process.env.GEMINI_API_KEY;
 
-    const result = await model.generateContent(prompt);
-    const response = result.response;
-    const text = response.text();
+    if (!apiKey) {
+        return {
+            statusCode: 500,
+            body: JSON.stringify({ error: 'API key is not configured on the server.' }),
+        };
+    }
 
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ reply: text }),
-    };
-  } catch (error) {
-    console.error("Error calling Gemini API:", error);
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: "Failed to get a response from the AI." }),
-    };
-  }
+    try {
+        // Parse the user's query from the incoming request body.
+        const body = JSON.parse(event.body);
+        const userQuery = body.query; // Correctly extract the query string
+
+        if (!userQuery) {
+            return {
+                statusCode: 400,
+                body: JSON.stringify({ error: 'Query is missing from the request body.' }),
+            };
+        }
+        
+        // Initialize the Google AI SDK
+        const genAI = new GoogleGenerativeAI(apiKey);
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
+
+        // --- FIX 1: Pass only the userQuery string to generateContent ---
+        const result = await model.generateContent(userQuery);
+        const geminiResponse = result.response;
+        const generatedText = geminiResponse.text();
+
+        if (!generatedText) {
+             return {
+                statusCode: 500,
+                body: JSON.stringify({ error: 'Received an invalid response structure from Google API.' }),
+            };
+        }
+
+        // --- FIX 2: Send the successful response back using the "response" key ---
+        return {
+            statusCode: 200,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ response: generatedText }),
+        };
+
+    } catch (error) {
+        console.error('Error in serverless function:', error);
+        return {
+            statusCode: 500,
+            body: JSON.stringify({ error: error.message || "An internal server error occurred." }),
+        };
+    }
 };
+
