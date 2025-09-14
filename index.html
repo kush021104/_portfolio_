@@ -1105,53 +1105,28 @@
                 }, 2000);
             });
 
-            // --- Bio-Query Assistant Logic (FIXED) ---
+            // --- Bio-Query Assistant Logic (SECURE) ---
             const askBtn = document.getElementById('askAssistantBtn');
             const queryInput = document.getElementById('bioQueryInput'); 
             const responseContainer = document.getElementById('assistantResponse');
             
-            async function callGeminiAPI(query, retries = 3, delay = 1000) {
-                 const apiKey = ""; // API key is handled by the execution environment.
-                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
-                 const systemPrompt = "You are a helpful and knowledgeable assistant specializing in bioinformatics, biotechnology, and computational biology. Provide clear, concise, and accurate answers suitable for a university student or researcher in the field. Format your responses using markdown for clarity (e.g., use bolding for key terms, lists for steps).";
-
-                 const payload = {
-                    contents: [{ parts: [{ text: query }] }],
-                    systemInstruction: {
-                        parts: [{ text: systemPrompt }]
-                    },
-                 };
+            async function callProxyAPI(query) {
+                 const proxyUrl = '/.netlify/functions/ask-gemini'; // This is the key change
                  
-                 for (let i = 0; i < retries; i++) {
-                     try {
-                        const response = await fetch(apiUrl, {
-                             method: 'POST',
-                             headers: { 'Content-Type': 'application/json' },
-                             body: JSON.stringify(payload)
-                        });
+                 const response = await fetch(proxyUrl, {
+                     method: 'POST',
+                     headers: { 'Content-Type': 'application/json' },
+                     body: JSON.stringify({ query: query })
+                 });
 
-                        if (!response.ok) {
-                            const errorText = await response.text();
-                            throw new Error(`API Error: ${response.status} ${response.statusText} - ${errorText}`);
-                        }
-
-                        const result = await response.json();
-                        const candidate = result.candidates?.[0];
-
-                        if (candidate && candidate.content?.parts?.[0]?.text) {
-                            return candidate.content.parts[0].text;
-                        } else {
-                            throw new Error("Invalid response structure from API.");
-                        }
-                    } catch (error) {
-                        console.error(`Attempt ${i + 1} failed:`, error);
-                        if (i === retries - 1) throw error; // Rethrow last error
-                        await new Promise(res => setTimeout(res, delay));
-                        delay *= 2; // Exponential backoff
-                    }
-                }
+                 if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({ error: 'Server returned an invalid response.' }));
+                    throw new Error(errorData.error || `Server error: ${response.statusText}`);
+                 }
+                 
+                 const data = await response.json();
+                 return data.response;
             }
-
 
             askBtn.addEventListener('click', async () => {
                 const query = queryInput.value.trim();
@@ -1167,21 +1142,18 @@
                 responseContainer.innerHTML = '<p>Please wait while I process your request...</p>';
 
                 try {
-                    const resultText = await callGeminiAPI(query);
+                    const resultText = await callProxyAPI(query);
                     
-                    // Basic markdown to HTML conversion
                     let formattedResponse = resultText
                         .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
                         .replace(/\*(.*?)\*/g, '<em>$1</em>')
                         .replace(/`([^`]+)`/g, '<code>$1</code>')
-                        .replace(/^\s*\n/gm, '<br>') // Handle newlines
-                        .replace(/(\r\n|\n|\r)/gm, "<br>");
-
+                        .replace(/\n/g, '<br>');
 
                     responseContainer.innerHTML = formattedResponse;
                 } catch (error) {
-                    console.error("Error fetching AI response:", error);
-                    responseContainer.innerHTML = `<p style="color: var(--error-red);">Sorry, an error occurred: ${error.message}</p>`;
+                    console.error("Error fetching AI response via proxy:", error);
+                    responseContainer.innerHTML = `<p style="color: var(--error-red);">Sorry, an error occurred: ${error.message}. The backend function may not be configured correctly.</p>`;
                 } finally {
                     askBtn.disabled = false;
                     askBtn.textContent = 'Ask AI';
@@ -1191,3 +1163,4 @@
     </script>
 </body>
 </html>
+
