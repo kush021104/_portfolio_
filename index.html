@@ -579,7 +579,6 @@
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#experience">Experience</a></li>
-                <li><a href="#bio-assistant">Assistant</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
             <button class="hamburger" id="hamburger" aria-label="Open menu">
@@ -645,7 +644,7 @@
                 </div>
                 <div class="card fade-in">
                     <h3>
-                        <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M14.25 6.087c0-.665-.535-1.2-1.2-1.2h-1.5c-.665 0-1.2.535-1.2 1.2v1.5c0 .665.535 1.2 1.2 1.2h1.5c.665 0 1.2-.535 1.2-1.2v-1.5Zm0 6c0-.665-.535-1.2-1.2-1.2h-1.5c-.665 0-1.2.535-1.2 1.2v1.5c0 .665.535 1.2 1.2 1.2h1.5c.665 0 1.2-.535 1.2-1.2v-1.5Zm0 6c0-.665-.535-1.2-1.2-1.2h-1.5c-.665 0-1.2.535-1.2 1.2v1.5c0 .665.535 1.2 1.2 1.2h1.5c.665 0 1.2-.535 1.2-1.2v-1.5Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M4.875 6.087c0-.665.535-1.2 1.2-1.2h1.5c.665 0 1.2.535 1.2 1.2v1.5c0 .665-.535 1.2-1.2 1.2h-1.5c-.665 0-1.2-.535-1.2-1.2v-1.5Zm0 6c0-.665.535-1.2 1.2-1.2h1.5c.665 0 1.2.535 1.2 1.2v1.5c0 .665-.535 1.2-1.2 1.2h-1.5c-.665 0-1.2-.535-1.2-1.2v-1.5Zm0 6c0-.665.535-1.2 1.2-1.2h1.5c.665 0 1.2.535 1.2 1.2v1.5c0 .665.535 1.2-1.2 1.2h-1.5c-.665 0-1.2-.535-1.2-1.2v-1.5Z" /></svg>
+                        <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M14.25 6.087c0-.665-.535-1.2-1.2-1.2h-1.5c-.665 0-1.2.535-1.2 1.2v1.5c0 .665.535 1.2 1.2 1.2h1.5c.665 0 1.2-.535 1.2-1.2v-1.5Zm0 6c0-.665-.535-1.2-1.2-1.2h-1.5c-.665 0-1.2.535-1.2 1.2v1.5c0 .665.535 1.2 1.2 1.2h1.5c.665 0 1.2-.535 1.2-1.2v-1.5Zm0 6c0-.665-.535-1.2-1.2-1.2h-1.5c-.665 0-1.2.535-1.2 1.2v1.5c0 .665.535 1.2-1.2 1.2h-1.5c-.665 0-1.2-.535-1.2-1.2v-1.5Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M4.875 6.087c0-.665.535-1.2 1.2-1.2h1.5c.665 0 1.2.535 1.2 1.2v1.5c0 .665-.535 1.2-1.2 1.2h-1.5c-.665 0-1.2-.535-1.2-1.2v-1.5Zm0 6c0-.665.535-1.2 1.2-1.2h1.5c.665 0 1.2.535 1.2 1.2v1.5c0 .665-.535 1.2-1.2 1.2h-1.5c-.665 0-1.2-.535-1.2-1.2v-1.5Zm0 6c0-.665.535-1.2 1.2-1.2h1.5c.665 0 1.2.535 1.2 1.2v1.5c0 .665.535 1.2-1.2 1.2h-1.5c-.665 0-1.2-.535-1.2-1.2v-1.5Z" /></svg>
                         <span>🔬 Research Interests</span>
                     </h3>
                     <p>Passionate about drug repurposing, molecular docking, AI-driven drug discovery, and gaining data-driven insights from genomic and bioinformatic data.</p>
@@ -767,20 +766,6 @@
         </div>
     </section>
     
-    <!-- Bio-Query Assistant Section -->
-    <section id="bio-assistant" class="section">
-        <div class="container">
-            <h2 class="section-title fade-in">Bio-Query Assistant</h2>
-            <div class="centered-content fade-in">
-                <p>This tool uses Google's Gemini API to answer questions about bioinformatics and biotechnology. Ask it a question below to see a demonstration of my ability to integrate AI into functional applications.</p>
-                <textarea id="bioQueryInput" placeholder="e.g., Explain CRISPR-Cas9..." style="width: 100%; height: 100px; resize: vertical; border: 1px solid var(--border-color); background: var(--white); color: var(--dark-text); padding: 1rem; border-radius: 8px; font-size: 1rem; margin-top: 1.5rem;"></textarea>
-                <p class="assistant-example">Try asking: "How do I perform multiple sequence alignment in Python?"</p>
-                <button id="askAssistantBtn" class="btn btn-primary" style="margin-top: 1rem;">Ask AI</button>
-                <div id="assistantResponse" style="text-align: left; margin-top: 2rem; background-color: var(--light-gray); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color); display: none; white-space: pre-wrap; word-wrap: break-word;"></div>
-            </div>
-        </div>
-    </section>
-
     <!-- Contact Section -->
     <section id="contact" class="section">
         <div class="container">
@@ -1104,63 +1089,7 @@
                     copyEmailBtn.textContent = 'Copy';
                 }, 2000);
             });
-
-            // --- Bio-Query Assistant Logic (SECURE) ---
-            const askBtn = document.getElementById('askAssistantBtn');
-            const queryInput = document.getElementById('bioQueryInput'); 
-            const responseContainer = document.getElementById('assistantResponse');
-            
-            async function callProxyAPI(query) {
-                 const proxyUrl = '/.netlify/functions/ask-gemini'; // This is the key change
-                 
-                 const response = await fetch(proxyUrl, {
-                     method: 'POST',
-                     headers: { 'Content-Type': 'application/json' },
-                     body: JSON.stringify({ query: query })
-                 });
-
-                 if (!response.ok) {
-                    const errorData = await response.json().catch(() => ({ error: 'Server returned an invalid response.' }));
-                    throw new Error(errorData.error || `Server error: ${response.statusText}`);
-                 }
-                 
-                 const data = await response.json();
-                 return data.response;
-            }
-
-            askBtn.addEventListener('click', async () => {
-                const query = queryInput.value.trim();
-                if (!query) {
-                    responseContainer.style.display = 'block';
-                    responseContainer.innerHTML = `<p style="color: var(--error-red);">Please enter a question first.</p>`;
-                    return;
-                }
-
-                askBtn.disabled = true;
-                askBtn.textContent = 'Thinking...';
-                responseContainer.style.display = 'block';
-                responseContainer.innerHTML = '<p>Please wait while I process your request...</p>';
-
-                try {
-                    const resultText = await callProxyAPI(query);
-                    
-                    let formattedResponse = resultText
-                        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                        .replace(/\*(.*?)\*/g, '<em>$1</em>')
-                        .replace(/`([^`]+)`/g, '<code>$1</code>')
-                        .replace(/\n/g, '<br>');
-
-                    responseContainer.innerHTML = formattedResponse;
-                } catch (error) {
-                    console.error("Error fetching AI response via proxy:", error);
-                    responseContainer.innerHTML = `<p style="color: var(--error-red);">Sorry, an error occurred: ${error.message}. The backend function may not be configured correctly.</p>`;
-                } finally {
-                    askBtn.disabled = false;
-                    askBtn.textContent = 'Ask AI';
-                }
-            });
         });
     </script>
 </body>
 </html>
-
